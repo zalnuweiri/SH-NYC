@@ -1,0 +1,222 @@
+/* ── 1. Self-hosted fonts: @font-face MUST sit before @import "tailwindcss" ──
+   (Tailwind v4: @import url() / @font-face go at top of file.
+    https://tailwindcss.com/docs/font-family#loading-a-font) */
+
+/* Monoglyphic — real font (from the .fig). Used in specific spots only: footer
+   titles ("Let's get social"/"Quick links"), the De Monterrey chef quote, and several
+   mobile headings. Mondwest (below) is the PRIMARY heading/display font (354 uses). */
+@font-face {
+  font-family: "Monoglyphic";
+  src: url("/fonts/Monoglyphic-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Monoglyphic";
+  src: url("/fonts/Monoglyphic-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+/* Lighter Monoglyphic weights (from the original 9-weight family; the site shipped only
+   Regular+Bold). Used to thin the mobile Events CTA — same font, lighter stroke. Additive:
+   nothing else requests 100–300 so existing 400/700 usages are unaffected. */
+@font-face {
+  font-family: "Monoglyphic";
+  src: url("/fonts/Monoglyphic-Thin.woff2") format("woff2");
+  font-weight: 100; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Monoglyphic";
+  src: url("/fonts/Monoglyphic-Extralight.woff2") format("woff2");
+  font-weight: 200; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Monoglyphic";
+  src: url("/fonts/Monoglyphic-Light.woff2") format("woff2");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+/* Body / UI font */
+@font-face {
+  font-family: "NeueBit";
+  src: url("/fonts/NeueBit-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "NeueBit";
+  src: url("/fonts/NeueBit-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* Mondwest — still used for some menu-item titles (Figma uses it at 28px) */
+@font-face {
+  font-family: "Mondwest";
+  src: url("/fonts/Mondwest-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Mondwest";
+  src: url("/fonts/Mondwest-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+@import "tailwindcss";
+
+/* ── 2. Design tokens (Tailwind v4 @theme; sets a CSS var AND generates the utility) ── */
+@theme {
+  /* ---- Font families (full stacks w/ fallbacks) ---- */
+  --font-display:     "Monoglyphic", ui-monospace, monospace; /* → font-display: PRIMARY headings (the smooth font — text-style is truth, node "Mondwest" was a stale cache) */
+  --font-monoglyphic: "Monoglyphic", ui-monospace, monospace; /* alias */
+  --font-body:        "NeueBit", ui-monospace, monospace;     /* → font-body */
+  --font-mondwest:    "Mondwest", serif;                      /* → font-mondwest (alias) */
+
+  /* ---- Brand colors (hex from design-system canvas) ---- */
+  /* Black ramp / backgrounds */
+  --color-sh-black:    #000000;   /* → bg-sh-black  */
+  --color-sh-ink:      #0b0b0b;   /* near-black section bg */
+  --color-sh-grey-700: #5d5d5d;
+  --color-sh-grey-500: #858585;
+  --color-sh-grey-300: #c3c3c3;
+  --color-sh-grey-200: #d7d7d7;
+
+  /* Cream / offwhite (light text + occasional light panels) */
+  --color-sh-cream:      #ece1d4;  /* primary light text — exact Figma off-white (nav/body) */
+  --color-sh-cream-50:   #fffefd;  /* near-white, for rare bright-on-image text */
+  --color-sh-cream-100:  #fff5e9;
+  --color-sh-cream-200:  #ece1d4;
+
+  /* Pink accent (CTAs, active nav, highlights) */
+  --color-sh-pink:        #eb4660;  /* Pink-06, the accent → bg-sh-pink / text-sh-pink */
+  --color-sh-pink-hover:  #ff5873;
+  --color-sh-pink-tint:   #ffc9d1;
+
+  /* Gold / dark-beige (arches, line decor, headings accents) */
+  --color-sh-gold:        #dfa867;  /* primary gold */
+  --color-sh-gold-600:    #c28f53;
+  --color-sh-gold-700:    #b89360;
+  --color-sh-gold-900:    #7e6037;
+  --color-sh-gold-light:  #fcc27d;
+  --color-sh-gold-light2: #f3ca94;
+  --color-sh-gold-light3: #ffd5a5;
+
+  /* ---- Type scale (px + lh + ls + weight from design-system) ----
+     Desktop sizes are the named tokens; mobile uses arbitrary values / `md:` swaps. */
+
+  /* Hero — Display 700, 60/60, ls6 */
+  --text-hero: 60px;
+  --text-hero--line-height: 60px;
+  --text-hero--letter-spacing: 6px;
+  --text-hero--font-weight: 700;
+
+  /* H1 — Display 700, 40/40, ls4, UPPER (apply uppercase via class) */
+  --text-h1: 40px;
+  --text-h1--line-height: 40px;
+  --text-h1--letter-spacing: 4px;
+  --text-h1--font-weight: 700;
+
+  /* H2 — Display 400, 28/33.6, ls0.56 (precise lh per G-22) */
+  --text-h2: 28px;
+  --text-h2--line-height: 33.6px;
+  --text-h2--letter-spacing: 0.56px;
+  --text-h2--font-weight: 400;
+
+  /* H3 — Display 400, 22/26.4, ls3.3 (precise lh per G-22) */
+  --text-h3: 22px;
+  --text-h3--line-height: 26.4px;
+  --text-h3--letter-spacing: 3.3px;
+  --text-h3--font-weight: 400;
+
+  /* Subtitle / eyebrow — NeueBit 700, 22/22, ls4.4 (UPPERCASE via class) */
+  --text-subtitle: 22px;
+  --text-subtitle--line-height: 22px;
+  --text-subtitle--letter-spacing: 4.4px;
+  --text-subtitle--font-weight: 700;
+
+  /* Body — NeueBit 400, 22/26, ls2.2 */
+  --text-body: 22px;
+  --text-body--line-height: 26px;
+  --text-body--letter-spacing: 2.2px;
+  --text-body--font-weight: 400;
+
+  /* Body-sm — NeueBit 700, 18/22, ls1.8 */
+  --text-body-sm: 18px;
+  --text-body-sm--line-height: 22px;
+  --text-body-sm--letter-spacing: 1.8px;
+  --text-body-sm--font-weight: 700;
+
+  /* Button — NeueBit 700, 16/16, ls1.6 UPPERCASE */
+  --text-button: 16px;
+  --text-button--line-height: 16px;
+  --text-button--letter-spacing: 1.6px;
+  --text-button--font-weight: 700;
+
+  /* Caption-1 — NeueBit 700, 16/19, ls3.2 UPPERCASE */
+  --text-caption: 16px;
+  --text-caption--line-height: 19px;
+  --text-caption--letter-spacing: 3.2px;
+  --text-caption--font-weight: 700;
+
+  /* Caption-2 — NeueBit 400, 14/14, ls2.8 */
+  --text-caption-sm: 14px;
+  --text-caption-sm--line-height: 14px;
+  --text-caption-sm--letter-spacing: 2.8px;
+  --text-caption-sm--font-weight: 400;
+
+  /* ---- Recurring tracking tokens (Figma em-equivalents) ---- */
+  --tracking-eyebrow: 0.2em;   /* → tracking-eyebrow  (nav/eyebrow labels) */
+  --tracking-wide2:   0.16em;  /* → tracking-wide2    (common heading tracking) */
+}
+
+/* Design-width — desktop sizing is authored in `vw` against the 1280px Figma frame. Rebasing
+   every desktop length on this var (calc(var(--dw)*<vw-number>/100)) caps the design at 1280 on
+   wider screens (1080p / 4K TVs) while staying pixel-identical at ≤1280 (there --dw == 100vw).
+   Mobile blocks use fixed px and never reference --dw. */
+:root { --dw: min(100vw, 1280px); }
+
+/* ── 3. Base layer (page defaults; below @theme so utilities still win) ── */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-sh-black);
+    color: var(--color-sh-cream);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); }
+  /* Clickable elements show the hand cursor (Tailwind v4 / UA default <button> is `default`). */
+  button:not(:disabled), [role="button"], summary, label[for] { cursor: pointer; }
+  /* Visible keyboard focus on dark (G-35) */
+  :focus-visible {
+    outline: 2px solid var(--color-sh-pink);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}
+
+/* ── Mobile falling sparks (CSS-only dust; see MobileSparks.jsx) ──
+   GPU-composited transform/opacity only. Hidden entirely for reduced-motion. */
+.sh-spark {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  /* LINEAR = steady wind (ease-in-out decelerates at the ends → reads as floating). One long
+     directional travel carried by the breeze. */
+  animation-name: sh-spark-breeze;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+/* blown across on the breeze: a long, steady, cohesive travel (--tx,--ty) with a leaf-flutter
+   cross-sway (--sway alternating). Constant speed; fades only at the very ends. */
+@keyframes sh-spark-breeze {
+  0%   { opacity: 0;           transform: translate3d(0, 0, 0); }
+  6%   { opacity: var(--peak); }
+  18%  { transform: translate3d(calc(var(--tx) * 0.18), calc(var(--ty) * 0.18 + var(--sway)), 0); }
+  36%  { transform: translate3d(calc(var(--tx) * 0.36), calc(var(--ty) * 0.36 - var(--sway)), 0); }
+  54%  { transform: translate3d(calc(var(--tx) * 0.54), calc(var(--ty) * 0.54 + var(--sway)), 0); }
+  72%  { transform: translate3d(calc(var(--tx) * 0.72), calc(var(--ty) * 0.72 - var(--sway)), 0); }
+  90%  { transform: translate3d(calc(var(--tx) * 0.9),  calc(var(--ty) * 0.9  + var(--sway)), 0); opacity: var(--peak); }
+  100% { opacity: 0;           transform: translate3d(var(--tx), var(--ty), 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-spark { animation: none; opacity: 0; }
+}

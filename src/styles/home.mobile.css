@@ -1,0 +1,223 @@
+/* Load this after Tailwind so it can override utilities when needed.
+   It only applies on small screens, so desktop stays 100% intact. */
+
+@media (max-width: 768px) {
+
+    /* ---------- HERO ---------- */
+
+    .home .hero .absolute.inset-0.z-10 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+    .home .hero h1 { font-size: clamp(1.75rem, 7.5vw, 2.5rem) !important; line-height: 1.15 !important; }
+    .home .hero button { font-size: clamp(0.95rem, 3.8vw, 1.25rem) !important; padding: 0.5rem 1rem !important; margin-top: 0.75rem !important; }
+
+    @media (max-width: 767px) {
+        .home .hero {
+            width: 100% !important;             /* fluid width, no hard min-width */
+            min-height: 480px !important;       /* still ensures tall-enough video */
+            aspect-ratio: 4 / 5 !important;     /* maintains ~393x480 ratio flexibly */
+            overflow: hidden !important;        /* prevent any overflow whitespace */
+        }
+    }
+
+    /* ---------- ABOUT ---------- */
+    .home .about { padding-left: 1rem !important; padding-right: 1rem !important;  height: auto !important; }
+    .home .about h2 { margin-bottom: -28px; margin-top: 10%;  letter-spacing: 1.68px; line-height: 1.2;  padding-left: 1rem !important; font-size: 28px !important;}
+    .home .about p  { width: 92%; padding-left: 1rem !important; margin-bottom: 12%; font-size: 22px !important; line-height: 1.2 !important; letter-spacing: 1.8px; font-weight: 300} /* 18px in figma but 18px way too small imo, can show javier for his confirmation*/
+    .home .about .dec-border {
+        width: 176vw !important;
+        transform: translateX(-1.4vw);   /* nudges decoration left */
+    }
+
+    .home .about .test2{gap: 0px;}
+    .home .about .test{gap: 0px;}
+
+    /* ---------- PRIVATE DINING & EVENTS ---------- */
+    .home .private { height: 480px; background-attachment: scroll !important;} /* mobile fix for bg-fixed */
+    .home .private h2 { align-items: start; font-size: 20px !important; }
+    /* keep messing with these values and trying to add spans subdivs in the text of private dining to customize just the lines below vibrant space's width */
+    .home .private p  { color: white;text-align: left; font-size: 18px !important; transform: translateY(-10%); line-height: 1.2; letter-spacing: 1.8px; align-self:stretch; width: 80%; font-weight: 500;}
+    .home .private .btn { padding: 16px !important; font-size: 18px !important; letter-spacing: 3.6px; line-height: 100%; justify-content: center; align-items: center; width: 55%}
+    .home .private .h2outer { align-items: start; }
+    .home .private .x1 { width: 12000px;}
+
+    /* ---------- MENU (Menú excepcional) : mobile horizontal grid ---------- */
+    .home .menu-ex {
+        padding-top: 12vh !important;   /* was 24vh */
+        padding-bottom: 12vh !important;
+    }
+
+    .home .menu-ex .menutitle {padding-top: 10%; transform: translateX(1.6%) !important;}
+
+    .home .menu-ex .caption {line-height: 120%; transform: translateX(2%) !important; font-size: 18px !important; letter-spacing: 1.8px;}
+
+    .home .menu-ex .viewmenu {
+        transform: translateX(19%) !important;
+        font-size: 18px !important;
+        letter-spacing: 3.6px;
+    }
+
+    .home .menu-ex .carousel {
+        display: flex !important;
+        gap: 0.75rem !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 0.25rem !important;  /* align with headings */
+    }
+    .home .menu-ex .carousel::-webkit-scrollbar { display: none; }
+
+    /* Each mobile card = half width (2 visible), minus gap */
+    .home .menu-ex .carousel .card {
+        flex: 0 0 calc(50% - 0.375rem) !important;
+    }
+    .home .menu-ex .carousel .imgbox {
+        height: 220px !important; /* smaller than desktop */
+    }
+
+    /* Keep dots on mobile */
+    .home .menu-ex .dots {
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 1rem !important;
+        gap: 0.5rem !important;
+        padding-bottom: 10%;
+    }
+
+    .home .menu-ex .dots button {
+        width: 0.75rem !important;
+        height: 0.75rem !important;
+    }
+
+    /* (Optional) tighten spacing above the carousel on mobile */
+    .home .menu-ex .mt-12 { margin-top: 1.5rem !important; }
+    .home .menu-ex h2  { transform: translateX(2.5%) !important; font-size: 1.25rem !important; line-height: 1.2 !important; letter-spacing: 1.68px; }
+    .home .menu-ex p :not(caption) { transform: translateX(2.5%) !important; font-size: 0.95rem !important; letter-spacing: 1.8px; }
+    .home .menu-ex a  { transform: translateX(20%) !important; padding: 0.5rem 1rem !important; }
+    .home .menu-ex .dec-border {
+        width: 176vw !important;
+        transform: translateX(-1.4vw);   /* nudges decoration left */
+    }
+
+
+
+    /* ---------- CHEF’S SELECTION ---------- */
+    .home .chef {
+        min-height: 483px !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .home .chef .z-10 > div {
+        align-items: flex-start !important;  /* left align content */
+        gap: 0.75rem !important;             /* reduce space between elements */
+        text-align: left !important;         /* force left text alignment */
+    }
+
+    .home .chef h3 {
+        font-size: 20px !important;
+        line-height: 1.4 !important;
+        max-width: 93% !important;
+        letter-spacing: 1.4px !important;
+
+    }
+
+    .home .chef p {
+        font-size: clamp(0.9rem, 3.6vw, 1.05rem) !important;
+        margin-top: 0.25rem !important;
+    }
+
+    .home .chef a {
+        padding: 0.4rem 0.9rem !important;
+        font-size: clamp(0.85rem, 3.4vw, 1rem) !important;
+        margin-top: 0.5rem !important;
+    }
+
+
+    /* ---------- SPECIALS ---------- */
+    .home .specials { padding-top: 12vh !important; padding-bottom: 12vh !important; padding-left: 1rem !important; padding-right: 1rem !important; }
+    .home .specials h3 { font-size: 1.125rem !important; }
+    .home .specials p  { font-size: 0.95rem !important; }
+    .home .specials button { width: 85% !important; padding: 0.5rem 1rem !important; }
+
+    .home .specials .dec-border {
+        width: 176vw !important;
+        transform: translateX(-1.4vw);   /* nudges decoration left */
+    }
+
+    .home .specials .specialsimg{
+        width:270px !important;
+        height:367px !important;
+    }
+    .home .specials .outer-specials {
+        padding-left: 17% !important;
+        padding-right: 17% !important;
+    }
+
+    /*Targets captions and makes them fit proper*/
+    .home .specials .spec {
+        padding-left: 2.5px !important;
+    }
+
+    .home .specials .specbtn {
+        padding-left: 31px !important;
+        padding-right: 31px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        width: 100% !important;
+    }
+
+    .safarifix{
+        width: 176vw !important;
+        transform: translateX(-50%);   /* nudges decoration left */
+        pointer-events: none;
+        position: absolute;
+        top: calc(var(--spacing) * 0);
+        left: 50%;
+        z-index: 0;
+        justify-content: center;
+    }
+
+    .decoration-img {
+        position: absolute;
+        top: 50%;                         /* top-1/2 */
+        left: 50%;                        /* left-1/2 */
+        transform: translate(-50%, -52.2%) rotate(90deg);
+        /* translate-x-[calc(-50%+6px)] + translate-y[-52.2%] + rotate-90 */
+
+        width: 20%;                       /* w-[20%] */
+        max-width: 90vw;                  /* max-w-[90vw] */
+        height: auto;                     /* h-auto */
+        opacity: 0.4;                     /* opacity-40 */
+        pointer-events: none;             /* pointer-events-none */
+        z-index: 0;                       /* z-0 */
+        transform-origin: center;         /* style={{ transformOrigin: "center" }} */
+    }
+    .safarifixbtm {
+        pointer-events: none;   /* pointer-events-none */
+        position: absolute;     /* absolute */
+        bottom: 0;              /* bottom-0 */
+        left: 50%;              /* left-1/2 */
+        transform: translateX(-50.75%); /* -translate-x-1/2 */
+        z-index: 0;             /* z-0 */
+        width: 176vw !important;            /* w-full */
+
+        display: flex;          /* flex */
+        justify-content: center;/* justify-center */
+    }
+
+    .bttm-dec {
+        position: absolute;
+        top: 50%;  /* top-1/2 */
+        left: 50%; /* left-1/2 */
+
+        /* combines translate-x and translate-y with pixel adjustment + rotation */
+        transform: translateY(-47.8%) translateX(calc(-50% + 6px)) rotate(90deg);
+
+        width: 20%;          /* w-[20%] */
+        height: auto;        /* h-auto */
+        opacity: 0.4;        /* opacity-40 */
+        pointer-events: none;/* pointer-events-none */
+        z-index: 0;          /* z-0 */
+    }
+
+}

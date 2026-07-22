@@ -1,0 +1,184 @@
+import { useEffect } from "react";
+import Footer from "@/components/Footer.jsx";
+import SEO from "@/components/SEO.jsx";
+
+
+export default function Aitch() {
+    useEffect(() => {
+        // Dynamically load Font Awesome for this page only
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js";
+        script.crossOrigin = "anonymous";
+        script.defer = true;
+        document.body.appendChild(script);
+
+        // Dynamically add CSS for Aitch only
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "/aitch/styles.css";
+        document.head.appendChild(link);
+
+        // Cleanup on unmount — prevents affecting other pages
+        return () => {
+            document.body.removeChild(script);
+            document.head.removeChild(link);
+        };
+    }, []);
+    useEffect(() => {
+        // replicate your main.js logic once DOM loads
+        const initLazyLoadObserver = () => {
+            const lazyTargets = document.querySelectorAll(".lazyload-bg");
+            if (!("IntersectionObserver" in window)) {
+                lazyTargets.forEach((el) => el.classList.add("lazyloaded"));
+                return;
+            }
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        el.classList.add("lazyloaded");
+                        obs.unobserve(el);
+                    }
+                });
+            });
+            lazyTargets.forEach((el) => observer.observe(el));
+        };
+        initLazyLoadObserver();
+    }, []);
+
+    return (
+        <>
+            {/* <SEO title="AITCH – Aitch Club Toronto | King Street Toronto" description="Sólo invitados · 647-822-5367 · 461 King St. W, Toronto, ON" /> */}
+            <SEO
+                title="Silent H AITCH | AITCH Speakeasy Club"
+                description="A hidden vibe beneath King West's bustling streets."
+            />
+            <main className="aitch-page">
+                {/* Hero Section */}
+                <section className="aitch-hero relative h-screen w-full bg-black overflow-hidden">
+                    <video
+                        className="h-screen w-full object-cover object-[50%_47%]"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                    >
+                        <source src="/aitchold/hero-bg.webm" type="video/webm" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                    {/* Optional dark overlay for legibility */}
+                    <div className="pointer-events-none absolute inset-0 bg-black/40" />
+                </section>
+
+
+                {/* Brand Section */}
+                <section className="brand-invite">
+                    <div className="brand-content">
+                        <img
+                            src="/aitchold/aitch-logo-BRWN-WHTBG.png"
+                            alt="Aitch logo"
+                            className="brand-logo"
+                        />
+                        <h1>Sólo invitados</h1>
+                        <h4>
+                            <a href="tel:+16478225367">647-822-5367</a>
+                        </h4>
+                        <a
+                            className="btn"
+                            href="https://v2.themrblack.com/embed/Aitch/event?referrerId=812001"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            BOOK A TABLE
+                        </a>
+                    </div>
+                </section>
+
+                {/* Follow Section */}
+                <section className="follow-section">
+                    <h1>Follow Us</h1>
+                    <h3>We are on social media</h3>
+                    <div className="social-icons">
+                        <a
+                            href="https://www.tiktok.com/@aitch.to"
+                            target="_blank"
+                            aria-label="Tiktok"
+                            rel="noopener noreferrer"
+                        >
+                            <i className="fab fa-tiktok"></i>
+                        </a>
+                        <a
+                            href="https://www.instagram.com/aitch.to"
+                            target="_blank"
+                            aria-label="Instagram"
+                            rel="noopener noreferrer"
+                        >
+                            <i className="fab fa-instagram"></i>
+                        </a>
+                    </div>
+
+                    <div className="gallery">
+                        <img src="/aitchold/2-copy-1024x760.png" alt="Gallery 1" />
+                        <img src="/aitchold/2.png" alt="Gallery 2" />
+                        <img src="/aitchold/1.png" alt="Gallery 3" />
+                        <img src="/aitchold/2-copy-1.png" alt="Gallery 4" />
+                        <img src="/aitchold/1-1.png" alt="Gallery 5" className="tall" />
+                        <img src="/aitchold/2-1.png" alt="Gallery 6" />
+                    </div>
+                </section>
+
+                {/* Footer Section */}
+                <footer>
+                    <div className="footer-left">
+                        <h2>Contact Us</h2>
+                        <ul>
+                            <li>
+                                <i className="fas fa-map-marker-alt"></i>
+                                <span>
+                  461 KING ST. W
+                  <br />
+                  Toronto ON, Canada
+                </span>
+                            </li>
+                            <li>
+                                <i className="fas fa-phone"></i>
+                                <a href="tel:+16478225367">+1 647 822-5367</a>
+                            </li>
+                            <li>
+                                <i className="far fa-envelope-open"></i>
+                                <a href="mailto:aitch@silenth.ca">aitch@silenth.ca</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className="footer-right">
+                        <h2>Get Connected</h2>
+                        <div className="social-icons-f">
+                            <a
+                                href="https://www.instagram.com/aitch.to/?hl=en"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                            <a
+                                href="https://www.tiktok.com/@aitch.to?lang=en"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-tiktok"></i>
+                            </a>
+                        </div>
+                        <p>
+                            Open Wed – Sun
+                            <br />
+                            From 11:00pm – 3:00am
+                        </p>
+                    </div>
+                </footer>
+            </main>
+        </>
+    );
+}

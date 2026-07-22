@@ -1,0 +1,342 @@
+@font-face { font-family: NeueBit;
+    src: url('/fonts/NeueBit-Regular.otf') format('opentype');
+    font-weight: 400; /* normal */
+    font-style: normal; }
+
+@font-face {
+    font-family: 'NeueBit';
+    src: url('/fonts/NeueBit-Bold.otf') format('opentype');
+    font-weight: 700; /* bold */
+    font-style: normal;
+}
+/* ---------- MENU PAGE: MOBILE OVERRIDES ---------- */
+@media (max-width: 768px) {
+    /* Apply only to content sections, not decorations */
+    .menu section.content {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-top: 6vh !important;
+        padding-bottom: 6vh !important;
+    }
+
+    .menu .ctgry {
+        font-size: 24px !important;
+        line-height: 1.2 !important;
+        letter-spacing: 1.68px !important;
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    /* expand and collapse menus here*/
+    .menu .expnd {
+        width: 42% !important;
+        font-size: 14px;
+        margin-left: 4vw;
+        /*transform: translateX(25%) !important;*/
+        line-height: 1;
+    }
+
+    .menu .clps {
+        width: 42% !important;
+        font-size: 14px;
+        line-height: 1;
+        margin-left:1vw;
+    }
+
+    .cName{
+        padding-top: 13vh !important;
+
+    }
+
+    .menu .ed-cName {
+        padding-top: 7vh !important;
+    }
+
+
+    .menu .ecdprice {
+        font-size: 20px !important;
+    }
+
+    .menu .desc {
+        margin-bottom: 0.5rem !important; /* reduce space after description */
+        width: 85vw !important;
+        font-size: 18px !important;
+    }
+
+    .menu .daisycntnt {
+        width: 85% !important;
+        font-size: 18px !important;
+        line-height: 1.2 !important;
+        letter-spacing: 1.8px !important;
+        transform: translateY(-65%);
+        margin-left: 35px;
+    }
+
+    .menu .ingredients {
+        transform: translateY(-60%) !important;
+        padding-left: 36px;
+        padding-right: 36px;
+        max-width: 100% !important;
+        width: 1000% !important;
+        font-size: 18px !important;
+        line-height: 1.2 !important;
+        letter-spacing: 1.8px !important;
+    }
+
+    /* Switch (Food / Drinks) */
+    .menu .switx {
+        top: 94px !important;
+        width: 100vw !important;
+        margin-left: 49.41% !important;
+        transform: translateX(-49.41%) !important; /* centers the 100vw strip */
+        height: 48px !important;
+        position: sticky;
+
+    }
+
+
+
+    /* Section headers (explicitly target headings inside content) */
+    .menu section.content h2 {
+        font-size: clamp(1.25rem, 5vw, 1.6rem) !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    /* Subheadings */
+    .menu section.content h2 + span {
+        font-size: clamp(0.7rem, 3vw, 0.9rem) !important;
+    }
+
+    .menu .cam-btn {
+        position: relative !important;   /* break it out of absolute */
+        bottom: 9% !important;
+        margin-top: 0.5rem;              /* space below price */
+        display: flex !important;
+        justify-content: flex-start;     /* push left */
+        transform: translateX(6px); /* KEEP MESSING WITH THIS AND THIS SECTION*/
+    }
+
+    .menu .cam-btn2 {
+        padding-left: 36px;
+        padding-right: 36px;
+        transform: translateY(-390%) translateX(-0.7%) !important;
+    }
+
+    .menu .plogo {
+        margin-top: -50%;
+        margin-left: 11.5%;
+    }
+
+    /* Expand/Collapse buttons (scoped to grids/content) */
+    .menu section.content .grid button,
+    .menu section.content > div > button {
+        font-size: clamp(0.75rem, 3.4vw, 0.9rem) !important;
+        padding: 0.4rem 0.75rem !important;
+
+    }
+
+    /* Grid adjustments */
+    .menu section.content .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    /* Cards */
+    .menu section.content .grid > div {
+        padding: 0.75rem !important;
+    }
+
+    .menu section.content .grid h3 {
+
+        font-size: clamp(1rem, 4.2vw, 1.2rem) !important;
+    }
+
+    .menu section.content .grid p {
+        font-size: clamp(0.85rem, 3.5vw, 1rem) !important;
+        line-height: 1.35 !important;
+    }
+
+    .menu .cardback {
+        background-color: #ECE1D4 !important;
+        box-shadow: none !important;
+    }
+
+    /*the price*/
+    .menu .trebek {
+        padding-bottom: 1.2em;
+        @font-face: 'NeueBit' !important;
+        padding-right: 30px !important;
+
+    }
+
+    .menu .dec-border {
+        width: 33vw !important;
+
+    }
+
+    .menu .dec-border2 {
+        transform: translateX(77%);
+        width: 35vw !important;
+        bottom: 11vh !important;
+
+    }
+
+    /* Price block */
+    .menu section.content .grid span {
+        font-size: clamp(0.9rem, 3.5vw, 1.05rem) !important;
+    }
+    .menu .border-control {
+        transform: translateX(-23.5px);
+        width: 99.71vw !important;
+        border-width: medium;
+        border-bottom-style: none;
+        border-left-style: none;
+        border-right-style: none;
+
+    }
+
+    .menu .mt-cName {
+        padding-top: 7vh !important;
+        padding-left: 7px !important;
+    }
+
+    .menu .caption {
+        display: block !important;
+        padding-top: 1em !important;
+        padding-left: 1.5px !important;
+        padding-bottom: 0 !important;
+        color: #0B0B0B !important;
+        font-style: normal;
+        line-height: 120%; /* 19.2px */
+        letter-spacing: 3.2px;
+        text-transform: uppercase;
+
+    }
+
+    .safarifix{
+        width: 176vw !important;
+        transform: translateX(-50%);   /* nudges decoration left */
+        pointer-events: none;
+        position: absolute;
+        top: calc(var(--spacing) * 0);
+        left: 50%;
+        z-index: 0;
+        justify-content: center;
+    }
+
+    .decoration-img {
+        position: absolute;
+        top: 50%;                         /* top-1/2 */
+        left: 50%;                        /* left-1/2 */
+        transform: translate(-50%, -52.2%) rotate(90deg);
+        /* translate-x-[calc(-50%+6px)] + translate-y[-52.2%] + rotate-90 */
+
+        width: 20%;                       /* w-[20%] */
+        max-width: 90vw;                  /* max-w-[90vw] */
+        height: auto;                     /* h-auto */
+        opacity: 0.4;                     /* opacity-40 */
+        pointer-events: none;             /* pointer-events-none */
+        z-index: 0;                       /* z-0 */
+        transform-origin: center;         /* style={{ transformOrigin: "center" }} */
+    }
+    .safarifixbtm {
+        pointer-events: none;   /* pointer-events-none */
+        position: absolute;     /* absolute */
+        bottom: 0;              /* bottom-0 */
+        left: 50%;              /* left-1/2 */
+        transform: translateX(-50.75%); /* -translate-x-1/2 */
+        z-index: 0;             /* z-0 */
+        width: 176vw !important;            /* w-full */
+
+        display: flex;          /* flex */
+        justify-content: center;/* justify-center */
+    }
+
+    .bttm-dec {
+        position: absolute;
+        top: 50%;  /* top-1/2 */
+        left: 50%; /* left-1/2 */
+
+        /* combines translate-x and translate-y with pixel adjustment + rotation */
+        transform: translateY(-47.8%) translateX(calc(-50% + 6px)) rotate(90deg);
+        height: 96px;
+        width: 20%;          /* w-[20%] */
+        height: auto;        /* h-auto */
+        opacity: 0.4;        /* opacity-40 */
+        pointer-events: none;/* pointer-events-none */
+        z-index: 0;          /* z-0 */
+    }
+
+}
+
+@media (max-width: 400px){
+    /* expand and collapse menus here*/
+    .menu .switx {
+        top: 93px !important;
+        width: 100vw !important;
+        margin-left: 49.41% !important;
+        transform: translateX(-49.48%) !important; /* centers the 100vw strip */
+        height: 48px !important;
+        position: sticky;
+
+    }
+    .menu .expnd {
+        width: 42% !important;
+        font-size: 10px;
+        margin-left: 4vw;
+        /*transform: translateX(25%) !important;*/
+        line-height: 1;
+    }
+
+    .menu .clps {
+        width: 42% !important;
+        font-size: 10px;
+        line-height: 1;
+        margin-left:1vw;
+    }
+    .menu .ctgry {
+        font-size: 18px !important;
+        line-height: 1.2 !important;
+        letter-spacing: 1.68px !important;
+        width: 100%;
+        max-width: 100% !important;
+
+    }
+
+    .cName{
+        padding-top: 13vh !important;
+
+    }
+
+    .menu .border-control{
+        transform: translateX(-22.5px);
+        width: 99.71vw !important;
+        border-width: medium;
+        border-bottom-style: none;
+        border-left-style: none;
+        border-right-style: none;
+    }
+
+    .menu .dec-border {
+        width: 33vw !important;
+
+    }
+
+    .menu .dec-border2 {
+        transform: translateX(74%);
+        width: 35vw !important;
+        bottom: 10vh !important;
+
+    }
+
+    .menu .cntnt {
+
+    }
+
+    .menu .caption {
+        display: block !important;
+        padding-left: 10px !important;
+        justify-content: flex-start;
+    }
+}

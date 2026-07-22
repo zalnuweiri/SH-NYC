@@ -1,0 +1,40 @@
+# Old URLs from the previous site -> current pages (SEO Part 1)
+# both no-slash and trailing-slash variants
+/our-story /story 301
+/our-story/ /story 301
+/happyhour /happy-hour 301
+/happyhour/ /happy-hour 301
+/home / 301
+/home/ / 301
+/brunch /menu 301
+/brunch/ /menu 301
+/spirits /menu 301
+/spirits/ /menu 301
+/vino /menu 301
+/vino/ /menu 301
+/drinks /menu 301
+/drinks/ /menu 301
+/patio / 301
+/patio/ / 301
+/thursdayspecial /happy-hour 301
+/thursdayspecial/ /happy-hour 301
+/nye2026 / 301
+/nye2026/ / 301
+/donhalloween / 301
+/donhalloween/ / 301
+/tiff / 301
+/tiff/ / 301
+/reservations / 301
+/reservations/ / 301
+
+# Normalize trailing slash on current pages -> no-slash canonical
+/menu/ /menu 301
+/events/ /events 301
+/story/ /story 301
+/happy-hour/ /happy-hour 301
+/blogs/ /blogs 301
+
+# SPA fallback. /aitch is a real page (public/aitch), so do not redirect it.
+# Missing /assets/* requests are converted to genuine 404s by
+# functions/_middleware.js before this fallback can poison the browser cache.
+/* /index.html 200
