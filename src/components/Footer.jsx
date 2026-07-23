@@ -83,7 +83,7 @@ export default function Footer() {
             {/* h = Group25 content 50.94vw + 98px (7.66vw) empty below to match the home frame's
                 bottom padding (4744→4842). Without it the whole page is short and everything reads
                 proportionally too low vs the figma. */}
-            <div className="hidden md:block relative w-full h-[72vw]">
+            <div className="hidden md:block relative w-full h-[77.6vw]">
                 {/* Figma "footer 1": full-width doorway image across the top of the footer (h ≈ 45.78vw) */}
                 <div className="absolute inset-x-0 top-0 w-full">
                     <picture>
