@@ -182,6 +182,9 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
+  /* Text selection — pink highlight on black text (colleague's body::selection, --pink #ef4564) */
+  ::selection      { background: #ef4564; color: #000; }
+  ::-moz-selection { background: #ef4564; color: #000; }
   h1, h2, h3 { font-family: var(--font-display); }
   /* Clickable elements show the hand cursor (Tailwind v4 / UA default <button> is `default`). */
   button:not(:disabled), [role="button"], summary, label[for] { cursor: pointer; }

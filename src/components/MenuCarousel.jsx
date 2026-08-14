@@ -11,21 +11,24 @@ const MAX_ITEMS = 15;
 const DESKTOP_ITEMS_PER_PAGE = 3;
 const MOBILE_ITEMS_PER_PAGE = 2;
 
+// Colleague sizing: grid cols 0.86fr / 1.16fr / 0.86fr, gap 24px inside a
+// min(1040px, …) container; every image is a FIXED 370px tall (not vw-scaled)
+// with rounded-[5px] corners. `sizes` = approx rendered px width at the 1040 cap.
 const DESKTOP_CARD_STYLES = [
     {
-        w: "21.02vw",
-        h: "28.91vw",
+        col: "0.86fr",
+        sizes: "296px",
+        pos: "object-[50%_54%]",
+    },
+    {
+        col: "1.16fr",
+        sizes: "400px",
         pos: "object-[50%_50%]",
     },
     {
-        w: "28.59vw",
-        h: "28.98vw",
-        pos: "object-[50%_40%]",
-    },
-    {
-        w: "21.02vw",
-        h: "28.98vw",
-        pos: "object-[50%_50%]",
+        col: "0.86fr",
+        sizes: "296px",
+        pos: "object-[47%_48%]",
     },
 ];
 
@@ -118,7 +121,7 @@ export default function MenuCarousel() {
     return (
         <section className="relative w-full">
             {/* Desktop exact composition */}
-            <div className="hidden md:flex w-[73.91vw] mx-auto flex-col items-center gap-[2.5vw]">
+            <div className="hidden md:flex w-[min(1040px,calc(100%-44px))] mx-auto flex-col items-center gap-[2.5vw]">
                 <Reveal className="flex flex-col items-center gap-[2.1vw] w-full">
                     <h2 className="font-display font-bold uppercase text-sh-cream text-center text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em]">
                         Menú excepcional
@@ -130,7 +133,7 @@ export default function MenuCarousel() {
                 </Reveal>
 
                 <div className="flex flex-col items-start gap-[2.19vw] w-full">
-                    <div className="flex flex-row items-start justify-center gap-[1.64vw] w-full">
+                    <div className="grid grid-cols-[0.86fr_1.16fr_0.86fr] items-start gap-6 w-full">
                         {currentDesktopItems.map((item, idx) => {
                             const cardStyle = DESKTOP_CARD_STYLES[idx];
 
@@ -154,13 +157,12 @@ export default function MenuCarousel() {
                                 <Reveal
                                     key={`${item.id ?? getName(item)}-${desktopStartIndex + idx}`}
                                     delay={idx * 0.08}
-                                    className="flex flex-col gap-[1.56vw]"
-                                    style={{ width: cardStyle.w }}
+                                    className="flex flex-col gap-4"
                                 >
                                     <button
                                         type="button"
                                         onClick={handleCardClick}
-                                        className={`flex flex-col gap-[1.56vw] text-left ${
+                                        className={`flex flex-col gap-4 text-left ${
                                             isClickableEdge ? "cursor-pointer" : "cursor-default"
                                         }`}
                                         aria-label={
@@ -171,16 +173,11 @@ export default function MenuCarousel() {
                                                     : getName(item)
                                         }
                                     >
-                                        <div
-                                            className="overflow-hidden rounded-[4px]"
-                                            style={{ height: cardStyle.h }}
-                                        >
-                                            {/* cardStyle.w is TRUE vw (not capped to var(--dw)), so sizes
-                                                matches it exactly rather than approximating. */}
+                                        <div className="overflow-hidden rounded-[5px] h-[370px]">
                                             <ResponsiveImg
                                                 src={getImage(item)}
                                                 alt={getName(item)}
-                                                sizes={cardStyle.w}
+                                                sizes={cardStyle.sizes}
                                                 className={`w-full h-full object-cover ${cardStyle.pos} transition-transform duration-500 ${
                                                     isClickableEdge ? "hover:scale-105" : ""
                                                 }`}
