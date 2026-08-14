@@ -265,7 +265,7 @@ export default function Home() {
             <div className="mx-auto max-w-[920px] text-center">
               <h2 className="font-display font-bold uppercase text-[clamp(38px,4.2vw,56px)] leading-none tracking-[0.045em] text-sh-cream mb-7">A Modern Mexican Restaurant in
                 NYC</h2>
-              <p className="font-body text-sh-cream text-[clamp(20px,1.85vw,24px)] font-[550] leading-[1.45] tracking-[0.025em]">Silent H is a modern Mexican
+              <p className="font-body text-sh-cream text-[clamp(20px,1.85vw,24px)] font-[500] leading-[1.45] tracking-[0.025em]">Silent H is a modern Mexican
                 restaurant and agave cocktail lounge in NYC's Meatpacking District. Led by Chef Gerardo Álvarez
                 Saucedo, the kitchen reimagines traditional Mexican family recipes with refined technique, from charred
                 guacamole and crispy chicharrón tacos to mesquite-grilled rib-eye espadas and a 44oz tomahawk. Next
