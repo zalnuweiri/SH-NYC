@@ -5,6 +5,7 @@ import { breadcrumb } from "../lib/seoSchema.js";
 import Reveal from "../lib/motion/Reveal";
 import Parallax from "../lib/motion/Parallax";
 import RelatedGuides from "../components/RelatedGuides";
+import ResponsiveImg from "../components/ResponsiveImg";
 import { useOTWidget } from "../components/OTwidget.jsx";
 import { T, M } from "../styles/figmaTokens";
 
@@ -17,9 +18,12 @@ import { T, M } from "../styles/figmaTokens";
      body  NeueBit 22 (·18 mobile)                    → T.body / M.body, dimmed to a warm grey
    Headings are cream #ece1d4; body paragraphs render a warm grey (~#b1a79b = cream/75).
    Content images are arches (rounded-t 216px desktop / 200px mobile); hero is full-bleed, NO
-   overlay/filter (per .fig). The inspiración, grandmother, table and dish photos are the
-   colleague's Our-Story iteration assets (upscaled / edited), optimised to webp under
-   /redesign; each is framed in its arch via a per-row `pos` object-position (no mirroring).
+   overlay/filter (per .fig). The full-bleed hero plus the inspiración, grandmother, table and
+   dish photos (the colleague's Our-Story iteration assets, upscaled / edited) all flow through
+   the responsive pipeline — masters under /redesign, jobs in the `story` entry of
+   scripts/build-page-images.mjs generate the AVIF/WebP width ladders + imageManifest.json,
+   and each is rendered via <ResponsiveImg> (srcset/sizes), framed in its arch via a per-row
+   `pos` object-position (no mirroring). Regenerate with: npm run images:build -- story.
    Copy is verbatim from the .fig (incl. its “recipe's” / “Mexico’s” quirks). The closing
    "Experience Silent H" reservation CTA is the colleague's new footer section. */
 
@@ -79,7 +83,7 @@ export default function Story() {
         <div className="hidden md:block">
           {/* Hero — full-bleed chef portrait (no overlay/filter per .fig), bold headline + subtitle */}
           <section className="relative w-full h-[calc(var(--dw)*65.23/100)] min-h-[100svh] overflow-hidden">
-            <img src="/redesign/story-hero.jpg" alt="Chef Gerardo Álvarez Saucedo at Silent H" className="absolute inset-0 h-full w-full object-cover object-center" />
+            <ResponsiveImg src="/redesign/story-hero.jpg" alt="Chef Gerardo Álvarez Saucedo at Silent H" sizes="100vw" loading="eager" className="absolute inset-0 h-full w-full object-cover object-center" />
             <div className="absolute inset-0 mx-auto w-[var(--dw)]">
               {/* top is the .fig 601px (46.95% of --dw), but capped so the block (~15% of --dw
                   tall) never falls below a short viewport — e.g. a wide, low window. On normal-
@@ -103,7 +107,7 @@ export default function Story() {
           {/* La inspiración — arch image (filtered) + overlaid bold title (@360,1809) */}
           <Parallax speed={-0.05} className="mt-[calc(var(--dw)*10.86/100)] mx-auto w-[calc(var(--dw)*73.91/100)]">
             <div className="relative overflow-hidden rounded-t-[calc(var(--dw)*16.875/100)] h-[calc(var(--dw)*46.875/100)]">
-              <img src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
+              <ResponsiveImg src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" sizes="(min-width: 1280px) 946px, (min-width: 768px) 74vw, 92vw" className="h-full w-full object-cover object-center" />
               <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-sh-black/85 to-transparent" />
               <h2 className={`${T.h1} font-bold uppercase text-sh-cream leading-[1] absolute inset-x-0 bottom-[calc(var(--dw)*4.69/100)] text-center`}>La inspiración</h2>
             </div>
@@ -115,7 +119,7 @@ export default function Story() {
             <div key={row.title} className="mt-[calc(var(--dw)*9.375/100)] mx-auto w-[calc(var(--dw)*73.91/100)] flex items-center gap-[calc(var(--dw)*4.69/100)]">
               <Parallax speed={-0.04} className={`${row.side === "right" ? "order-2" : "order-1"} w-[calc(var(--dw)*36.17/100)] shrink-0`}>
                 <div className="overflow-hidden rounded-t-[calc(var(--dw)*16.875/100)] h-[calc(var(--dw)*44.22/100)]">
-                  <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
+                  <ResponsiveImg src={row.img} alt={row.alt} sizes="(min-width: 1280px) 463px, (min-width: 768px) 36vw, 92vw" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
                 </div>
               </Parallax>
               <Reveal className={`${row.side === "right" ? "order-1" : "order-2"} relative top-[calc(var(--dw)*2/100)] flex-1 flex flex-col gap-[calc(var(--dw)*1.56/100)]`}>
@@ -132,7 +136,7 @@ export default function Story() {
         <div className="md:hidden">
           {/* Hero — full-bleed, centered bold headline + subtitle (Frame 1642 @36,689) */}
           <section className="relative w-full h-[920px] min-h-[100svh] overflow-hidden">
-            <img src="/redesign/story-hero.jpg" alt="Chef Gerardo Álvarez Saucedo at Silent H" className="absolute inset-0 h-full w-full object-cover object-[64%_center]" />
+            <ResponsiveImg src="/redesign/story-hero.jpg" alt="Chef Gerardo Álvarez Saucedo at Silent H" sizes="100vw" loading="eager" className="absolute inset-0 h-full w-full object-cover object-[64%_center]" />
             {/* top is the .fig 689px, but capped so the block never falls below the visible
                 viewport on short phones (block is ~195px tall → keep ~220px of headroom).
                 On tall phones 100svh-220 > 689 so it stays at the design 689px, unchanged. */}
@@ -151,7 +155,7 @@ export default function Story() {
 
             <Parallax speed={-0.04}>
               <div className="relative overflow-hidden rounded-t-[200px] h-[480px]">
-                <img src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
+                <ResponsiveImg src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" sizes="92vw" className="h-full w-full object-cover object-center" />
                 <div className="absolute inset-x-0 bottom-0 h-[88px] bg-gradient-to-t from-sh-black/85 to-transparent" />
                 <h2 className="font-display font-bold uppercase text-sh-cream text-[24px] leading-[1.2] tracking-[0.05em] absolute inset-x-0 bottom-[30px] text-center">La inspiración</h2>
               </div>
@@ -165,7 +169,7 @@ export default function Story() {
                 </Reveal>
                 <Parallax speed={-0.04}>
                   <div className="overflow-hidden rounded-t-[200px] h-[480px]">
-                    <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
+                    <ResponsiveImg src={row.img} alt={row.alt} sizes="92vw" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
                   </div>
                 </Parallax>
               </div>

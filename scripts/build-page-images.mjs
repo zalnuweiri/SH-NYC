@@ -435,6 +435,54 @@ const PAGE_JOBS = {
             webpQuality: 78,
         },
     ],
+
+    // Our Story page (src/pages/Story.jsx). Four content images from the
+    // colleague's Our-Story iterations, all rendered via <ResponsiveImg>.
+    // The inspiración photo is the large arch — desktop ~73.9vw (≈946px at the
+    // 1280 --dw cap), so it needs tiers up to 1600 (≈946 @2x); its 1600px webp
+    // master downsizes cleanly. The three alternating-row photos render in a
+    // ~36.2vw arch (≈463px desktop) / full-width 480px-tall box on mobile, so a
+    // ladder topping out at 1080 (≈500 @2x) is plenty; masters are 1200px webp.
+    story: [
+        {
+            // Full-bleed hero (LCP). Native source is only 1108px, so the ladder
+            // caps there — the win is the AVIF/WebP re-encode over the 93KB JPEG
+            // plus smaller mobile tiers, not any large-screen sharpness gain.
+            name: "story-hero",
+            input: "public/redesign/story-hero.jpg",
+            widths: [480, 640, 768, 960, 1108],
+            avifQuality: 55,
+            webpQuality: 78,
+        },
+        {
+            name: "story-inspiracion",
+            input: "public/redesign/story-inspiracion.webp",
+            widths: [480, 768, 960, 1280, 1600],
+            avifQuality: 55,
+            webpQuality: 78,
+        },
+        {
+            name: "story-1 (grandmother)",
+            input: "public/redesign/story-1.webp",
+            widths: [240, 480, 640, 768, 1080],
+            avifQuality: 55,
+            webpQuality: 78,
+        },
+        {
+            name: "story-2 (table)",
+            input: "public/redesign/story-2.webp",
+            widths: [240, 480, 640, 768, 1080],
+            avifQuality: 55,
+            webpQuality: 78,
+        },
+        {
+            name: "story-3 (dish)",
+            input: "public/redesign/story-3.webp",
+            widths: [240, 480, 640, 768, 1080],
+            avifQuality: 55,
+            webpQuality: 78,
+        },
+    ],
 };
 
 function fileExists(filePath) {
