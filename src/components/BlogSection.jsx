@@ -353,12 +353,12 @@ export default function BlogSection() {
         <section className="relative w-full">
             {/* Desktop */}
             <div className="hidden md:flex w-[89.06vw] mx-auto flex-col items-center gap-[2.5vw]">
-                <Reveal className="flex flex-col items-center gap-[2.5vw] w-full">
-                    <h2 className={`${T.h1} uppercase text-sh-cream text-center leading-[1] font-bold`}>
+                <Reveal className="flex flex-col items-center gap-[1.5vw] w-full">
+                    <h2 className="font-display font-bold uppercase text-sh-cream text-center text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em]">
                         A blog full of experiences
                     </h2>
 
-                    <p className={`${T.body} text-sh-cream text-center leading-[1.2]`}>
+                    <p className="w-full font-body text-sh-cream text-center text-[clamp(20px,1.85vw,24px)] tracking-[0.025em] leading-[1.45]">
                         A closer look at the flavours, culture, and experiences behind Silent H.
                     </p>
                 </Reveal>
@@ -409,7 +409,7 @@ export default function BlogSection() {
                     A blog full of experiences
                 </h2>
 
-                <p className="font-body text-sh-cream text-center text-[18px] leading-[1.3] tracking-[0.1em]">
+                <p className="w-full font-body text-sh-muted text-center text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em]">
                     A closer look at the flavours, culture, and experiences behind Silent H.
                 </p>
 

@@ -120,11 +120,11 @@ export default function MenuCarousel() {
             {/* Desktop exact composition */}
             <div className="hidden md:flex w-[73.91vw] mx-auto flex-col items-center gap-[2.5vw]">
                 <Reveal className="flex flex-col items-center gap-[2.1vw] w-full">
-                    <h2 className={`${T.h1} uppercase text-sh-cream text-center leading-[1.2] font-bold`}>
+                    <h2 className="font-display font-bold uppercase text-sh-cream text-center text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em]">
                         Menú excepcional
                     </h2>
 
-                    <p className={`${T.body} text-sh-cream text-center leading-[1.2]`}>
+                    <p className="w-full font-body text-sh-muted text-center text-[clamp(20px,1.85vw,24px)] tracking-[0.025em] leading-[1.45]">
                         From expertly crafted artisanal cocktails to dishes that celebrate authentic Mexican soul.
                     </p>
                 </Reveal>
@@ -225,7 +225,7 @@ export default function MenuCarousel() {
                     Menú excepcional
                 </h2>
 
-                <p className="mt-8 font-body text-sh-cream leading-[1.2] text-[18px] tracking-[0.125em]">
+                <p className="mt-8 font-body text-sh-muted leading-[1.45] text-[clamp(20px,1.85vw,24px)] tracking-[0.025em]">
                     From expertly crafted artisanal cocktails to dishes that celebrate authentic
                     <br />
                     Mexican soul.

@@ -4,7 +4,7 @@ import { Menu as MenuIcon, X } from "lucide-react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { LuFacebook } from "react-icons/lu";
 import { useOTWidget } from "./OTwidget";
-import { T, EASE } from "../styles/figmaTokens";
+import { EASE } from "../styles/figmaTokens";
 
 // Figma home nav — Frame 1589 @(408,40) 464×67, bg #00000066 (= bg-black/40) +
 // backdrop-blur, rounded-full. Inner Frame 1426 @(428,50) 424×48, gap12:
@@ -27,7 +27,8 @@ export default function Navbar() {
     // NeueBit Bold, uppercase, button type token (16/16 ls1.6 → ~0.16em). On the
     // full-bleed canvas the pill text is sized in vw so it tracks the design exactly.
     // Nav links = Desktop/Button style (NeueBit 16, ls 10%, UPPER) + spring colour fade.
-    const linkBase = `${T.button} uppercase whitespace-nowrap px-[1vw] ${EASE}`;
+    // Fixed px (not vw) so the pill keeps a constant size on wide desktops instead of expanding.
+    const linkBase = `font-body uppercase whitespace-nowrap text-[16px] tracking-[0.1em] px-[13px] ${EASE}`;
 
     // Mobile menu-overlay links (Reserve has no `to` — it opens the OT widget).
     const MOBILE_LINKS = [
@@ -44,15 +45,15 @@ export default function Navbar() {
         <NavLink
             to={to}
             className={({ isActive }) =>
-                `${linkBase} inline-flex items-center gap-[0.45vw] ${isActive ? "text-sh-pink" : "text-sh-cream hover:text-sh-gold"}`
+                `${linkBase} inline-flex items-center gap-[6px] ${isActive ? "text-sh-pink" : "text-sh-cream hover:text-sh-gold"}`
             }
         >
             {({ isActive }) => (
                 <>
                     {/* circles always reserve space; only visible when active — so clicking doesn't reflow the row */}
-                    <span className={`w-[0.47vw] h-[0.47vw] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
+                    <span className={`w-[6px] h-[6px] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
                     {children}
-                    <span className={`w-[0.47vw] h-[0.47vw] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
+                    <span className={`w-[6px] h-[6px] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
                 </>
             )}
         </NavLink>
@@ -68,13 +69,13 @@ export default function Navbar() {
         <header className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none">
             {/* Desktop centered pill — @(408,40), so top = 40px = 3.125vw.
                 Pill 464×67 with inner 424-wide item row, gap 12px = 0.94vw, h 67px = 5.23vw. */}
-            <nav className="font-bold pointer-events-auto hidden md:flex items-center justify-center gap-[0.94vw] rounded-full bg-black/40 backdrop-blur-[10px] mt-[3.125vw] h-[5.23vw] px-[1.56vw] shadow-xl shadow-black/30">
+            <nav className="font-bold pointer-events-auto hidden md:flex items-center justify-center gap-[12px] rounded-full bg-black/40 backdrop-blur-[10px] mt-[40px] h-[67px] px-[20px] shadow-xl shadow-black/30">
                 {/* MENU (50w) */}
                 <NavItem to="/menu">Menu</NavItem>
                 {/* HAPPY HOUR (98w) */}
                 <NavItem to="/happy-hour">Happy Hour</NavItem>
                 {/* pink Silent-H logo 38×48 = 2.97vw × 3.75vw */}
-                <Logo className="h-[3.75vw] w-auto" />
+                <Logo className="h-[48px] w-auto" />
                 {/* RESERVE (75w) — opens OT widget */}
                 <button
                     onClick={openReservationWidget}

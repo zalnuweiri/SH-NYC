@@ -78,7 +78,9 @@
   --color-sh-grey-200: #d7d7d7;
 
   /* Cream / offwhite (light text + occasional light panels) */
-  --color-sh-cream:      #ece1d4;  /* primary light text — exact Figma off-white (nav/body) */
+  --color-sh-cream:      #eee4d9;  /* primary light text — exact Figma off-white (nav/body) */
+  --color-sh-muted:      #b8aca4;  /* muted caption text — section-intro captions (colleague pattern) */
+  --color-sh-muted:      #b8aca4;  /* muted caption text (section-intro subtitles) — colleague's --muted */
   --color-sh-cream-50:   #fffefd;  /* near-white, for rare bright-on-image text */
   --color-sh-cream-100:  #fff5e9;
   --color-sh-cream-200:  #ece1d4;

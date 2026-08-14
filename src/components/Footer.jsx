@@ -83,9 +83,23 @@ export default function Footer() {
             {/* h = Group25 content 50.94vw + 98px (7.66vw) empty below to match the home frame's
                 bottom padding (4744→4842). Without it the whole page is short and everything reads
                 proportionally too low vs the figma. */}
-            <div className="hidden md:block relative w-full h-[77.6vw]">
-                {/* Figma "footer 1": full-width doorway image across the top of the footer (h ≈ 45.78vw) */}
-                <div className="absolute inset-x-0 top-0 w-full">
+            <div className="hidden md:flex w-full flex-col items-center bg-sh-black">
+                {/* ── Social section (colleague .social-section): heading + icons, then the
+                    neon image CENTERED below at ~760px — not full-width, not overlaid. ── */}
+                <div className="w-[min(1120px,100%)] mx-auto flex flex-col items-center px-6 pt-[82px] pb-[36px]">
+                    <p className="font-display font-bold uppercase text-sh-cream text-center text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em] whitespace-nowrap">
+                        Let&apos;s get social
+                    </p>
+                    <div className="mt-[22px] flex flex-row items-center gap-[30px] text-[28px]">
+                        <a href="https://www.tiktok.com/@silenth.to?lang=en" aria-label="TikTok"
+                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaTiktok/></a>
+                        <a href="https://www.instagram.com/silenth.to/?hl=en" aria-label="Instagram"
+                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaInstagram/></a>
+                        <a href="https://www.facebook.com/silenth.to/" aria-label="Facebook"
+                           className="text-sh-cream hover:text-sh-pink transition-colors"><LuFacebook/></a>
+                        <a href="https://www.youtube.com/@silenth.toronto" aria-label="Youtube"
+                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaYoutube/></a>
+                    </div>
                     <picture>
                         <source
                             type="image/avif"
@@ -94,7 +108,7 @@ export default function Footer() {
                                 "/redesign/footer-social-960.avif 960w",
                                 "/redesign/footer-social-1200.avif 1200w",
                             ].join(", ")}
-                            sizes="100vw"
+                            sizes="760px"
                         />
                         <source
                             type="image/webp"
@@ -103,66 +117,39 @@ export default function Footer() {
                                 "/redesign/footer-social-960.webp 960w",
                                 "/redesign/footer-social-1200.webp 1200w",
                             ].join(", ")}
-                            sizes="100vw"
+                            sizes="760px"
                         />
                         <img
                             src="/redesign/footer-social-1200.webp"
-                            width="1279"
-                            height="586"
-                            alt="The entrance to Silent H — a carved stone doorway flanked by two reclining figures, with a neon sign reading You Are Exactly Where You Need To Be"
-                            className="block w-full h-auto object-cover"
+                            width="1875"
+                            height="839"
+                            alt="Neon sign at Silent H reading You Are Exactly Where You Need To Be"
+                            className="mt-[52px] block w-[min(760px,calc(100%-48px))] h-auto object-contain translate-x-[3%]"
                             loading="lazy"
                             decoding="async"
                         />
                     </picture>
                 </div>
-                {/* Darken the doorway's top for the overlaid heading + a stronger fade-in; seal the image bottom to black */}
-                <div className="absolute inset-x-0 top-0 h-[24vw] bg-gradient-to-b from-black via-black/70 to-transparent" />
-                <div className="absolute inset-x-0 top-[34vw] h-[11.78vw] bg-gradient-to-b from-transparent to-sh-black" />
-                <div className="absolute inset-x-0 top-[45.78vw] bottom-0 bg-sh-black" />
 
-                {/* Frame 1651 — "Let's get social" + icons, overlaid on the doorway's upper area */}
-                <div className="absolute left-[28.13vw] top-[6.25vw] w-[43.75vw] z-10 flex flex-col items-center gap-[3.125vw]">
-                    {/* Monoglyphic Bold 40px (Desktop/H1 style), UPPER, ls 7% → 3.125vw / 0.219vw */}
-                    <p className={`${T.h1} uppercase text-sh-cream text-center leading-[1]`}>
-                        Let&apos;s get social
-                    </p>
-                    {/* Frame 1395: social icons row, gap32 = 2.5vw, 24×24 = 1.875vw */}
-                    <div className="flex flex-row items-center gap-[2.5vw] text-[round(1.875vw,1px)]">
-                        <a href="https://www.tiktok.com/@silenth.to?lang=en" aria-label="TikTok"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaTiktok/></a>
-                        <a href="https://www.instagram.com/silenth.to/?hl=en" aria-label="Instagram"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaInstagram/></a>
-                        <a href="https://www.facebook.com/silenth.to/" aria-label="Facebook"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><LuFacebook/></a>
-                        <a href=" https://www.youtube.com/@silenth.toronto" aria-label="Youtube"
-                           className="hover:text-sh-pink transition-colors"><FaYoutube/></a>
-                    </div>
-                </div>
-
-                {/* Frame 1653 — quick links / address / maps, now BELOW the full-width doorway */}
-                <div className="absolute left-[5.47vw] top-[58.44vw] flex flex-row items-center gap-[3.125vw]">
-                    {/* Frame 1597: Quick links column, gap20 = 1.56vw, width 229 = 17.89vw */}
-                    <div className="w-[17.89vw] flex flex-col items-start gap-[1.56vw]">
-                        {/* "Quick links" = Monoglyphic Regular 22px, MIXED case (figma renders
-                            "Quick links", not uppercase), ls ~5% */}
-                        <p className={`${T.h3} text-sh-cream leading-[1.2]`}>Quick links</p>
-                        {/* Frame 1596: links, items at 20px pitch (8px cap-box + 12px gap).
-                            leading-[0.5] makes each box hug the uppercase cap-height like Figma. */}
-                        <div className="flex flex-col items-start gap-[0.94vw]">
+                {/* ── Footer info row (colleague .site-footer): quick links | address | maps | mailing ── */}
+                <div className="w-[min(1140px,100%)] mx-auto px-6 pt-[34px] pb-[80px] flex flex-row items-start justify-between gap-[44px]">
+                    {/* Quick links */}
+                    <div className="flex flex-col items-start gap-[10px]">
+                        <p className="font-body text-sh-cream text-[24px] leading-[1.2] mb-[6px]">Quick links</p>
+                        <div className="flex flex-col items-start gap-[5px]">
                             {QUICK_LINKS.map((l) => (
-                                <Link key={l.to} to={l.to} className={`${T.caption} uppercase text-sh-cream leading-[0.5] hover:text-sh-pink transition-colors font-bold`}>
+                                <Link key={l.to} to={l.to} className="font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em] leading-[1.5] hover:text-sh-pink transition-colors">
                                     {l.label}
                                 </Link>
                             ))}
-                            <button onClick={openReservationWidget} className={`${T.caption} uppercase text-sh-cream leading-[0.5] hover:text-sh-pink transition-colors text-left font-bold`}>
+                            <button onClick={openReservationWidget} className="font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em] leading-[1.5] hover:text-sh-pink transition-colors text-left">
                                 reserve a table
                             </button>
                         </div>
                     </div>
 
-                    {/* Address @(339,551) → NeueBit Bold 16px ls3.2 UPPER, 229 wide = 17.89vw */}
-                    <p className={`w-[17.89vw] ${T.caption} uppercase text-sh-cream leading-[1.2] font-bold`}>
+                    {/* Address */}
+                    <p className="max-w-[220px] font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em] leading-[1.5] pt-[50px]">
                         <a href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer" className="hover:text-sh-pink transition-colors">416 West 13th St</a>
                         {" | "}
                         <a href="tel:+14169003535" className="hover:text-sh-pink transition-colors">416 900 3535</a>
@@ -170,27 +157,23 @@ export default function Footer() {
                         <a href="mailto:info@silenth.ca" className="hover:text-sh-pink transition-colors">info@silenth.ca</a>
                     </p>
 
-                    {/* Frame 1652 @(608,548): google maps link. The embedded map sits BELOW it,
-                        absolutely positioned so it doesn't shift the link in this items-center row. */}
-                    <div className="relative">
+                    {/* Maps link + embed */}
+                    <div className="flex flex-col items-start gap-[16px] pt-[50px]">
                         <a
                             href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex flex-row items-center gap-[1.56vw] hover:opacity-80 transition-opacity"
+                            className="flex flex-row items-center gap-[10px] hover:opacity-80 transition-opacity"
                         >
-                            <img src="/redesign/fig-google-maps-logo-1-1.png" alt="" className="w-[1.875vw] h-[2.58vw] object-cover" />
-                            {/* NeueBit Bold 16px UPPER → 1.25vw */}
-                            <span className={`${T.button} uppercase text-sh-cream font-bold`}>find us on google maps</span>
+                            <img src="/redesign/fig-google-maps-logo-1-1.png" alt="" className="w-[24px] h-[33px] object-cover" />
+                            <span className="font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em]">find us on google maps</span>
                         </a>
-                        {/* Embedded map (restored). pointer-events-none so it never grabs the scroll;
-                            the wrapping link opens Google Maps. */}
                         <a
                             href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Open Silent H on Google Maps"
-                            className="absolute top-full left-0 mt-[1.25vw] block w-[17.89vw] h-[10vw] overflow-hidden rounded-[4px]"
+                            className="block w-[229px] h-[128px] overflow-hidden rounded-[4px]"
                         >
                             <iframe
                                 title="Silent H location"
@@ -200,23 +183,19 @@ export default function Footer() {
                             />
                         </a>
                     </div>
-                </div>
 
-                {/* Frame 1654 — mailing + recommended, aligned with the links row below the doorway */}
-                <div className="absolute left-[73.44vw] top-[58.44vw] w-[21.09vw] flex flex-col items-center gap-[3.125vw]">
-                    {/* Pink SecondaryButton 270×48 → full width × 3.75vw */}
-                    <MailingButton sizing="w-full h-[3.75vw] text-[round(1.25vw,1px)] font-bold tracking-[1.6px]" onOpen={() => setShowForm(true)}>
-                        Join our mailing community
-                    </MailingButton>
-                    {/* Frame 1592 219×57 black r4 → w 17.11vw, h 4.45vw, gap12 = 0.94vw */}
-                    <div className="w-[17.11vw] h-[4.45vw] rounded-[4px] bg-sh-ink flex flex-col items-center justify-center gap-[0.94vw]">
-                        {/* "RECOMENDED ON" green #00eb5b NeueBit Bold 22px → 1.72vw */}
-                        <span className={`${T.subtitle} text-[#00eb5b] leading-[1]`}>RECOMMENDED ON</span>
-                        {/* Tripadvisor logo 150×23 → 11.72vw × 1.8vw (explicit height reserves the space) */}
-                        <RecommendedBadge
-                            imgClassName="w-[11.72vw] h-[1.8vw] object-contain"
-                            fallbackClassName="inline-flex items-center h-[1.8vw] font-body font-bold text-[#00eb5b] text-[round(1.56vw,1px)] leading-none tracking-[0.08em]"
-                        />
+                    {/* Mailing + recommended */}
+                    <div className="w-[240px] flex flex-col items-center gap-[28px] pt-[40px]">
+                        <MailingButton sizing="w-full h-[52px] text-[12px] font-bold tracking-[1.6px]" onOpen={() => setShowForm(true)}>
+                            Join our mailing community
+                        </MailingButton>
+                        <div className="w-[219px] rounded-[4px] bg-sh-ink flex flex-col items-center justify-center gap-[10px] py-[12px]">
+                            <span className="font-body text-[#00eb5b] text-[22px] leading-[1] tracking-[0.12em]">RECOMMENDED ON</span>
+                            <RecommendedBadge
+                                imgClassName="w-[150px] h-[23px] object-contain"
+                                fallbackClassName="inline-flex items-center h-[23px] font-body font-bold text-[#00eb5b] text-[20px] leading-none tracking-[0.08em]"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,7 +211,7 @@ export default function Footer() {
                     <picture>
                         <source type="image/avif" srcSet={["/redesign/footer-social-480.avif 480w", "/redesign/footer-social-768.avif 768w"].join(", ")} sizes="321px" />
                         <source type="image/webp" srcSet={["/redesign/footer-social-480.webp 480w", "/redesign/footer-social-768.webp 768w"].join(", ")} sizes="321px" />
-                        <img src="/redesign/footer-social-480.webp" width="480" height="220" alt="The entrance to Silent H — a carved stone doorway with a neon sign reading You Are Exactly Where You Need To Be" className="block w-full h-auto" loading="lazy" decoding="async" />
+                        <img src="/redesign/footer-social-480.webp" width="480" height="215" alt="Neon sign at Silent H reading You Are Exactly Where You Need To Be" className="block w-full h-auto" loading="lazy" decoding="async" />
                     </picture>
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-sh-black to-transparent" />
                 </div>

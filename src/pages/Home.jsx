@@ -95,9 +95,8 @@ export default function Home() {
             Mondwest Bold 64px ls4.48 cream + paragraph NeueBit 22px cream +
             SecondaryButton 216×48 r4. The hero dust is the global DustGate. */}
           <section className="relative w-full overflow-hidden">
-            <div className="relative hidden md:block w-full h-[65.39vw]">
-              {/* Full-bleed hero — the stained-glass Sacred Heart. Its natural 1.53 aspect
-                matches the 1280×837 frame, so it fills h-[65.39vw] with no crop. */}
+            <div className="relative hidden md:block w-full h-[980px]">
+              {/* Full-bleed hero — the sunburst stained-glass; object-cover keeps the sun centred. */}
               <picture>
                 <source
                     type="image/avif"
@@ -123,40 +122,52 @@ export default function Home() {
 
                 <img
                     src="/redesign/newhero-1280.webp"
-                    alt="Silent H modern Mexican restaurant and agave cocktail bar in NYC's Meatpacking District"
+                    alt="Silent H — a radiant stained-glass sunburst; modern Mexican dining in NYC"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    className="absolute left-0 top-0 w-full h-[65.39vw] object-cover select-none"
+                    className="absolute inset-0 w-full h-full object-cover object-[50%_48%] select-none"
                     draggable="false"
                 />
               </picture>
-              {/* Nav scrim (top) + text scrim (bottom half) so the cream copy stays legible over
-                the bright heart. */}
-              <div className="absolute inset-x-0 top-0 h-[13vw] bg-gradient-to-b from-black/60 to-transparent pointer-events-none"/>
-              <div className="absolute inset-x-0 bottom-0 h-[45vw] bg-gradient-to-t from-black via-black/45 to-transparent pointer-events-none"/>
-              {/* Frame 1427 @(167,467) 946×276 — CENTERED heading / subtitle / button (Figma:
-                flex-col, items-center, gap 32px; all text-center). */}
-              <Parallax speed={0.05}
-                        className="absolute left-1/2 top-[36.48vw] w-[73.91vw] -translate-x-1/2">
-                <Reveal>
-                  <div className="flex flex-col items-center text-center gap-[2.5vw]">
-                    {/* Monoglyphic Bold 64px, ls 6.4px (10%), centered */}
-                    <h1 className="font-display font-bold text-sh-cream leading-none text-[5vw] tracking-[0.5vw]">
-                      Mexican flavours, celebrated in NYC
-                    </h1>
-                    {/* NeueBit Bold 22px ls4.4, centered */}
-                    <p className={`w-full ${T.subtitle} text-sh-cream leading-none tracking-[4.4px] font-bold`}>
-                      Chef Gerardo brings Mexico's street flavours to NYC. Elevated, authentic and an homage to
-                      Monterrey.
-                    </p>
-                    {/* SecondaryButton: px28 py20 r4 */}
-                    <OutlineButton onClick={openReservationWidget} size="px-[2.19vw] py-[0.86vw] font-bold">
-                      BOOK YOUR EXPERIENCE
-                    </OutlineButton>
+              {/* Single light overlay copied from the reference: keeps the glass bright (transparent
+                through the middle), only darkens the bottom ~20% for the copy + seals to black, with
+                a faint corner vignette. */}
+              <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.02) 48%, rgba(0,0,0,0.1) 65%, rgba(0,0,0,0.22) 78%, rgba(0,0,0,0.42) 88%, rgba(0,0,0,0.72) 96%, rgb(0,0,0) 100%), radial-gradient(at 50% 45%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.03) 78%, rgba(0,0,0,0.3) 100%)",
+                  }}
+              />
+              {/* Hero content — colleague layout: centered column, padding-top 530px so the h1
+                sits at the reference's height; h1 Monoglyphic clamp(56,6vw,82) ls 0.08em, a
+                one-line NeueBit subtitle 20px ls 0.22em, then the dual CTAs. */}
+              <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center px-[25px] pt-[530px] text-center">
+                <div className="flex flex-col items-center">
+                  <h1 className="font-display font-bold text-sh-cream text-[clamp(56px,6vw,82px)] leading-[0.98] tracking-[0.08em] [text-wrap:balance] max-w-[950px] [text-shadow:0_2px_8px_rgba(0,0,0,0.45),0_10px_32px_rgba(0,0,0,0.3)]">
+                    Mexican flavours,<br />celebrated in NYC
+                  </h1>
+                  <p className="mt-7 font-body font-bold text-sh-cream text-[20px] leading-none tracking-[0.22em] whitespace-nowrap [text-shadow:0_3px_18px_#000]">
+                    Chef Gerardo brings Mexico&apos;s street flavours to NYC. Elevated, authentic and an homage to Monterrey.
+                  </p>
+                  <div className="mt-7 flex flex-wrap items-center justify-center gap-[18px]">
+                    <button
+                        onClick={openReservationWidget}
+                        className="min-w-[220px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-sh-pink bg-sh-pink text-sh-ink font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:bg-[#f05f76] hover:border-[#f05f76] transition-colors"
+                    >
+                      Book Your Reservation
+                    </button>
+                    <Link
+                        to="/menu"
+                        className="min-w-[220px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-sh-cream bg-black/25 text-sh-cream font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:border-sh-pink hover:text-sh-pink transition-colors"
+                    >
+                      Our Menu
+                    </Link>
                   </div>
-                </Reveal>
-              </Parallax>
+                </div>
+              </div>
             </div>
 
                 {/* Mobile hero */}
@@ -167,7 +178,7 @@ export default function Home() {
                     w-full
                     overflow-hidden
                     bg-black
-                    pt-[134vw]
+                    pt-[96vw]
                     pb-16
                   "
                 >
@@ -233,20 +244,28 @@ export default function Home() {
                       Elevated, authentic and an homage to Monterrey.
                     </p>
 
-                    <button
-                        onClick={openReservationWidget}
-                        className="mt-8 inline-flex items-center justify-center rounded-[4px] border border-sh-cream font-body uppercase text-sh-cream text-[16px] tracking-[0.1em] w-[216px] h-[48px] hover:bg-sh-cream hover:text-sh-black transition-colors font-bold"
-                    >
-                      Book Your Experience
-                    </button>
+                    <div className="mt-8 flex flex-col gap-3 w-[216px]">
+                      <button
+                          onClick={openReservationWidget}
+                          className="inline-flex items-center justify-center rounded-[4px] bg-sh-pink text-sh-ink font-body font-bold uppercase text-[16px] tracking-[0.1em] h-[48px] hover:opacity-90 transition-opacity"
+                      >
+                        Book Your Reservation
+                      </button>
+                      <Link
+                          to="/menu"
+                          className="inline-flex items-center justify-center rounded-[4px] border border-sh-cream bg-black/25 text-sh-cream font-body font-bold uppercase text-[16px] tracking-[0.1em] h-[48px] hover:bg-sh-cream hover:text-sh-black transition-colors"
+                      >
+                        Our Menu
+                      </Link>
+                    </div>
                   </Reveal>
                 </div>
           </section>
-          <section className="text-sh-cream px-6 md:px-12 lg:px-20 py-16 md:py-24">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="font-display uppercase text-2xl md:text-4xl mb-6">A Modern Mexican Restaurant in
+          <section className="text-sh-cream px-6 md:px-12 lg:px-20 py-16 md:py-28 md:pb-55">
+            <div className="mx-auto max-w-[920px] text-center">
+              <h2 className="font-display font-bold uppercase text-[clamp(38px,4.2vw,56px)] leading-none tracking-[0.045em] text-sh-cream mb-7">A Modern Mexican Restaurant in
                 NYC</h2>
-              <p className="text-base md:text-lg leading-relaxed text-sh-cream/85">Silent H is a modern Mexican
+              <p className="font-body text-sh-cream text-[clamp(20px,1.85vw,24px)] font-[550] leading-[1.45] tracking-[0.025em]">Silent H is a modern Mexican
                 restaurant and agave cocktail lounge in NYC's Meatpacking District. Led by Chef Gerardo Álvarez
                 Saucedo, the kitchen reimagines traditional Mexican family recipes with refined technique, from charred
                 guacamole and crispy chicharrón tacos to mesquite-grilled rib-eye espadas and a 44oz tomahawk. Next
@@ -277,9 +296,30 @@ export default function Home() {
             {/* Desktop — Figma: centered heading/subtitle/button, then a FULL-BLEED mural
               (Silent H NYC mural + winged statues) that fades from black at the top and
               carries an edge vignette to match the reference. */}
-            <div className="hidden md:block relative w-full bg-sh-black">
-              {/* Full-bleed mural (natural 1280×602) with the Figma vignette + overlaid centered text */}
-              <div className="relative w-full">
+            <div className="hidden md:block relative w-full bg-sh-black pt-[88px] pb-[104px]">
+              {/* section-intro — centered header + captions ABOVE the image (colleague layout) */}
+              <Reveal className="relative z-[2] text-center px-[22px]">
+                <h2 className="font-display font-bold uppercase text-sh-cream text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em] mb-[18px]">
+                  Private dining &amp; events
+                </h2>
+                <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em] mb-[5px]">
+                  Plan your celebración auténtica in our vibrant NYC space.
+                </p>
+                <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em] mb-[5px]">
+                  Book your holiday event before October 31st and receive a $100 gift card.
+                </p>
+                <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em]">
+                  Terms apply
+                </p>
+              </Reveal>
+              {/* "Plan Your Event" — centered, overlapping the image top slightly (colleague .events-button) */}
+              <div className="relative z-[3] mx-auto mt-7 mb-[-26px] w-max">
+                <Link to="/events" className="min-w-[220px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-sh-cream bg-black/25 text-sh-cream font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:border-sh-pink hover:text-sh-pink transition-colors">
+                  Start Planning
+                </Link>
+              </div>
+              {/* event-image-wrap — 1180px max, 590px tall, colleague edge-frame gradient (::after) */}
+              <div className="relative mx-auto w-[min(1180px,100%)]">
                 <picture>
                   <source
                       type="image/avif"
@@ -288,7 +328,7 @@ export default function Home() {
                         "/redesign/private-dining-960.avif 960w",
                         "/redesign/private-dining-1280.avif 1280w",
                       ].join(", ")}
-                      sizes="100vw"
+                      sizes="(min-width: 1180px) 1180px, 100vw"
                   />
                   <source
                       type="image/webp"
@@ -297,38 +337,26 @@ export default function Home() {
                         "/redesign/private-dining-960.webp 960w",
                         "/redesign/private-dining-1280.webp 1280w",
                       ].join(", ")}
-                      sizes="100vw"
+                      sizes="(min-width: 1180px) 1180px, 100vw"
                   />
                   <img
                       src="/redesign/private-dining-1280.webp"
-                      width="1280"
-                      height="602"
+                      width="1180"
+                      height="590"
                       alt="Silent H private dining room with a Mexican mural and winged statues"
                       loading="lazy"
                       decoding="async"
-                      className="block w-full h-auto object-cover"
+                      className="block w-full h-[590px] object-cover object-center"
                   />
                 </picture>
-                {/* Rectangle 187 — radial vignette: bright centre, edges → black, via multiply
-                  (Figma: radialGradient white@33.6% → black at the edges, mix-blend multiply). */}
-                <div className="pointer-events-none absolute inset-0 mix-blend-multiply bg-[radial-gradient(ellipse_farthest-side_at_center,transparent_33.6%,#000_100%)]"/>
-                {/* Top scrim so the overlaid heading stays legible */}
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-sh-black via-black/40 to-transparent"/>
-                {/* Soft seal to black at the bottom */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-sh-black to-transparent"/>
-                {/* Frame 1428 — CENTERED heading / subtitle / button, overlaid near the top */}
-                <Reveal className="absolute inset-x-0 top-[3.5vw] z-10 flex flex-col items-center text-center px-[10vw] gap-[2vw]">
-                  <h2 className={`${T.h1} uppercase text-sh-cream leading-[1.1]`}>
-                    Private dining &amp; events
-                  </h2>
-                  <p className={`${T.body} text-sh-cream leading-[1.25] max-w-[56vw]`}>
-                    Plan your celebración auténtica in our vibrant NYC space. Book your holiday event before
-                    October 31st and receive a $100 gift card. Terms apply.
-                  </p>
-                  <OutlineButton to="/events" size="w-[16vw] h-[3.75vw] font-bold">
-                    Plan Your Event
-                  </OutlineButton>
-                </Reveal>
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(180deg, #000 0%, transparent 20%, transparent 78%, #000 100%), linear-gradient(90deg, #000 0%, transparent 15%, transparent 85%, #000 100%)",
+                    }}
+                />
               </div>
             </div>
 
@@ -339,12 +367,12 @@ export default function Home() {
                 <h2 className={`${M.h2} uppercase text-sh-cream leading-[1.2]`}>
                   Private dining &amp; events
                 </h2>
-                <p className="font-body text-[18px] tracking-[0.1em] text-sh-cream leading-[1.4] max-w-[321px]">
+                <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] tracking-[0.025em] leading-[1.45] max-w-[321px]">
                   Plan your celebración auténtica in our vibrant NYC space. Book your holiday event before
                   October 31st and receive a $100 gift card. Terms apply.
                 </p>
                 <Link to="/events" className="inline-flex items-center justify-center rounded-[4px] border border-sh-cream font-body uppercase text-sh-cream text-[16px] tracking-[0.1em] w-[164px] h-[48px] hover:bg-sh-cream hover:text-sh-black transition-colors">
-                  Plan Your Event
+                  Start Planning
                 </Link>
               </Reveal>
               <div className="relative w-full">
@@ -378,9 +406,14 @@ export default function Home() {
                   />
                 </picture>
                 {/* Rectangle 187 radial vignette (multiply) — same as desktop */}
-                <div className="pointer-events-none absolute inset-0 mix-blend-multiply bg-[radial-gradient(ellipse_farthest-side_at_center,transparent_33.6%,#000_100%)]"/>
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-sh-black to-transparent"/>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-sh-black to-transparent"/>
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(180deg, #000 0%, transparent 20%, transparent 78%, #000 100%), linear-gradient(90deg, #000 0%, transparent 15%, transparent 85%, #000 100%)",
+                    }}
+                />
               </div>
             </div>
           </section>
@@ -516,7 +549,8 @@ export default function Home() {
                 {/* Line 1 — Monoglyphic Regular, EXACT figma STYLE values (verified in-browser):
                   28px (2.1875vw), letterSpacing 2% (0.044vw), lineHeight 1.2. At 2% ls
                   "I believe the best ingredient" = 438px, fits 463px → explicit break holds. */}
-                <h2 className={`${T.h2} text-sh-cream leading-[1.2]`}>
+                {/* Colleague .story-section blockquote h2: Monoglyphic 2.1875vw / 400 / lh1.2 / ls0.02em */}
+                <h2 className="font-display text-sh-cream text-[2.1875vw] leading-[1.2] font-[400] tracking-[0.02em] ">
                   &ldquo;I believe the best ingredient<br />is nostalgia,
                 </h2>
                 {/* Line 2 — NeueBit REGULAR 22 / ls 20% / lh 1.0. (Style/bake say Bold but the
@@ -524,20 +558,22 @@ export default function Home() {
                   baked line width 400.8px ≈ Bold 398.8, not Regular 387.) Explicit breaks at the
                   reference's points: "México" is a knife-edge wrap (466px vs 463 box) that natural
                   wrap flip-flops per viewport, so force it after "to" to match Figma at all widths. */}
-                <h3 className={`absolute top-[5.78vw] w-full ${T.subtitle} text-sh-cream leading-[1] font-bold`}>
+                {/* Colleague blockquote p: NeueBit 1.71875vw / 700 (bold) / lh1 / ls0.2em */}
+                <p className="absolute top-[5.78vw] w-full font-body font-bold text-sh-cream text-[1.71875vw] leading-[1] tracking-[0.2em]">
                   which is reflected in every dish on this<br />menu. It is a tribute to my family, to<br />México and to my culture.&rdquo;
-                </h3>
+                </p>
                 {/* Chef — NeueBit Regular @ y2883, 22px (1.72vw), ls 10%. DIMMED to ~0.6 opacity:
                   figma renders the chef attribution at ~0.57× the quote's brightness (muted), so
                   full-cream made it stand out too much, but 0.36 was too muted — ~0.6 (chef reads
                   ~0.6x the quote's brightness). */}
-                <p className={`absolute top-[12.57vw] ${T.body} text-sh-cream leading-[1.2] opacity-60`}>
+                {/* Colleague cite: NeueBit 1.71875vw / lh1.2 / ls0.1em / cream @ opacity 0.6 */}
+                <p className="absolute top-[12.57vw] font-body text-sh-cream text-[1.71875vw] leading-[1.2] tracking-[0.1em] opacity-60">
                   Chef Gerardo Álvarez Saucedo
                 </p>
                 {/* SecondaryButton @ y2926 (top 15.94vw), 306×51 → 23.91vw × 3.98vw */}
                 <Link
                     to="/story"
-                    className="absolute top-[15.94vw] inline-flex items-center justify-center rounded-[4px] border border-sh-cream/70 font-body font-bold uppercase text-sh-cream text-[round(1.71875vw,1px)] tracking-[0.2em] w-[23.91vw] h-[3.98vw] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-sh-pink"
+                    className="absolute top-[15.94vw] inline-flex items-center justify-center rounded-[4px] border-[2px] border-sh-cream/70 font-body font-bold uppercase text-sh-cream text-[round(1.71875vw,1px)] tracking-[0.2em] w-[23.91vw] h-[3.98vw] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-sh-pink"
                 >
                   A taste of our story
                 </Link>
@@ -771,13 +807,14 @@ export default function Home() {
             </LazyMount>
 
         {/* FAQ CTA */}
-        <section className="text-sh-cream text-center px-6 py-16 md:py-20">
+        <section className="text-sh-cream text-center px-6 py-16 md:pt-25 pb-15">
           <p className="uppercase tracking-[0.25em] text-xs text-sh-gold mb-3">Questions before you visit?</p>
-          <Link to="/faq" className="font-display uppercase text-2xl md:text-4xl hover:text-sh-gold transition-colors">Frequently Asked Questions</Link>
+          <Link to="/faq" className="font-display font-bold uppercase text-[clamp(38px,4.2vw,56px)] leading-none tracking-[0.045em] text-sh-cream hover:text-sh-gold transition-colors">Frequently Asked Questions</Link>
         </section>
 
-          {/* Figma gap: Blog → Footer (≈162px @1280) so the footer lands at design Y4092 */}
-          <div aria-hidden className="hidden md:block w-full h-[12.66vw]" />
+          {/* Gap between the FAQ CTA and the footer. Tune this value (the footer itself adds
+            ~82px of its own top padding below this). */}
+          <div aria-hidden className="hidden md:block w-full h-[3vw]" />
         </main>
       </>
   );
