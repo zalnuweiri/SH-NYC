@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+
 import SEO from "../components/SEO.jsx";
 import { breadcrumb } from "../lib/seoSchema.js";
 import Reveal from "../lib/motion/Reveal";
 import Parallax from "../lib/motion/Parallax";
 import RelatedGuides from "../components/RelatedGuides";
+import { useOTWidget } from "../components/OTwidget.jsx";
 import { T, M } from "../styles/figmaTokens";
 
 /* Silent H — Our Story. Pixel-rebuilt from the Figma frames:
@@ -14,11 +17,11 @@ import { T, M } from "../styles/figmaTokens";
      body  NeueBit 22 (·18 mobile)                    → T.body / M.body, dimmed to a warm grey
    Headings are cream #ece1d4; body paragraphs render a warm grey (~#b1a79b = cream/75).
    Content images are arches (rounded-t 216px desktop / 200px mobile); hero is full-bleed, NO
-   overlay/filter (per .fig). The inspiración photo's warm/faded film grade (.fig paintFilter:
-   temperature, lifted shadows, vibrance) is BAKED into the asset via histogram-matching to the
-   Figma render — CSS filters couldn't reproduce it. The grandmother photo is likewise
-   baked (same histogram-match) and mirrored horizontally (m00=-1).
-   Copy is verbatim from the .fig (incl. its “recipe's” / “Mexico’s” quirks). */
+   overlay/filter (per .fig). The inspiración, grandmother, table and dish photos are the
+   colleague's Our-Story iteration assets (upscaled / edited), optimised to webp under
+   /redesign; each is framed in its arch via a per-row `pos` object-position (no mirroring).
+   Copy is verbatim from the .fig (incl. its “recipe's” / “Mexico’s” quirks). The closing
+   "Experience Silent H" reservation CTA is the colleague's new footer section. */
 
 const BODY = "text-sh-cream/75"; // warm-grey body (cream dimmed ~75%, matches the .fig render)
 
@@ -29,26 +32,28 @@ const PHILOSOPHY =
 // Alternating image/text rows (Figma Frame 1646/1645/1647). side = image side (desktop).
 const ROWS = [
   {
-    img: "/redesign/story-1.jpg",
-    alt: "Chef Saucedo's grandmother making fresh masa",
+    img: "/redesign/story-1.webp", // colleague's upscaled grandmother photo (not pre-mirrored)
+    alt: "Chef Saucedo's grandmother preparing dough at her family table",
     side: "left",
-    flip: true, // .fig mirrors this photo horizontally (m00=-1)
+    pos: "object-[center_28%]", // favour her face/hands in the tall arch crop
     title: "The heart of our kitchen is a story rooted in love, memory, and tradition.",
     body:
       "Chef Saucedo draws inspiration from his late grandmother, whose warmth and passion for cooking shaped his earliest memories.\nHer honoured recipes, once shared around a family table, now come to life on our menu—reimagined with elegance and respect for their origins. Each dish is a tribute to her legacy, blending the rich flavours of traditional Mexican cuisine with the artistry of fine dining. Through every bite, we invite you to experience the soul of his childhood and the enduring spirit of the woman who started it all.",
   },
   {
-    img: "/redesign/story-2.jpg",
-    alt: "A vibrant spread of cocktails and dishes at Silent H",
+    img: "/redesign/story-2.webp", // colleague's updated checkered-table spread
+    alt: "A cocktail, guacamole and croquettes arranged on a black-and-white tiled table",
     side: "right",
+    pos: "object-[center_60%]",
     title: "Setting a tone that is both vibrant and refined.",
     body:
       "Our service is intuitive and heartfelt, attentive without ever intruding.\nWhether you're joining us for an impromptu cocktail after a long day or gathering with friends for a celebratory dinner, we craft each moment with care. The experience feels effortless, elevated, and always memorable. A true taste of contemporary Mexico.",
   },
   {
-    img: "/redesign/story-3.jpg",
-    alt: "Handcrafted tacos served at Silent H",
+    img: "/redesign/story-3.webp", // colleague's smoked-meat + red-cocktail image
+    alt: "Smoked roasted meat, bone marrow, and a red cocktail against a black background",
     side: "left",
+    pos: "object-[center_58%]",
     mBody: 22, // .fig mobile renders this body at NeueBit 22 (others 18)
     title: "Every dish tells a story.",
     body:
@@ -57,6 +62,8 @@ const ROWS = [
 ];
 
 export default function Story() {
+  const { openReservationWidget } = useOTWidget();
+
   return (
     <>
       <SEO
@@ -96,7 +103,7 @@ export default function Story() {
           {/* La inspiración — arch image (filtered) + overlaid bold title (@360,1809) */}
           <Parallax speed={-0.05} className="mt-[calc(var(--dw)*10.86/100)] mx-auto w-[calc(var(--dw)*73.91/100)]">
             <div className="relative overflow-hidden rounded-t-[calc(var(--dw)*16.875/100)] h-[calc(var(--dw)*46.875/100)]">
-              <img src="/redesign/story-inspiracion.jpg" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
+              <img src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
               <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-sh-black/85 to-transparent" />
               <h2 className={`${T.h1} font-bold uppercase text-sh-cream leading-[1] absolute inset-x-0 bottom-[calc(var(--dw)*4.69/100)] text-center`}>La inspiración</h2>
             </div>
@@ -108,7 +115,7 @@ export default function Story() {
             <div key={row.title} className="mt-[calc(var(--dw)*9.375/100)] mx-auto w-[calc(var(--dw)*73.91/100)] flex items-center gap-[calc(var(--dw)*4.69/100)]">
               <Parallax speed={-0.04} className={`${row.side === "right" ? "order-2" : "order-1"} w-[calc(var(--dw)*36.17/100)] shrink-0`}>
                 <div className="overflow-hidden rounded-t-[calc(var(--dw)*16.875/100)] h-[calc(var(--dw)*44.22/100)]">
-                  <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover object-center ${row.flip ? "scale-x-[-1]" : ""}`} style={row.filter ? { filter: row.filter } : undefined} />
+                  <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
                 </div>
               </Parallax>
               <Reveal className={`${row.side === "right" ? "order-1" : "order-2"} relative top-[calc(var(--dw)*2/100)] flex-1 flex flex-col gap-[calc(var(--dw)*1.56/100)]`}>
@@ -144,7 +151,7 @@ export default function Story() {
 
             <Parallax speed={-0.04}>
               <div className="relative overflow-hidden rounded-t-[200px] h-[480px]">
-                <img src="/redesign/story-inspiracion.jpg" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
+                <img src="/redesign/story-inspiracion.webp" alt="The streets of México that inspire Silent H" className="h-full w-full object-cover object-center" />
                 <div className="absolute inset-x-0 bottom-0 h-[88px] bg-gradient-to-t from-sh-black/85 to-transparent" />
                 <h2 className="font-display font-bold uppercase text-sh-cream text-[24px] leading-[1.2] tracking-[0.05em] absolute inset-x-0 bottom-[30px] text-center">La inspiración</h2>
               </div>
@@ -158,7 +165,7 @@ export default function Story() {
                 </Reveal>
                 <Parallax speed={-0.04}>
                   <div className="overflow-hidden rounded-t-[200px] h-[480px]">
-                    <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover object-center ${row.flip ? "scale-x-[-1]" : ""}`} style={row.filter ? { filter: row.filter } : undefined} />
+                    <img src={row.img} alt={row.alt} loading="lazy" className={`h-full w-full object-cover ${row.pos || "object-center"}`} />
                   </div>
                 </Parallax>
               </div>
@@ -168,8 +175,38 @@ export default function Story() {
           <div aria-hidden className="h-[80px]" />
         </div>
 
+        {/* ════════════ EXPERIENCE SILENT H — reservation CTA ════════════
+            New section from the colleague's Our Story iterations. Muted rose panel
+            (#d24965) with near-black text; dark solid primary + outlined secondary.
+            Shared across breakpoints (self-contained clamp type, not --dw-based). */}
+        <section className="relative w-full bg-[#d24965] text-[#050505] text-center px-6 py-[78px] md:py-[92px] overflow-hidden">
+          <Reveal className="mx-auto w-[min(960px,100%)] flex flex-col items-center">
+            <p className="font-body font-bold uppercase text-[14px] tracking-[0.2em]">Your table is waiting</p>
+            <h2 className="mt-[22px] font-display font-bold uppercase text-[clamp(30px,6vw,68px)] leading-[0.96] tracking-[0.035em]">
+              Experience Silent H
+            </h2>
+            <p className="mt-6 font-body text-[clamp(18px,1.85vw,24px)] leading-[1.45] tracking-[0.075em] max-w-[680px]">
+              Join us for bold Mexican flavours, handcrafted cocktails, and a night made to be remembered.
+            </p>
+            <div className="mt-[38px] w-full flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={openReservationWidget}
+                className="w-full sm:w-auto min-w-[250px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-[#050505] bg-[#050505] text-sh-cream font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:bg-sh-cream hover:text-[#050505] transition-colors"
+              >
+                Book Your Reservation
+              </button>
+              <Link
+                to="/menu"
+                className="w-full sm:w-auto min-w-[250px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-[#050505] bg-transparent text-[#050505] font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:bg-[#050505]/10 transition-colors"
+              >
+                View the Menu
+              </Link>
+            </div>
+          </Reveal>
+        </section>
+
         <RelatedGuides
-          className="pb-20 md:pb-[calc(var(--dw)*10/100)]"
+          className="py-20 md:py-[calc(var(--dw)*10/100)]"
           links={[
             { to: "/blogs/date-night-restaurants-toronto", label: "Date-night restaurants in Toronto" },
           ]}
