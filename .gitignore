@@ -27,3 +27,5 @@ scripts/build-responsive-images.mjs
 
 # wrangler local dev state
 .wrangler/
+
+.env
