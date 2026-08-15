@@ -84,7 +84,7 @@ export default function Footer() {
                 bottom padding (4744→4842). Without it the whole page is short and everything reads
                 proportionally too low vs the figma. */}
             <div className="hidden md:flex w-full flex-col items-center bg-sh-black">
-                {/* ── Social section (colleague .social-section): heading + icons, then the
+                {/* ── Social section ( .social-section): heading + icons, then the
                     neon image CENTERED below at ~760px — not full-width, not overlaid. ── */}
                 <div className="w-[min(1120px,100%)] mx-auto flex flex-col items-center px-6 pt-[82px] pb-[36px]">
                     <p className="font-display font-bold uppercase text-sh-cream text-center text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em] whitespace-nowrap">
@@ -124,14 +124,14 @@ export default function Footer() {
                             width="1875"
                             height="839"
                             alt="Neon sign at Silent H reading You Are Exactly Where You Need To Be"
-                            className="mt-[52px] block w-[min(760px,calc(100%-48px))] h-auto object-contain translate-x-[3%]"
+                            className="mt-[52px] block w-[min(760px,calc(100%-48px))] h-auto object-contain translate-x-[3%] opacity-[0.82]"
                             loading="lazy"
                             decoding="async"
                         />
                     </picture>
                 </div>
 
-                {/* ── Footer info row (colleague .site-footer): quick links | address | maps | mailing ── */}
+                {/* ── Footer info row ( .site-footer): quick links | address | maps | mailing ── */}
                 <div className="w-[min(1140px,100%)] mx-auto px-6 pt-[34px] pb-[80px] flex flex-row items-start justify-between gap-[44px]">
                     {/* Quick links */}
                     <div className="flex flex-col items-start gap-[10px]">
@@ -211,7 +211,7 @@ export default function Footer() {
                     <picture>
                         <source type="image/avif" srcSet={["/redesign/footer-social-480.avif 480w", "/redesign/footer-social-768.avif 768w"].join(", ")} sizes="321px" />
                         <source type="image/webp" srcSet={["/redesign/footer-social-480.webp 480w", "/redesign/footer-social-768.webp 768w"].join(", ")} sizes="321px" />
-                        <img src="/redesign/footer-social-480.webp" width="480" height="215" alt="Neon sign at Silent H reading You Are Exactly Where You Need To Be" className="block w-full h-auto" loading="lazy" decoding="async" />
+                        <img src="/redesign/footer-social-480.webp" width="480" height="215" alt="Neon sign at Silent H reading You Are Exactly Where You Need To Be" className="block w-full h-auto opacity-[0.82]" loading="lazy" decoding="async" />
                     </picture>
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-sh-black to-transparent" />
                 </div>

@@ -11,7 +11,7 @@ const MAX_ITEMS = 15;
 const DESKTOP_ITEMS_PER_PAGE = 3;
 const MOBILE_ITEMS_PER_PAGE = 2;
 
-// Colleague sizing: grid cols 0.86fr / 1.16fr / 0.86fr, gap 24px inside a
+//  sizing: grid cols 0.86fr / 1.16fr / 0.86fr, gap 24px inside a
 // min(1040px, …) container; every image is a FIXED 370px tall (not vw-scaled)
 // with rounded-[5px] corners. `sizes` = approx rendered px width at the 1040 cap.
 const DESKTOP_CARD_STYLES = [

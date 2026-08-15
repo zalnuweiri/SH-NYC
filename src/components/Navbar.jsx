@@ -4,13 +4,16 @@ import { Menu as MenuIcon, X } from "lucide-react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { LuFacebook } from "react-icons/lu";
 import { useOTWidget } from "./OTwidget";
-import { EASE } from "../styles/figmaTokens";
 
-// Figma home nav — Frame 1589 @(408,40) 464×67, bg #00000066 (= bg-black/40) +
-// backdrop-blur, rounded-full. Inner Frame 1426 @(428,50) 424×48, gap12:
-//   MENU(50) · HAPPY HOUR(98) · [pink Silent-H logo 38×48] · RESERVE(75) · PLAN AN EVENT(115)
-// Labels are NeueBit uppercase cream; "Reserve" opens the OT widget (link, not button).
-// 1px @1280 design = 0.078125vw → exact desktop pill scales with the full-bleed canvas.
+// Desktop nav matches the .main-nav (globals.css): a fixed 620×74 centered
+// pill, radius 999, bg rgba(0,0,0,.4) + backdrop-blur 10, top 42px, laid out as a 5-col
+// grid 0.9fr / 1.25fr / 74px(brand) / 0.9fr / 1.3fr:
+//   MENU · HAPPY HOUR · [Silent-H logo 38×56 in a 68px box] · RESERVE · PLAN AN EVENT
+// Links: NeueBit(body) bold uppercase 15px, ls 0.13em, place-items-center, pad 0 7px,
+// hover → pink. Dynamic controls kept (differ from the 's static Next site):
+// router NavLinks for the real routes, "Reserve" opens the OT widget, logo → scroll-top,
+// active link tinted pink (colour only — no sparkles, so the grid metrics stay exact).
+// Mobile is our own full-width glass bar + hamburger/overlay (unchanged).
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { openReservationWidget } = useOTWidget();
@@ -24,11 +27,10 @@ export default function Navbar() {
         }
     };
 
-    // NeueBit Bold, uppercase, button type token (16/16 ls1.6 → ~0.16em). On the
-    // full-bleed canvas the pill text is sized in vw so it tracks the design exactly.
-    // Nav links = Desktop/Button style (NeueBit 16, ls 10%, UPPER) + spring colour fade.
-    // Fixed px (not vw) so the pill keeps a constant size on wide desktops instead of expanding.
-    const linkBase = `font-body uppercase whitespace-nowrap text-[16px] tracking-[0.1em] px-[13px] ${EASE}`;
+    // 's .main-nav > a: grid cell, place-items center, height 100%, pad 0 7px,
+    // NeueBit(body) bold uppercase 15px, ls 0.13em, 180ms colour transition, hover → pink.
+    const linkBase =
+        "grid place-items-center h-full px-[7px] text-center whitespace-nowrap font-body font-bold uppercase text-[15px] tracking-[0.13em] transition-colors duration-[180ms]";
 
     // Mobile menu-overlay links (Reserve has no `to` — it opens the OT widget).
     const MOBILE_LINKS = [
@@ -37,25 +39,16 @@ export default function Navbar() {
         { label: "Reserve" },
         { to: "/events", label: "Plan an Event" },
     ];
-    const pill = ({ isActive }) =>
-        `${linkBase} ${isActive ? "text-sh-gold" : "text-sh-cream hover:text-sh-gold"}`;
 
-    // Active page link: pink + flanking pink sparkles (Figma "✦ MENU ✦").
+    // Desktop pill link. Active page = pink (colour only, no sparkles → grid metrics stay exact).
     const NavItem = ({ to, children }) => (
         <NavLink
             to={to}
             className={({ isActive }) =>
-                `${linkBase} inline-flex items-center gap-[6px] ${isActive ? "text-sh-pink" : "text-sh-cream hover:text-sh-gold"}`
+                `${linkBase} ${isActive ? "text-sh-pink" : "text-sh-cream hover:text-sh-pink"}`
             }
         >
-            {({ isActive }) => (
-                <>
-                    {/* circles always reserve space; only visible when active — so clicking doesn't reflow the row */}
-                    <span className={`w-[6px] h-[6px] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
-                    {children}
-                    <span className={`w-[6px] h-[6px] shrink-0 rounded-full bg-current transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`} />
-                </>
-            )}
+            {children}
         </NavLink>
     );
 
@@ -67,23 +60,31 @@ export default function Navbar() {
 
     return (
         <header className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none">
-            {/* Desktop centered pill — @(408,40), so top = 40px = 3.125vw.
-                Pill 464×67 with inner 424-wide item row, gap 12px = 0.94vw, h 67px = 5.23vw. */}
-            <nav className="font-bold pointer-events-auto hidden md:flex items-center justify-center gap-[12px] rounded-full bg-black/40 backdrop-blur-[10px] mt-[40px] h-[67px] px-[20px] shadow-xl shadow-black/30">
-                {/* MENU (50w) */}
+            {/* Desktop centered pill — 's .main-nav: fixed 620×74 (shrinks to
+                100vw-24 below ~644px), top 42px, 5-col grid, radius 999, bg black/40 +
+                blur 10, two-layer shadow. */}
+            <nav
+                aria-label="Primary navigation"
+                className="pointer-events-auto hidden md:grid items-center mt-[42px] h-[74px] w-[min(620px,calc(100vw-24px))] rounded-[999px] bg-black/40 backdrop-blur-[10px] [grid-template-columns:0.9fr_1.25fr_74px_0.9fr_1.3fr] [box-shadow:0_20px_25px_-5px_rgba(0,0,0,0.3),0_8px_10px_-6px_rgba(0,0,0,0.3)]"
+            >
                 <NavItem to="/menu">Menu</NavItem>
-                {/* HAPPY HOUR (98w) */}
                 <NavItem to="/happy-hour">Happy Hour</NavItem>
-                {/* pink Silent-H logo 38×48 = 2.97vw × 3.75vw */}
-                <Logo className="h-[48px] w-auto" />
-                {/* RESERVE (75w) — opens OT widget */}
+                {/* brand-mark — 68px grid cell, logo 38×56 object-contain ( .brand-mark) */}
+                <NavLink
+                    to="/"
+                    onClick={handleLogoClick}
+                    aria-label="Silent H home"
+                    className="grid place-items-center justify-self-center w-[68px] h-[68px]"
+                >
+                    <img src="/redesign/nav-logo.svg" alt="Silent H" className="w-[38px] h-[56px] object-contain" loading="eager" decoding="async" />
+                </NavLink>
+                {/* RESERVE — opens OT widget (kept dynamic; the  uses a mailto link) */}
                 <button
                     onClick={openReservationWidget}
-                    className={`${linkBase} text-sh-cream hover:text-sh-gold cursor-pointer`}
+                    className={`${linkBase} text-sh-cream hover:text-sh-pink cursor-pointer`}
                 >
                     Reserve
                 </button>
-                {/* PLAN AN EVENT (115w) */}
                 <NavItem to="/events">Plan an Event</NavItem>
             </nav>
 

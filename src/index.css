@@ -79,8 +79,8 @@
 
   /* Cream / offwhite (light text + occasional light panels) */
   --color-sh-cream:      #eee4d9;  /* primary light text — exact Figma off-white (nav/body) */
-  --color-sh-muted:      #b8aca4;  /* muted caption text — section-intro captions (colleague pattern) */
-  --color-sh-muted:      #b8aca4;  /* muted caption text (section-intro subtitles) — colleague's --muted */
+  --color-sh-muted:      #b8aca4;  /* muted caption text — section-intro captions ( pattern) */
+  --color-sh-muted:      #b8aca4;  /* muted caption text (section-intro subtitles) — 's --muted */
   --color-sh-cream-50:   #fffefd;  /* near-white, for rare bright-on-image text */
   --color-sh-cream-100:  #fff5e9;
   --color-sh-cream-200:  #ece1d4;
@@ -180,11 +180,11 @@
     background-color: var(--color-sh-black);
     color: var(--color-sh-cream);
     font-family: var(--font-body);
-    /* No -webkit-font-smoothing: colleague's site leaves it at the browser default
+    /* No -webkit-font-smoothing: 's site leaves it at the browser default
        (subpixel-antialiased). `antialiased` renders glyphs lighter on macOS WebKit,
        which made our identical 700-weight text look thinner than Selena's redesign. */
   }
-  /* Text selection — pink highlight on black text (colleague's body::selection, --pink #ef4564) */
+  /* Text selection — pink highlight on black text ('s body::selection, --pink #ef4564) */
   ::selection      { background: #ef4564; color: #000; }
   ::-moz-selection { background: #ef4564; color: #000; }
   h1, h2, h3 { font-family: var(--font-display); }

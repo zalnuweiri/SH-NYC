@@ -68,20 +68,26 @@ export default function Home() {
             url="https://www.silenthnyc.com/"
             preloads={[
               {
-                href: "/redesign/mewhero-393.avif",
+                href: "/redesign/home-hero-768.avif",
                 type: "image/avif",
                 media: "(max-width: 767px)",
+                imageSrcSet: [
+                  "/redesign/home-hero-480.avif 480w",
+                  "/redesign/home-hero-768.avif 768w",
+                  "/redesign/home-hero-960.avif 960w",
+                ].join(", "),
+                imageSizes: "100vw",
                 fetchPriority: "high",
               },
               {
-                href: "/redesign/newhero-1280.avif",
+                href: "/redesign/home-hero-1280.avif",
                 type: "image/avif",
                 media: "(min-width: 768px)",
                 imageSrcSet: [
-                  "/redesign/newhero-960.avif 960w",
-                  "/redesign/newhero-1280.avif 1280w",
-                  "/redesign/newhero-1600.avif 1600w",
-                  "/redesign/newhero-1920.avif 1920w",
+                  "/redesign/home-hero-640.avif 640w",
+                  "/redesign/home-hero-768.avif 768w",
+                  "/redesign/home-hero-960.avif 960w",
+                  "/redesign/home-hero-1280.avif 1280w",
                 ].join(", "),
                 imageSizes: "100vw",
                 fetchPriority: "high",
@@ -96,15 +102,16 @@ export default function Home() {
             SecondaryButton 216×48 r4. The hero dust is the global DustGate. */}
           <section className="relative w-full overflow-hidden">
             <div className="relative hidden md:block w-full h-[980px]">
-              {/* Full-bleed hero — the sunburst stained-glass; object-cover keeps the sun centred. */}
+              {/* Full-bleed hero — the two-angel mural dining room; object-cover keeps it centred.
+                  Source is 1280 wide (the old Private Dining render), so the ladder caps at 1280. */}
               <picture>
                 <source
                     type="image/avif"
                     srcSet={[
-                      "/redesign/newhero-960.avif 960w",
-                      "/redesign/newhero-1280.avif 1280w",
-                      "/redesign/newhero-1600.avif 1600w",
-                      "/redesign/newhero-1920.avif 1920w",
+                      "/redesign/home-hero-640.avif 640w",
+                      "/redesign/home-hero-768.avif 768w",
+                      "/redesign/home-hero-960.avif 960w",
+                      "/redesign/home-hero-1280.avif 1280w",
                     ].join(", ")}
                     sizes="100vw"
                 />
@@ -112,21 +119,21 @@ export default function Home() {
                 <source
                     type="image/webp"
                     srcSet={[
-                      "/redesign/newhero-960.webp 960w",
-                      "/redesign/newhero-1280.webp 1280w",
-                      "/redesign/newhero-1600.webp 1600w",
-                      "/redesign/newhero-1920.webp 1920w",
+                      "/redesign/home-hero-640.webp 640w",
+                      "/redesign/home-hero-768.webp 768w",
+                      "/redesign/home-hero-960.webp 960w",
+                      "/redesign/home-hero-1280.webp 1280w",
                     ].join(", ")}
                     sizes="100vw"
                 />
 
                 <img
-                    src="/redesign/newhero-1280.webp"
-                    alt="Silent H — a radiant stained-glass sunburst; modern Mexican dining in NYC"
+                    src="/redesign/home-hero-1280.webp"
+                    alt="Silent H's dining room — a Mexican mural framed by winged statues"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-[50%_48%] select-none"
+                    className="absolute inset-0 w-full h-full object-cover object-[50%_45%] select-none"
                     draggable="false"
                 />
               </picture>
@@ -141,7 +148,7 @@ export default function Home() {
                       "linear-gradient(rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0.02) 48%, rgba(0,0,0,0.1) 65%, rgba(0,0,0,0.22) 78%, rgba(0,0,0,0.42) 88%, rgba(0,0,0,0.72) 96%, rgb(0,0,0) 100%), radial-gradient(at 50% 45%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.03) 78%, rgba(0,0,0,0.3) 100%)",
                   }}
               />
-              {/* Hero content — colleague layout: centered column, padding-top 530px so the h1
+              {/* Hero content —  layout: centered column, padding-top 530px so the h1
                 sits at the reference's height; h1 Monoglyphic clamp(56,6vw,82) ls 0.08em, a
                 one-line NeueBit subtitle 20px ls 0.22em, then the dual CTAs. */}
               <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center px-[25px] pt-[530px] text-center">
@@ -187,19 +194,27 @@ export default function Home() {
                     <picture>
                       <source
                           type="image/avif"
-                          srcSet="/redesign/mewhero-393.avif 393w"
+                          srcSet={[
+                            "/redesign/home-hero-480.avif 480w",
+                            "/redesign/home-hero-768.avif 768w",
+                            "/redesign/home-hero-960.avif 960w",
+                          ].join(", ")}
                           sizes="100vw"
                       />
 
                       <source
                           type="image/webp"
-                          srcSet="/redesign/mewhero-393.webp 393w"
+                          srcSet={[
+                            "/redesign/home-hero-480.webp 480w",
+                            "/redesign/home-hero-768.webp 768w",
+                            "/redesign/home-hero-960.webp 960w",
+                          ].join(", ")}
                           sizes="100vw"
                       />
 
                       <img
-                          src="/redesign/mewhero-393.webp"
-                          alt="Silent H agave cocktails and Mexican plates, Meatpacking District NYC"
+                          src="/redesign/home-hero-768.webp"
+                          alt="Silent H's dining room — a Mexican mural framed by winged statues"
                           loading="eager"
                           fetchPriority="high"
                           decoding="async"
@@ -210,7 +225,7 @@ export default function Home() {
                                 w-full
                                 select-none
                                 object-cover
-                                object-top
+                                object-center
                                      "
                                     />
                                    </picture>
@@ -297,7 +312,7 @@ export default function Home() {
               (Silent H NYC mural + winged statues) that fades from black at the top and
               carries an edge vignette to match the reference. */}
             <div className="hidden md:block relative w-full bg-sh-black pt-[88px] pb-[104px]">
-              {/* section-intro — centered header + captions ABOVE the image (colleague layout) */}
+              {/* section-intro — centered header + captions ABOVE the image ( layout) */}
               <Reveal className="relative z-[2] text-center px-[22px]">
                 <h2 className="font-display font-bold uppercase text-sh-cream text-[clamp(34px,3.5vw,50px)] leading-none tracking-[0.035em] mb-[18px]">
                   Private dining &amp; events
@@ -312,13 +327,13 @@ export default function Home() {
                   Terms apply
                 </p>
               </Reveal>
-              {/* "Plan Your Event" — centered, overlapping the image top slightly (colleague .events-button) */}
+              {/* "Plan Your Event" — centered, overlapping the image top slightly ( .events-button) */}
               <div className="relative z-[3] mx-auto mt-7 mb-[-26px] w-max">
                 <Link to="/events" className="min-w-[220px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-sh-cream bg-black/25 text-sh-cream font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:border-sh-pink hover:text-sh-pink transition-colors">
                   Start Planning
                 </Link>
               </div>
-              {/* event-image-wrap — 1180px max, 590px tall, colleague edge-frame gradient (::after) */}
+              {/* event-image-wrap — 1180px max, 590px tall,  edge-frame gradient (::after) */}
               <div className="relative mx-auto w-[min(1180px,100%)]">
                 <picture>
                   <source
@@ -327,6 +342,7 @@ export default function Home() {
                         "/redesign/private-dining-768.avif 768w",
                         "/redesign/private-dining-960.avif 960w",
                         "/redesign/private-dining-1280.avif 1280w",
+                        "/redesign/private-dining-1600.avif 1600w",
                       ].join(", ")}
                       sizes="(min-width: 1180px) 1180px, 100vw"
                   />
@@ -336,6 +352,7 @@ export default function Home() {
                         "/redesign/private-dining-768.webp 768w",
                         "/redesign/private-dining-960.webp 960w",
                         "/redesign/private-dining-1280.webp 1280w",
+                        "/redesign/private-dining-1600.webp 1600w",
                       ].join(", ")}
                       sizes="(min-width: 1180px) 1180px, 100vw"
                   />
@@ -343,7 +360,7 @@ export default function Home() {
                       src="/redesign/private-dining-1280.webp"
                       width="1180"
                       height="590"
-                      alt="Silent H private dining room with a Mexican mural and winged statues"
+                      alt="Silent H's agave bar and dining room beneath a winged statue"
                       loading="lazy"
                       decoding="async"
                       className="block w-full h-[590px] object-cover object-center"
@@ -549,7 +566,7 @@ export default function Home() {
                 {/* Line 1 — Monoglyphic Regular, EXACT figma STYLE values (verified in-browser):
                   28px (2.1875vw), letterSpacing 2% (0.044vw), lineHeight 1.2. At 2% ls
                   "I believe the best ingredient" = 438px, fits 463px → explicit break holds. */}
-                {/* Colleague .story-section blockquote h2: Monoglyphic 2.1875vw / 400 / lh1.2 / ls0.02em */}
+                {/*  .story-section blockquote h2: Monoglyphic 2.1875vw / 400 / lh1.2 / ls0.02em */}
                 <h2 className="font-display text-sh-cream text-[2.1875vw] leading-[1.2] font-[400] tracking-[0.02em] ">
                   &ldquo;I believe the best ingredient<br />is nostalgia,
                 </h2>
@@ -558,7 +575,7 @@ export default function Home() {
                   baked line width 400.8px ≈ Bold 398.8, not Regular 387.) Explicit breaks at the
                   reference's points: "México" is a knife-edge wrap (466px vs 463 box) that natural
                   wrap flip-flops per viewport, so force it after "to" to match Figma at all widths. */}
-                {/* Colleague blockquote p: NeueBit 1.71875vw / 700 (bold) / lh1 / ls0.2em */}
+                {/*  blockquote p: NeueBit 1.71875vw / 700 (bold) / lh1 / ls0.2em */}
                 <p className="absolute top-[5.78vw] w-full font-body font-bold text-sh-cream text-[1.71875vw] leading-[1] tracking-[0.2em]">
                   which is reflected in every dish on this<br />menu. It is a tribute to my family, to<br />México and to my culture.&rdquo;
                 </p>
@@ -566,7 +583,7 @@ export default function Home() {
                   figma renders the chef attribution at ~0.57× the quote's brightness (muted), so
                   full-cream made it stand out too much, but 0.36 was too muted — ~0.6 (chef reads
                   ~0.6x the quote's brightness). */}
-                {/* Colleague cite: NeueBit 1.71875vw / lh1.2 / ls0.1em / cream @ opacity 0.6 */}
+                {/*  cite: NeueBit 1.71875vw / lh1.2 / ls0.1em / cream @ opacity 0.6 */}
                 <p className="absolute top-[12.57vw] font-body text-sh-cream text-[1.71875vw] leading-[1.2] tracking-[0.1em] opacity-60">
                   Chef Gerardo Álvarez Saucedo
                 </p>
