@@ -250,14 +250,26 @@ export default function BlogSection() {
         let ignore = false;
 
         async function loadBlogPosts() {
-            const { data, error } = await supabase
-                .from("blog_posts")
-                .select(
-                    "id,title,category,image_url,href,slug,author_name,date_label,published_at,created_at,sort_order,status"
-                )
-                .eq("status", "published")
-                .order("sort_order", { ascending: true })
-                .order("published_at", { ascending: false });
+            // No client (missing env / offline) → static fallback, never crash the page.
+            if (!supabase) {
+                setPosts(FALLBACK_POSTS);
+                setIsLoading(false);
+                return;
+            }
+
+            let data, error;
+            try {
+                ({ data, error } = await supabase
+                    .from("blog_posts")
+                    .select(
+                        "id,title,category,image_url,href,slug,author_name,date_label,published_at,created_at,sort_order,status"
+                    )
+                    .eq("status", "published")
+                    .order("sort_order", { ascending: true })
+                    .order("published_at", { ascending: false }));
+            } catch (err) {
+                error = err;
+            }
 
             if (ignore) return;
 
