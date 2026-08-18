@@ -59,6 +59,8 @@ function resolveImageUrl(value) {
 
   const cleanPath = cleanValue.replace(/^\/+/, "");
 
+  if (!supabase) return "/placeholder.jpg";
+
   const { data } = supabase.storage
     .from(BLOG_IMAGE_BUCKET)
     .getPublicUrl(cleanPath);
@@ -101,6 +103,13 @@ export default function BlogContent() {
     async function loadArticle() {
       setIsLoading(true);
       setErrorMessage("");
+
+      if (!supabase) {
+        setErrorMessage("We couldn't load this article.");
+        setArticle(null);
+        setIsLoading(false);
+        return;
+      }
 
       const { data, error } = await supabase
         .from("blog_posts")

@@ -88,6 +88,9 @@ export default function Home() {
                   "/redesign/home-hero-768.avif 768w",
                   "/redesign/home-hero-960.avif 960w",
                   "/redesign/home-hero-1280.avif 1280w",
+                  "/redesign/home-hero-1600.avif 1600w",
+                  "/redesign/home-hero-1920.avif 1920w",
+                  "/redesign/home-hero-2560.avif 2560w",
                 ].join(", "),
                 imageSizes: "100vw",
                 fetchPriority: "high",
@@ -112,6 +115,9 @@ export default function Home() {
                       "/redesign/home-hero-768.avif 768w",
                       "/redesign/home-hero-960.avif 960w",
                       "/redesign/home-hero-1280.avif 1280w",
+                      "/redesign/home-hero-1600.avif 1600w",
+                      "/redesign/home-hero-1920.avif 1920w",
+                      "/redesign/home-hero-2560.avif 2560w",
                     ].join(", ")}
                     sizes="100vw"
                 />
@@ -123,12 +129,15 @@ export default function Home() {
                       "/redesign/home-hero-768.webp 768w",
                       "/redesign/home-hero-960.webp 960w",
                       "/redesign/home-hero-1280.webp 1280w",
+                      "/redesign/home-hero-1600.webp 1600w",
+                      "/redesign/home-hero-1920.webp 1920w",
+                      "/redesign/home-hero-2560.webp 2560w",
                     ].join(", ")}
                     sizes="100vw"
                 />
 
                 <img
-                    src="/redesign/home-hero-1280.webp"
+                    src="/redesign/home-hero-1920.webp"
                     alt="Silent H's dining room — a Mexican mural framed by winged statues"
                     loading="eager"
                     fetchPriority="high"
@@ -343,6 +352,7 @@ export default function Home() {
                         "/redesign/private-dining-960.avif 960w",
                         "/redesign/private-dining-1280.avif 1280w",
                         "/redesign/private-dining-1600.avif 1600w",
+                        "/redesign/private-dining-1920.avif 1920w",
                       ].join(", ")}
                       sizes="(min-width: 1180px) 1180px, 100vw"
                   />
@@ -353,6 +363,7 @@ export default function Home() {
                         "/redesign/private-dining-960.webp 960w",
                         "/redesign/private-dining-1280.webp 1280w",
                         "/redesign/private-dining-1600.webp 1600w",
+                        "/redesign/private-dining-1920.webp 1920w",
                       ].join(", ")}
                       sizes="(min-width: 1180px) 1180px, 100vw"
                   />

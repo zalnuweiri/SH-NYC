@@ -64,6 +64,8 @@ function resolveImageUrl(value) {
         .replace(/^\/+/, "")
         .replace(/^.*\/blog-images\//, "");
 
+    if (!supabase) return "/placeholder.jpg";
+
     const { data } = supabase.storage
         .from(BLOG_IMAGE_BUCKET)
         .getPublicUrl(cleanPath);
@@ -137,14 +139,25 @@ export default function BlogsPage() {
         let ignore = false;
 
         async function loadBlogPosts() {
-            const { data, error } = await supabase
-                .from("blog_posts")
-                .select(
-                    "id,title,image_url,href,slug,published_at,created_at,sort_order,status"
-                )
-                .eq("status", "published")
-                .order("sort_order", { ascending: true })
-                .order("published_at", { ascending: false });
+            if (!supabase) {
+                setBlogPosts(FALLBACK_POSTS);
+                setIsLoading(false);
+                return;
+            }
+
+            let data, error;
+            try {
+                ({ data, error } = await supabase
+                    .from("blog_posts")
+                    .select(
+                        "id,title,image_url,href,slug,published_at,created_at,sort_order,status"
+                    )
+                    .eq("status", "published")
+                    .order("sort_order", { ascending: true })
+                    .order("published_at", { ascending: false }));
+            } catch (err) {
+                error = err;
+            }
 
             if (ignore) return;
 

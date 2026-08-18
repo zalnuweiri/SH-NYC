@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ErrorBoundary from "../components/ErrorBoundary";
 import EnterAitchTab from "../components/EnterAitchTab";
 import ScrollManager from "./ScrollManager";
 import SmoothScroll from "../lib/smoothScroll/SmoothScroll";
@@ -44,7 +45,12 @@ export default function Layout() {
         <Navbar />
         {/* Enter-Aitch side tab only on the home page (not menu/events/story/etc.) */}
         {/*{pathname === "/" && <EnterAitchTab />} */}
-        <Outlet />        {/* page changes here; Navbar/Footer do NOT remount */}
+        {/* ErrorBoundary keyed by route: a page-level throw shows a fallback panel
+            (with nav + footer intact) instead of blanking the whole app; the key
+            resets it when navigating to another route. */}
+        <ErrorBoundary key={pathname}>
+          <Outlet />        {/* page changes here; Navbar/Footer do NOT remount */}
+        </ErrorBoundary>
         <Footer />
       </SmoothScroll>
   );
