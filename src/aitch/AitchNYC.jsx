@@ -41,6 +41,14 @@ function Notice({ kind, onClose }) {
 
 export default function AitchNYC() {
   const [notice, setNotice] = useState(null);
+  const [videoReady, setVideoReady] = useState(false);
+  const [motionAllowed, setMotionAllowed] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => { setMotionAllowed(!preference.matches); setVideoReady(false); };
+    preference.addEventListener('change', update);
+    return () => preference.removeEventListener('change', update);
+  }, []);
   const scene = useRef(null);
   useEffect(() => {
     const fit = () => {
@@ -55,12 +63,19 @@ export default function AitchNYC() {
   }, []);
   return (
     <main className="aitch-landing" ref={scene}>
-      <div className="aitch-scene" aria-hidden="true">
+      <div className={`aitch-scene${videoReady && motionAllowed ? ' video-ready' : ''}`} aria-hidden="true">
         <img className="scene-wall" src={asset('wall.png')} alt="" fetchPriority="high" />
         <div className="butterfly-shadow shadow-left"><div><img src={asset('butterfly-left-shadow.svg')} alt="" /></div></div>
         <div className="butterfly-shadow shadow-right"><div><img src={asset('butterfly-right-shadow.svg')} alt="" /></div></div>
         <div className="butterfly butterfly-left"><img src={asset('butterfly-left.png')} alt="" /></div>
         <div className="butterfly butterfly-right"><img src={asset('butterfly-right.png')} alt="" /></div>
+        {motionAllowed && <video
+          className="scene-video"
+          src="/aitch/assets/VIDBG-6HyEBzEq.mp4"
+          autoPlay loop muted playsInline preload="auto"
+          onPlaying={() => setVideoReady(true)}
+          onError={() => setVideoReady(false)}
+        />}
         <div className="scene-vignette" />
       </div>
       <CornerMarks />

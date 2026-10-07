@@ -50,6 +50,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .shadow-left div { width: 99px; height: 45.842px; transform: rotate(-144.68deg); }
 .shadow-right { left: 986px; top: 470px; width: 76.898px; height: 71.966px; }
 .shadow-right div { width: 72.24px; height: 33.451px; transform: rotate(140.16deg); }
+.scene-video {
+  position: absolute; inset: 0; width: 1280px; height: 824px;
+  object-fit: contain; pointer-events: none;
+  opacity: 0; mix-blend-mode: multiply;
+}
+.video-ready .scene-video { opacity: .7; }
+.video-ready .butterfly, .video-ready .butterfly-shadow { display: none; }
 .scene-vignette {
   position: absolute; left: -4px; top: 0; width: 1287px; height: 824px;
   mix-blend-mode: multiply;
