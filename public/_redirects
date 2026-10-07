@@ -1,3 +1,11 @@
+# The /menu route shares a name with the menu photo directory. Serve the app
+# for this exact route while leaving /menu/* photo requests as static assets.
+/menu /index.html 200!
+
+# The /menu route shares a name with the menu photo directory. Serve the app
+# for this exact route while leaving /menu/* photo requests as static assets.
+/menu /index.html 200!
+
 # Old URLs from the previous site -> current pages (SEO Part 1)
 # both no-slash and trailing-slash variants
 /our-story /story 301
@@ -24,14 +32,9 @@
 /donhalloween/ / 301
 /tiff / 301
 /tiff/ / 301
-/reservations/ /reservations 301
 
-# Normalize trailing slash on current pages -> no-slash canonical
-/menu/ /menu 301
-/events/ /events 301
-/story/ /story 301
-/happy-hour/ /happy-hour 301
-/blogs/ /blogs 301
+# Current page canonicals are set by SEO metadata. Netlify normalizes slash
+# variants before matching, so same-page 301 rules would create redirect loops.
 
 /aitch/faq /aitch/index.html 200
 /aitch/booking /aitch/index.html 200
