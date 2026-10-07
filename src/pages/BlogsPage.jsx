@@ -84,7 +84,7 @@ export default function BlogsPage() {
                         fontWeight: 400,
                     }}
                 >
-                    A closer look at the flavours, culture, and experiences behind Silent H.
+                    Explore Mexican food, agave cocktails and plans for dining out in NYC.
                 </p>
             </header>
 

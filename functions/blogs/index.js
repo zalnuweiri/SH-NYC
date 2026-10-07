@@ -19,7 +19,7 @@ function postHref(post) {
 
 async function fetchPosts() { return nycBlogPosts; }
 
-function blogIndexHtml(posts) {
+export function blogIndexHtml(posts) {
   const articles = posts
     .map(
       (post) =>
@@ -32,7 +32,7 @@ function blogIndexHtml(posts) {
   return (
     `<div style="max-width:1140px;margin:0 auto;padding:100px 24px">` +
     `<header><h1>A blog full of experiences</h1>` +
-    `<p>A closer look at the flavours, culture, and experiences behind Silent H.</p></header>` +
+    `<p>Explore Mexican food, agave cocktails and plans for dining out in NYC.</p></header>` +
     `<main><section aria-label="Published articles">${articles}</section></main>` +
     `<nav><a href="/">Home</a> <a href="/menu">Menu</a> ` +
     `<a href="/happy-hour">Happy Hour</a> <a href="/events">Plan an Event</a> ` +

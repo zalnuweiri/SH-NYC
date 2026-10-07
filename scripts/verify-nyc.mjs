@@ -6,6 +6,8 @@ import { happyHourItems, happyHourIntro } from '../src/data/happyHourData.js';
 import { faqs } from '../src/data/faqData.js';
 import { bodyHtmlFor } from '../src/lib/routeContent.js';
 import { isKnownRoute, canonicalFor } from '../src/lib/routeSeo.js';
+import { blogIndexHtml } from '../functions/blogs/index.js';
+import { relatedFor } from '../src/lib/relatedPosts.js';
 import { onRequestGet } from '../functions/blogs/[slug].js';
 const forbidden = /Toronto|King West|461 King|silenth\.ca|opentable\.ca|\bCAD\b/i;
 for (const route of ['/', '/menu', '/happy-hour', '/events', '/story', '/faq', '/reservations', '/nye26', '/aitch']) {
@@ -24,10 +26,24 @@ assert.equal(happyHourIntro.title, 'Happy Hour Coming Soon');
 assert.equal(/\$10|\$4|5.to.7|Tuesday|Margarita|Infladita|Happy Hour FAQ/i.test(bodyHtmlFor('/happy-hour')), false);
 assert.equal(bodyHtmlFor('/happy-hour').includes('$20'), false);
 assert.equal(forbidden.test(JSON.stringify(faqs)), false);
+const blogMigration = JSON.parse(readFileSync('src/data/blogMigration.json', 'utf8'));
+assert.equal(nycBlogPosts.length, 35, 'Restore all 35 published source articles');
+assert.equal(new Set(nycBlogPosts.map(post => post.slug)).size, 35);
+assert.equal(new Set(blogMigration.map(row => row.source_slug)).size, 35);
+assert.deepEqual(blogMigration.map(row => row.nyc_slug).sort(), nycBlogPosts.map(post => post.slug).sort());
+const foreignBlogReferences = /Toronto|King West|Scotiabank|Rogers Centre|Princess of Wales|Royal Alex|The Well|461 King|silenth\.ca|\bCAD\b/i;
 for (const post of nycBlogPosts) {
   assert.equal(nycPost(post.slug), post);
-  assert.equal(forbidden.test(post.body_text), false);
+  assert.equal(foreignBlogReferences.test(JSON.stringify(post)), false, post.slug);
+  assert.ok(post.body_text.split(/\s+/).length >= 200, post.slug);
+  assert.ok(post.body_text.includes('opening soon'), post.slug);
+  assert.ok(existsSync('public' + post.image_url), `Missing article photo: ${post.slug}`);
+  assert.ok(blogIndexHtml(nycBlogPosts).includes(post.href), `Missing index link: ${post.slug}`);
+  for (const related of relatedFor(post.slug)) assert.ok(nycPost(related.slug), post.slug);
 }
+for (const slug of ['best-tacos-nyc', 'meatpacking-district-restaurants', 'private-dining-nyc', 'date-night-nyc']) assert.ok(nycPost(slug), 'Keep existing NYC article links');
+assert.ok(nycPost('happy-hour-nyc').body_text.includes('Times, offers, prices and the start date have not been announced.'));
+assert.ok(nycPost('private-dining-nyc').body_text.includes('have not announced NYC event spaces'));
 const missing = await onRequestGet({
   request: new Request('https://www.silenthnyc.com/blogs/private-dining-toronto'),
   params: { slug: 'private-dining-toronto' },
