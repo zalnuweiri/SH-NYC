@@ -46,9 +46,9 @@ export const ROUTE_SEO = {
       "The menu at Silent H, modern Mexican food and tacos in NYC: charred guacamole, crispy chicharron tacos, rib-eye skewers and agave cocktails.",
   },
   "/events": {
-    title: "Private Dining & Events in NYC | Silent H",
+    title: "Plan an Event Coming Soon | Silent H NYC",
     description:
-      "Private dining and events at Silent H in NYC: corporate dinners, celebrations and full buyouts in two Mexican-inspired spaces with chef menus.",
+      "Event planning at Silent H NYC is coming soon. Details will be announced here.",
   },
   "/story": {
     title: "Our Story | Silent H, Modern Mexican Restaurant NYC",

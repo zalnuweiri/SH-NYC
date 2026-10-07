@@ -38,7 +38,7 @@ export const faqs = [
   },
   {
     "q": "Can I host a private event?",
-    "a": "Contact the NYC team at info@silenthnyc.com or 406 282 8155 with your date and guest count. We will confirm availability, layouts and capacity."
+    "a": "Private-event bookings are coming soon. Details will be announced on our Plan an Event page."
   },
   {
     "q": "How do I get there and where do I park?",

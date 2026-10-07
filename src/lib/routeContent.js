@@ -1,4 +1,4 @@
-import { homeIntro, eventsFaq } from "../data/nycContent.js";
+import { homeIntro } from "../data/nycContent.js";
 // src/lib/routeContent.js
 //
 // Pre-JavaScript BODY content for the static routes, injected into #root at the
@@ -170,37 +170,9 @@ function story() {
   );
 }
 
-/* ───────────────────────── /events ─────────────────────────
-   keep in sync with src/pages/Events.jsx (heroIntro, whyIntro, benefits,
-   EVENTS_FAQ). */
-const EVENTS_BENEFITS = [
-  "Gracious, personalized hospitality",
-  "Semi-private & private options",
-  "Personal event enquiries",
-  "Chef-curated seasonal menus",
-  "NYC event planning support",
-];
-const EVENTS_FAQ = eventsFaq;
+/* ───────────────────────── /events ───────────────────────── */
 function events() {
-  return shell(
-    h1("Plan your auténtica celebración") +
-      p(
-        "At Silent H, every gathering becomes a celebration of flavour and culture. From intimate dinners to corporate events and full buyouts, our vibrant spaces and elevated Mexican cuisine create unforgettable experiences inspired by the heart of Mexico."
-      ) +
-      h2("Our spaces") +
-      h3("Silent H") +
-      h3("Aitch") +
-      h2("Why host your event at Silent H?") +
-      p(
-        "Elevate your occasion with bold, authentic flavours, artisan cocktails, and thoughtfully designed spaces that capture the spirit of modern Mexico."
-      ) +
-      `<ul>${EVENTS_BENEFITS.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` +
-      h2("Events & Private Dining FAQ") +
-      EVENTS_FAQ.map((f) => h3(f.q) + p(f.a)).join("") +
-    "<p>Ringing in the new year? See our " + a("/nye26", "New Year's Eve Masquerade Dinner") + " at Silent H, NYC.</p>" +
-    "<p>More reading: " + a("/blogs/private-dining-nyc", "private dining in NYC") + ".</p>" +
-      navHtml()
-  );
+  return shell(h1("Plan an Event Coming Soon") + navHtml());
 }
 
 /* ───────────────────────── /nye26 ─────────────────────────
