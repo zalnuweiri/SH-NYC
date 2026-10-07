@@ -76,9 +76,9 @@ export const ROUTE_SEO = {
       "Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Event details and reservations are coming soon.",
   },
   "/aitch": {
-    title: "Aitch | Agave Cocktail Lounge in NYC",
+    title: "Aitch NYC | Memberships Coming Soon",
     description:
-      "Aitch is Silent H's late-night agave lounge in NYC - opening soon at 418 West 13th Street, next door to Silent H.",
+      "Aitch NYC is opening soon at 418 West 13th Street. Membership details are coming soon. Contact info@aitchnyc.com for opening enquiries.",
   },
 };
 

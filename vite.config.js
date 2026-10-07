@@ -23,6 +23,9 @@ export default defineConfig({
         brotliSize: true,
       }),
   ].filter(Boolean),
+  build: {
+    rollupOptions: { input: { main: 'index.html', aitch: 'aitch/index.html' } },
+  },
   server: {
     proxy: {
       '/api': 'http://localhost:5050',
