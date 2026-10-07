@@ -38,7 +38,7 @@ function MenuIntro() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-[520px] font-body text-sh-cream/70 text-[clamp(0.85rem,1.1vw,1rem)] tracking-[0.08em] leading-[1.4] font-bold">
-          Prices are in USD. A celebration of authentic Mexican culinary heritage, reimagined for the modern palate. At
+          A celebration of authentic Mexican culinary heritage, reimagined for the modern palate. At
           Silent H, every dish is a story.
         </p>
       </section>
