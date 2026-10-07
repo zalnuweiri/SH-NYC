@@ -1,3 +1,4 @@
+import { eventsFaq } from "../data/nycContent.js";
 import SEO from "../components/SEO.jsx";
 import { faqPage } from "../lib/seoSchema.js";
 
@@ -17,7 +18,7 @@ import useIsDesktop from "../lib/media/useIsDesktop";
    it; Monoglyphic headings (H1 32 / H2 24), NeueBit body (hero-intro 18, why-intro 22, benefits 16), CTA =
    Mono Reg 18 mixed-case. Desktop hero = Mondwest serif heading over the gold-arch video. */
 
-const PLAN_URL = "https://silenth.tripleseat.com/party_request/32814";
+const PLAN_URL = "mailto:info@silenthnyc.com?subject=NYC%20private%20event%20enquiry";
 
 const heroIntro =
     "At Silent H, every gathering becomes a celebration of flavour and culture. From intimate dinners to corporate events and full buyouts, our vibrant spaces and elevated Mexican cuisine create unforgettable experiences inspired by the heart of Mexico.";
@@ -29,9 +30,9 @@ const whyIntro =
 const benefits = [
     "Gracious, personalized hospitality",
     "Semi-private & private options",
-    "Seamless, instant booking options",
+    "Personal event enquiries",
     "Chef-curated seasonal menus",
-    "Dedicated event planning support",
+    "NYC event planning support",
 ];
 
 // ── desktop type (vw) ──
@@ -78,12 +79,7 @@ const Seam = ({ className = "", h = "h-[2.19vw]" }) => (
     }} />
 );
 
-const EVENTS_FAQ = [
-  { q: "Can you host private events at Silent H?", a: "Yes. Silent H hosts private dining and events in NYC, from intimate dinners to corporate events and full buyouts across two Mexican-inspired spaces." },
-  { q: "How many guests can Silent H host?", a: "The main dining room, patios and private spaces seat up to 145 guests, with room for up to 220 for a standing reception." },
-  { q: "What kind of events does Silent H host?", a: "Corporate dinners, celebrations, milestone birthdays, engagement parties, product launches and full buyouts, each with chef-curated Mexican menus." },
-  { q: "Is there a private space for smaller groups?", a: "Yes. Aitch, our agave lounge downstairs, is available for smaller private bookings and after-parties behind a hidden door." },
-];
+const EVENTS_FAQ = eventsFaq;
 
 export default function Events() {
     // Mount ONLY the block for the current viewport — both blocks have autoplay videos and a
@@ -136,7 +132,7 @@ export default function Events() {
                                 <img src="/redesign/ev-silenth.webp" alt="Silent H venue" className="w-full h-[51.33vw] object-cover" />
                                 <div className="absolute inset-x-0 bottom-0 h-[11vw] bg-gradient-to-t from-sh-black/85 to-transparent" />
                                 <h3 className={`${D.label} absolute inset-x-0 bottom-[3vw] text-center !text-white`}><a
-                                    href="https://my.matterport.com/show/?m=Rs9KDtdhnm6"
+                                    href="mailto:info@silenthnyc.com?subject=NYC%20venue%20information"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-block hover:text-sh-gold transition-colors"
@@ -149,7 +145,7 @@ export default function Events() {
                                 <img src="/redesign/ev-aitch.webp" alt="Aitch venue" className="w-full h-[48.75vw] object-cover" />
                                 <div className="absolute inset-x-0 top-0 h-[11vw] bg-gradient-to-b from-sh-black/85 to-transparent" />
                                 <h3 className={`${D.label} absolute inset-x-0 top-[3vw] text-center`}><a
-                                    href="https://my.matterport.com/show/?m=Rs9KDtdhnm6"
+                                    href="mailto:info@silenthnyc.com?subject=NYC%20venue%20information"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-block hover:text-sh-gold transition-colors"
@@ -224,7 +220,7 @@ export default function Events() {
                                 <img src="/redesign/ev-silenth.webp" alt="Silent H venue" className="w-full h-[421px] object-cover" />
                                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-sh-black/85 to-transparent" />
                                 <h3 className={`${M.label} absolute inset-x-0 bottom-[44px] text-center !text-white`}><a
-                                    href="https://my.matterport.com/show/?m=Rs9KDtdhnm6"
+                                    href="mailto:info@silenthnyc.com?subject=NYC%20venue%20information"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-block hover:text-sh-gold transition-colors"
@@ -237,7 +233,7 @@ export default function Events() {
                                 <img src="/redesign/ev-aitch.webp" alt="Aitch venue" className="w-full h-[400px] object-cover" />
                                 <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-sh-black/85 to-transparent" />
                                 <h3 className={`${M.label} absolute inset-x-0 top-7 text-center`}><a
-                                    href="https://my.matterport.com/show/?m=Rs9KDtdhnm6"
+                                    href="mailto:info@silenthnyc.com?subject=NYC%20venue%20information"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-block hover:text-sh-gold transition-colors"
@@ -282,7 +278,7 @@ export default function Events() {
         <RelatedGuides
           className="mt-[100px] md:mt-[7.5vw]"
           links={[
-            { to: "/blogs/private-dining-toronto", label: "Private dining in Toronto" },
+            { to: "/blogs/private-dining-nyc", label: "Private dining in NYC" },
             { to: "/nye26", label: "New Year's Eve at Silent H" },
           ]}
         />

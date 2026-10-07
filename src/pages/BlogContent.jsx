@@ -1,10 +1,8 @@
 // src/pages/BlogContent.jsx
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { supabase } from "../lib/supabaseClient";
+import { nycPost } from "../data/nycBlogPosts.js";
 import SEO from "../components/SEO.jsx";
 import { breadcrumb, blogPosting, faqPage } from "../lib/seoSchema.js";
 // The text rules live in ONE place now — shared with functions/blogs/[slug].js,
@@ -20,16 +18,15 @@ import {
 // the "Related reading" links here match the crawler's HTML exactly (Task 3).
 import { relatedFor } from "../lib/relatedPosts.js";
 
-const BLOG_IMAGE_BUCKET = "blog-images";
 
 // Curated links shown at the foot of every article for internal linking.
 const RELATED_LINKS = [
   { to: "/menu", label: "The menu" },
-  { to: "/happy-hour", label: "Happy hour, every day 5 to 7" },
+  { to: "/happy-hour", label: "Happy hour after opening" },
   { to: "/aitch", label: "Aitch, our agave lounge" },
   { to: "/events", label: "Private events and bookings" },
   { to: "/story", label: "Our story" },
-  { to: "/reservations", label: "Book a table" },
+  { to: "/reservations", label: "Reservations coming soon" },
 ];
 
 function BackArrow() {
@@ -44,28 +41,6 @@ function BackArrow() {
       />
     </svg>
   );
-}
-
-function isFullImageUrl(value) {
-  return /^https?:\/\//i.test(value);
-}
-
-function resolveImageUrl(value) {
-  if (!value) return "/placeholder.jpg";
-
-  const cleanValue = String(value).trim();
-
-  if (isFullImageUrl(cleanValue)) return cleanValue;
-
-  const cleanPath = cleanValue.replace(/^\/+/, "");
-
-  if (!supabase) return "/placeholder.jpg";
-
-  const { data } = supabase.storage
-    .from(BLOG_IMAGE_BUCKET)
-    .getPublicUrl(cleanPath);
-
-  return data?.publicUrl || "/placeholder.jpg";
 }
 
 function renderParagraph(text, ranges) {
@@ -93,81 +68,13 @@ function renderParagraph(text, ranges) {
 export default function BlogContent() {
   const { slug } = useParams();
 
-  const [article, setArticle] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    let ignore = false;
-
-    async function loadArticle() {
-      setIsLoading(true);
-      setErrorMessage("");
-
-      if (!supabase) {
-        setErrorMessage("We couldn't load this article.");
-        setArticle(null);
-        setIsLoading(false);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("blog_posts")
-        .select(`
-          id,
-          title,
-          slug,
-          status,
-          author_name,
-          published_at,
-          updated_at,
-          blog_post_content (
-            title,
-            image_url,
-            body_text
-          )
-        `)
-        .eq("slug", slug)
-        .eq("status", "published")
-        .maybeSingle();
-
-      if (ignore) return;
-
-      if (error) {
-        console.error("[BlogContent] Failed to load article:", error);
-        setErrorMessage("We couldn't load this article.");
-        setArticle(null);
-        setIsLoading(false);
-        return;
-      }
-
-      if (!data || !data.blog_post_content) {
-        setErrorMessage("Article not found.");
-        setArticle(null);
-        setIsLoading(false);
-        return;
-      }
-
-      setArticle({
-        id: data.id,
-        slug: data.slug,
-        title: data.blog_post_content.title || data.title,
-        imageUrl: resolveImageUrl(data.blog_post_content.image_url),
-        bodyText: data.blog_post_content.body_text,
-        authorName: data.author_name,
-        publishedAt: data.published_at,
-        updatedAt: data.updated_at,
-      });
-
-      setIsLoading(false);
-    }
-
-    loadArticle();
-
-    return () => {
-      ignore = true;
-    };
-  }, [slug]);
+  const post = nycPost(slug);
+  const article = useMemo(() => post ? {
+    ...post, imageUrl: post.image_url, bodyText: post.body_text,
+    authorName: post.author_name, publishedAt: post.published_at, updatedAt: post.updated_at,
+  } : null, [post]);
+  const isLoading = false;
+  const errorMessage = post ? "" : "Article not found.";
 
   const paragraphs = useMemo(
     () => splitBodyText(article?.bodyText),
@@ -215,6 +122,7 @@ export default function BlogContent() {
   return (
     <>
       <SEO
+          index={Boolean(article)}
         title={seoTitle}
         description={seoDescription}
         url={canonicalUrl}

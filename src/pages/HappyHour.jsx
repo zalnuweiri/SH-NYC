@@ -3,10 +3,10 @@ import { breadcrumb, faqPage } from "../lib/seoSchema.js";
 import Button from "../components/Button";
 import Reveal from "../lib/motion/Reveal";
 import Parallax from "../lib/motion/Parallax";
-import { useOTWidget } from "../components/OTwidget";
+import { useOTWidget } from "../lib/reservationsContext.js";
 import ResponsiveImg from "../components/ResponsiveImg";
 import RelatedGuides from "../components/RelatedGuides";
-import { happyHourIntro, happyHourItems, tuesdays } from "../data/happyHourData";
+import { happyHourIntro, happyHourItems } from "../data/happyHourData";
 
 /* Figma desktop frame 8647:271 (1280×3372) / mobile 8823:305.
    Titles = Monoglyphic Bold 40 UPPER gold; schedule = Monoglyphic Reg gold; item names =
@@ -35,10 +35,9 @@ const M = {
 };
 
 const HH_FAQ = [
-  { q: "When is happy hour at Silent H?", a: "Every day from 5 to 7pm at Silent H in NYC, with $10 house margaritas and $4 Mexican bites." },
+  { q: "When is happy hour at Silent H?", a: "After opening, Tuesday to Sunday from 5 to 7pm at Silent H in NYC, with $10 house margaritas and $4 Mexican bites." },
   { q: "What is on the happy hour menu?", a: "Rotating house margaritas at $10 and Mexican bites at $4, alongside the full cocktail list." },
-  { q: "Does Silent H have happy hour on weekends?", a: "Yes. Happy hour runs every day, including weekends, from 5 to 7pm." },
-  { q: "What are Tuesdays at Silent H?", a: "All day Tuesday we serve a $20 rib-eye cachetada, on top of the daily 5 to 7 happy hour." },
+  { q: "Does Silent H have happy hour on weekends?", a: "After opening, happy hour is planned Tuesday to Sunday, including weekends, from 5 to 7pm. Closed Mondays." },
 ];
 
 export default function HappyHour() {
@@ -47,8 +46,8 @@ export default function HappyHour() {
   return (
     <>
       <SEO
-        title="Happy Hour in NYC | $10 Margaritas Daily | Silent H"
-        description="Best happy hour in NYC: every day 5-7pm at Silent H. $10 house margaritas and $4 Mexican bites, plus Tuesdays all day $20 rib-eye cachetada."
+        title="Happy Hour in NYC | $10 Margaritas | Silent H"
+        description="Happy hour planned in NYC: after opening, Tuesday to Sunday 5-7pm at Silent H. $10 house margaritas and $4 Mexican bites."
         url="https://www.silenthnyc.com/happy-hour"
         jsonLd={[breadcrumb("Happy Hour", "https://www.silenthnyc.com/happy-hour"), faqPage(HH_FAQ.map((f) => ({ question: f.q, answer: f.a })))]}
       />
@@ -91,37 +90,17 @@ export default function HappyHour() {
           </div>
 
           <div className="mt-[calc(var(--dw)*3.75/100)] flex justify-center">
-            <Button variant="gold" onClick={openReservationWidget}>Reserve a table</Button>
+            <Button variant="gold" onClick={openReservationWidget}>Reservations coming soon</Button>
           </div>
 
           {/* Hero 2 — 940×228 */}
-          <Parallax speed={-0.08} className="mt-[calc(var(--dw)*6.25/100)] mx-auto w-[calc(var(--dw)*73.4/100)]">
-            <ResponsiveImg src="/redesign/hh-hero2.webp" alt="Tuesdays at Silent H"
-              sizes="73.4vw"
-              className="w-full h-[calc(var(--dw)*17.8/100)] object-cover rounded-[8px]" />
-          </Parallax>
+          
 
           {/* TUESDAYS header (gold) */}
-          <Reveal className="mt-[calc(var(--dw)*6.25/100)] flex flex-col items-center gap-[calc(var(--dw)*1.875/100)] text-center">
-            <h2 className={`${D.title} text-sh-gold`}>{tuesdays.title}</h2>
-            <div className="flex flex-col items-center gap-[calc(var(--dw)*1.25/100)]">
-              <p className={`${D.price} text-sh-gold`}>{tuesdays.schedule}</p>
-              <p className={`${D.price} text-sh-gold`}>{tuesdays.price}</p>
-            </div>
-          </Reveal>
+          
 
           {/* Tuesdays items — centred, "+" separators */}
-          <div className="mt-[calc(var(--dw)*3.125/100)] mx-auto w-[calc(var(--dw)*49.3/100)] flex flex-col items-center gap-[calc(var(--dw)*3.125/100)] text-center">
-            {tuesdays.items.map((item, i) => (
-              <div key={item.id} className="contents">
-                {i > 0 && <span className={`${D.name} leading-none`}>+</span>}
-                <Reveal delay={i * 0.05} className="flex flex-col items-center gap-[calc(var(--dw)*1.5625/100)]">
-                  <h3 className={D.name}>{item.name}</h3>
-                  <p className={`${D.desc} max-w-[calc(var(--dw)*49/100)]`}>{item.description}</p>
-                </Reveal>
-              </div>
-            ))}
-          </div>
+          
 
           <div className="mt-[calc(var(--dw)*3.75/100)] flex justify-center">
             <Button variant="gold" onClick={openReservationWidget}>Book your experience</Button>
@@ -163,35 +142,15 @@ export default function HappyHour() {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <Button variant="gold" onClick={openReservationWidget}>Reserve a table</Button>
+            <Button variant="gold" onClick={openReservationWidget}>Reservations coming soon</Button>
           </div>
 
           {/* TUESDAYS title sits ABOVE hero 2 */}
-          <Reveal className="mt-14 flex flex-col items-center gap-5 text-center">
-            <h2 className={`${M.title} text-sh-gold`}>{tuesdays.title}</h2>
-            <div className="flex flex-col items-center gap-3">
-              <p className={`${M.name} text-sh-gold`}>{tuesdays.schedule}</p>
-              <p className={`${M.price} text-sh-gold`}>{tuesdays.price}</p>
-            </div>
-          </Reveal>
+          
 
-          <Parallax speed={-0.05} className="mt-9 w-full">
-            <ResponsiveImg src="/redesign/hh-hero2.webp" alt="Tuesdays at Silent H"
-              sizes="calc(100vw - 72px)"
-              className="w-full h-[480px] object-cover object-[61%_center] rounded-t-[200px] rounded-b-none" />
-          </Parallax>
+          
 
-          <div className="mt-10 flex flex-col items-center gap-5 text-center">
-            {tuesdays.items.map((item, i) => (
-              <div key={item.id} className="contents">
-                {i > 0 && <span className={`${M.name} leading-none`}>+</span>}
-                <Reveal className="flex flex-col items-center gap-5">
-                  <h3 className={M.name}>{item.name}</h3>
-                  <p className={M.desc}>{item.description}</p>
-                </Reveal>
-              </div>
-            ))}
-          </div>
+          
 
           <div className="mt-10 flex justify-center">
             <Button variant="gold" onClick={openReservationWidget}>Book your experience</Button>
@@ -212,7 +171,7 @@ export default function HappyHour() {
         <RelatedGuides
           className="mt-4 md:mt-0 pb-16 md:pb-[calc(var(--dw)*6.25/100)]"
           links={[
-            { to: "/blogs/happy-hour-downtown-toronto", label: "The best happy hours in downtown Toronto" },
+            { to: "/blogs/meatpacking-district-restaurants", label: "Dining in the Meatpacking District" },
           ]}
         />
 

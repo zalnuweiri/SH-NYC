@@ -90,10 +90,10 @@ export function event({
       name: "Silent H",
       url: "https://www.silenthnyc.com/",
       servesCuisine: "Mexican",
-      telephone: "+14169003535",
+      telephone: "+14062828155",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "416 West 13th Street",
+        streetAddress: "420 West 13th Street",
         addressLocality: "New York",
         addressRegion: "NY",
     postalCode: "10014",

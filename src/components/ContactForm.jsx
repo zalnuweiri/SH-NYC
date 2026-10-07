@@ -1,7 +1,7 @@
 // src/components/ContactForm.jsx
 import emailjs from "emailjs-com";
 import { useState } from "react";
-/* need to switch email to NORA@silenth.ca */
+/* NYC contact enquiries are available through the site footer. */
 export default function ContactForm({ onClose }) {
     const [status, setStatus] = useState("");
 

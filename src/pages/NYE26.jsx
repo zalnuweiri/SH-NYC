@@ -1,6 +1,6 @@
 import SEO from "../components/SEO.jsx";
-import { breadcrumb, event } from "../lib/seoSchema.js";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { breadcrumb } from "../lib/seoSchema.js";
+import { useOTWidget } from "../lib/reservationsContext.js";
 
 /**
  * NYE Masquerade Dinner landing page — /nye26
@@ -174,7 +174,7 @@ export default function NYE26() {
     <>
       <SEO
         title="New Year's Eve 2026 NYC | Silent H Masquerade Dinner"
-        description="Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Reserve your table."
+        description="Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Event details and reservations are coming soon."
         url={URL}
         preloads={[
           {
@@ -194,15 +194,6 @@ export default function NYE26() {
         ]}
         jsonLd={[
           breadcrumb("New Year's Eve", URL),
-          event({
-            name: "New Year's Eve Masquerade Dinner at Silent H",
-            description:
-              "A New Year's Eve masquerade dinner at Silent H in NYC — a modern Mexican prix-fixe menu served through midnight into 2027.",
-            url: URL,
-            image: HERO_IMG,
-            startDate: EVENT.start,
-            endDate: EVENT.end,
-          }),
         ]}
       />
 
@@ -243,6 +234,7 @@ export default function NYE26() {
             <h1 className={`${T.hero} text-sh-cream`}>New Years Eve</h1>
             <p className={`${T.sub} text-sh-cream`}>Masquerade Dinner</p>
             <p className={`${T.date} text-sh-cream`}>{EVENT.display}</p>
+            <p className="font-body text-sh-cream text-lg text-center">Menu preview · event details coming soon</p>
 
             {/* Figma "SecondaryButton - Desktop" 192×50. Same hover semantics as
                 BTN_OUTLINE / <Button variant="ghost">: label + outline fade
@@ -259,7 +251,7 @@ export default function NYE26() {
                 "md:py-[calc(var(--dw)*1.5625/100)] md:text-[round(calc(var(--dw)*1.5625/100),1px)]"
               }
             >
-              Reserve now
+              Reservations coming soon
             </button>
           </div>
         </section>

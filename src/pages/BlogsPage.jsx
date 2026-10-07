@@ -1,94 +1,13 @@
 // src/pages/BlogsPage.jsx
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { supabase } from "../lib/supabaseClient";
+import { nycBlogPosts } from "../data/nycBlogPosts.js";
 import SEO from "../components/SEO.jsx";
 import { breadcrumb } from "../lib/seoSchema.js";
 
-const BLOG_IMAGE_BUCKET = "blog-images";
+const FALLBACK_POSTS = nycBlogPosts.map((post) => ({ id: post.id, title: post.title, img: post.image_url, alt: post.title, href: post.href }));
 
-const FALLBACK_POSTS = [
-    {
-        id: "fallback-1",
-        img: "/redesign/fig-blog-1.png",
-        alt: "Date night at Silent H",
-        title: "Date Night Restaurants in Toronto that Let You Worry About the Connection and Not the Experience",
-        href: "/blogs",
-    },
-    {
-        id: "fallback-2",
-        img: "/redesign/fig-blog-2.png",
-        alt: "Happy hour drinks and food",
-        title: "Happy Hour in Downtown Toronto: Where to Go After Work",
-        href: "/blogs",
-    },
-    {
-        id: "fallback-3",
-        img: "/redesign/fig-blog-3.png",
-        alt: "Silent H restaurant interior",
-        title: "Why Silent H Is the Best Mexican Restaurant in Toronto",
-        href: "/blogs",
-    },
-    {
-        id: "fallback-4",
-        img: "/redesign/fig-blog-4.png",
-        alt: "Private dining room at Silent H",
-        title: "Private Dining in Toronto: Where to Host Your Next Event",
-        href: "/blogs",
-    },
-];
-
-function isFullUrl(value) {
-    return /^https?:\/\//i.test(value);
-}
-
-function isExternalHref(href) {
-    return /^https?:\/\//i.test(href);
-}
-
-function resolveImageUrl(value) {
-    if (!value) return "/placeholder.jpg";
-
-    const cleanValue = String(value).trim();
-
-    // Full correct Supabase/public URL.
-    if (isFullUrl(cleanValue) && !cleanValue.includes("YOUR_PROJECT_ID")) {
-        return cleanValue;
-    }
-
-    // Filename or storage path, e.g. "fig-blog-1.jpg" or "folder/fig-blog-1.jpg".
-    const cleanPath = cleanValue
-        .replace(/^\/+/, "")
-        .replace(/^.*\/blog-images\//, "");
-
-    if (!supabase) return "/placeholder.jpg";
-
-    const { data } = supabase.storage
-        .from(BLOG_IMAGE_BUCKET)
-        .getPublicUrl(cleanPath);
-
-    return data?.publicUrl || "/placeholder.jpg";
-}
-
-function getPostHref(post) {
-    if (post.href) return post.href;
-    if (post.slug) return `/blogs/${post.slug}`;
-
-    return "/blogs";
-}
-
-function normalizePost(post) {
-    return {
-        id: post.id,
-        img: resolveImageUrl(post.image_url),
-        alt: post.alt_text || post.title || "Silent H blog post",
-        title: post.title || "Untitled story",
-        href: getPostHref(post),
-    };
-}
+function isExternalHref(href) { return /^https?:\/\//i.test(href); }
 
 function CardWrapper({ href, children }) {
     if (isExternalHref(href)) {
@@ -132,54 +51,8 @@ function BlogCard({ img, alt, title, href }) {
 }
 
 export default function BlogsPage() {
-    const [blogPosts, setBlogPosts] = useState(FALLBACK_POSTS);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        let ignore = false;
-
-        async function loadBlogPosts() {
-            if (!supabase) {
-                setBlogPosts(FALLBACK_POSTS);
-                setIsLoading(false);
-                return;
-            }
-
-            let data, error;
-            try {
-                ({ data, error } = await supabase
-                    .from("blog_posts")
-                    .select(
-                        "id,title,image_url,href,slug,published_at,created_at,sort_order,status"
-                    )
-                    .eq("status", "published")
-                    .order("sort_order", { ascending: true })
-                    .order("published_at", { ascending: false }));
-            } catch (err) {
-                error = err;
-            }
-
-            if (ignore) return;
-
-            if (error) {
-                console.error("[BlogsPage] Failed to load blog posts:", error);
-                setBlogPosts(FALLBACK_POSTS);
-                setIsLoading(false);
-                return;
-            }
-
-            const nextPosts = (data ?? []).map(normalizePost);
-
-            setBlogPosts(nextPosts.length ? nextPosts : FALLBACK_POSTS);
-            setIsLoading(false);
-        }
-
-        loadBlogPosts();
-
-        return () => {
-            ignore = true;
-        };
-    }, []);
+    const blogPosts = FALLBACK_POSTS;
+    const isLoading = false;
 
     return (
         <>

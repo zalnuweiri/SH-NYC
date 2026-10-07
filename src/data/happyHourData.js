@@ -1,78 +1,48 @@
-// Happy Hour content lifted verbatim from the old Home happy-hour section.
-// Schema (G-36): { id, name, description?, note? }
-
+// Current shared happy-hour menu, presented for service after opening.
 export const happyHourIntro = {
-  title: "Best Happy Hour In NYC",
-  schedule: "Everyday – 5pm – 7pm",
-  prices: [
-    { label: "Margaritas", price: "$10" },
-    { label: "Individual Bites", price: "$4" },
+  "title": "Happy Hour in NYC",
+  "schedule": "After opening · Tuesday–Sunday · 5pm–7pm",
+  "prices": [
+    {
+      "label": "Margaritas",
+      "price": "$10"
+    },
+    {
+      "label": "Individual Bites",
+      "price": "$4"
+    }
   ],
-  heroImage: "/HH1-1.png",
+  "heroImage": "/HH1-1.png"
 };
-
 export const happyHourItems = [
   {
-    id: "hh-margarita",
-    name: "Margarita",
-    description: "House flavours",
+    "id": "hh-margarita",
+    "name": "Margarita",
+    "description": "Spicy · Mango · Strawberry · Coconut"
   },
   {
-    id: "hh-chicharron",
-    name: "Taco de chicharrón",
-    description:
-      "Crispy pork belly chicharrón taco, avocado mousse, fermented habanero salsa, onion, avocado, cilantro, lime.",
-    note: "VEGAN OPTION AVAILABLE",
+    "id": "hh-infladita",
+    "name": "Infladita de Chicharrón",
+    "description": "Infladita, chicharrón en salsa verde, avocado mousse, crispy chicharrón, pearl onions, serrano slices, wild cilantro"
   },
   {
-    id: "hh-flauta",
-    name: "Flauta carnita",
-    description:
-      "Rolled tacos filled with carnita, avocado mousse, sour cream, queso fresco, Siberia-style guacamole, pickled red onions, flowers",
+    "id": "hh-olvidado",
+    "name": "Tacos Olvidados",
+    "description": "Black tiger shrimp, onion, jalapeño, tomato, bacon, mozzarella, shrimp consommé"
   },
   {
-    id: "hh-olvidado",
-    name: "Taco olvidado",
-    description:
-      "Black tiger shrimp, bacon, mozzarella, shrimp consommé, served over hot river stones",
+    "id": "hh-tostada",
+    "name": "Tostada de atún",
+    "description": "Fire-charred corn tostada, guacamole, chipotle dressed tuna, fried red onions, Tajín mayo"
   },
   {
-    id: "hh-empanada",
-    name: "Empanada de barbacoa",
-    description:
-      "AAA rib eye barbacoa empanadas, salsa verde, salsa roja, onion and cilantro",
-    note: "VEGETARIAN OPTION AVAILABLE",
+    "id": "hh-pastor",
+    "name": "Taco de Pastor",
+    "description": "Pork belly al pastor, salsa verde, onions, cilantro, pineapple"
   },
   {
-    id: "hh-tostada",
-    name: "Tostada de atún",
-    description:
-      "Fire-charred corn tostada, guacamole, chipotle dressed tuna, fried red onions, Tajín mayo",
-  },
+    "id": "hh-esquite",
+    "name": "Esquite",
+    "description": "White corn, serrano cream, guajillo and ancho chile powder, Cotija cheese, butter"
+  }
 ];
-
-export const tuesdays = {
-  title: "Tuesdays",
-  schedule: "All day",
-  price: "$20",
-  heroImage: "/HH2-1.png",
-  items: [
-    {
-      id: "tu-cachetada",
-      name: "Cachetada de Rib eye",
-      description:
-        "Cheese-crusted rib eye slices, avocado, grilled onions, chives, served on corn tortillas",
-    },
-    {
-      id: "tu-esquite",
-      name: "Side of Esquite",
-      description:
-        "Andean corn, serrano cream, guajillo and ancho powder, cotija cheese, butter",
-    },
-    {
-      id: "tu-margarita",
-      name: "Margarita",
-      description: "House flavours",
-    },
-  ],
-};

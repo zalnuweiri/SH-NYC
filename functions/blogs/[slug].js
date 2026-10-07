@@ -34,35 +34,12 @@ import {
   classifyBlock,
   extractFaq,
   buildDescription,
-  resolveImageUrl,
 } from "../../src/lib/blogFormat.js";
 import { RELATED, TITLES } from "../../src/lib/relatedPosts.js";
 
 const SITE = "https://www.silenthnyc.com";
 
-// Supabase credentials for the edge.
-//
-// These MUST have a literal fallback. Cloudflare Pages Functions run at RUNTIME
-// and never see .env (that file is only read at build time), so with no runtime
-// variables set in the dashboard the key was "" — fetchPost() returned null and
-// this function silently served the bare shell. That is exactly how all 9 blog
-// posts shipped broken while the static routes passed.
-//
-// Inlining the anon key adds NO exposure: it is public by design (Vite already
-// inlines it into the JS bundle every visitor downloads), it is committed in
-// this repo's .env, and it is read-only against blog_posts — INSERT/UPDATE/
-// DELETE are denied at the GRANT level, verified. Set SUPABASE_URL /
-// SUPABASE_ANON_KEY as Pages variables to override (e.g. after a key rotation).
-const FALLBACK_URL = "https://ggmrhgiclbuvluyanvhd.supabase.co";
-const FALLBACK_ANON_KEY =
-  "sb_publishable_73fG-32amp7Nwzj_cJ9mhw_ePBn0Mfi";
-
-function creds(env) {
-  return {
-    url: env.SUPABASE_URL || env.VITE_SUPABASE_URL || FALLBACK_URL,
-    key: env.SUPABASE_ANON_KEY || env.VITE_SUPABASE_ANON_KEY || FALLBACK_ANON_KEY,
-  };
-}
+import { nycPost, nycPostForEdge } from "../../src/data/nycBlogPosts.js";
 
 const esc = (s) =>
   String(s ?? "")
@@ -77,39 +54,9 @@ const esc = (s) =>
 //   { status: "error" }      — no key / Supabase unreachable → degrade, never 404
 // The distinction matters: a transient Supabase outage must NOT 404 a real post
 // (that would deindex live articles), so only a successful empty query is a 404.
-async function fetchPost(env, slug) {
-  const { url, key } = creds(env);
-  if (!key) {
-    console.error("[blogs] No Supabase key at runtime — serving bare shell.");
-    return { status: "error" };
-  }
-
-  const endpoint =
-    `${url}/rest/v1/blog_posts` +
-    `?select=title,slug,author_name,published_at,updated_at,blog_post_content(title,image_url,body_text)` +
-    `&slug=eq.${encodeURIComponent(slug)}&status=eq.published`;
-
-  let res;
-  try {
-    res = await fetch(endpoint, {
-      headers: { apikey: key, Authorization: `Bearer ${key}` },
-      // Let Cloudflare cache the Supabase read briefly so a burst of crawler hits
-      // doesn't become a burst of database reads.
-      cf: { cacheTtl: 60, cacheEverything: true },
-    });
-  } catch {
-    console.error("[blogs] Supabase fetch threw — serving bare shell.");
-    return { status: "error" };
-  }
-  if (!res.ok) {
-    console.error(`[blogs] Supabase HTTP ${res.status} for slug — serving bare shell.`);
-    return { status: "error" };
-  }
-
-  const rows = await res.json();
-  const row = Array.isArray(rows) ? rows[0] : null;
-  if (!row || !row.blog_post_content) return { status: "notfound" };
-  return { status: "ok", post: row };
+async function fetchPost(_env, slug) {
+  const post = nycPostForEdge(nycPost(slug));
+  return post ? { status: "ok", post } : { status: "notfound" };
 }
 
 /** Build the article markup, mirroring BlogContent.jsx's classes closely enough
@@ -240,10 +187,7 @@ export async function onRequestGet(context) {
   const title = ((t)=> (t && t.length <= 47) ? `${t} | Silent H` : (t || "Silent H Blog"))(post.title || post.blog_post_content.title);
   const canonical = `${SITE}/blogs/${post.slug}`;
   const description = buildDescription(paragraphs);
-  const heroUrl = resolveImageUrl(
-    post.blog_post_content.image_url,
-    creds(env).url
-  );
+  const heroUrl = post.blog_post_content.image_url.startsWith("/") ? SITE + post.blog_post_content.image_url : post.blog_post_content.image_url;
 
   const ld = jsonLd(post, paragraphs, canonical, description, heroUrl);
 
@@ -294,7 +238,7 @@ export async function onRequestGet(context) {
           html: true,
         });
         el.append(
-          `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>`,
+          `<script type="application/ld+json" data-page-jsonld>${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>`,
           { html: true }
         );
       },

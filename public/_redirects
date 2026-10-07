@@ -24,8 +24,7 @@
 /donhalloween/ / 301
 /tiff / 301
 /tiff/ / 301
-/reservations / 301
-/reservations/ / 301
+/reservations/ /reservations 301
 
 # Normalize trailing slash on current pages -> no-slash canonical
 /menu/ /menu 301
@@ -33,6 +32,9 @@
 /story/ /story 301
 /happy-hour/ /happy-hour 301
 /blogs/ /blogs 301
+
+/aitch/faq /aitch/index.html 200
+/aitch/booking /aitch/index.html 200
 
 # SPA fallback. /aitch is a real page (public/aitch), so do not redirect it.
 # Missing /assets/* requests are converted to genuine 404s by

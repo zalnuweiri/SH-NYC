@@ -1,32 +1,91 @@
-// src/data/faqData.js
-//
-// Site FAQ, single source of truth. Consumed by:
-//   • src/pages/FAQ.jsx           — the rendered /faq page + its FAQPage JSON-LD
-//   • src/lib/routeContent.js     — the pre-JS crawler HTML injected at the edge
-// Keeping the array here (instead of inline in FAQ.jsx) means the crawler HTML and
-// the browser DOM can never disagree.
-
+// Shared by the browser FAQ and prerendered HTML.
 export const faqs = [
-  { q: "Where is Silent H located?", a: "Silent H is at 416 West 13th Street in NYC's Meatpacking District. Our late-night agave lounge, Aitch, shares the same address." },
-  { q: "What are Silent H's hours?", a: "Silent H serves dinner from 5pm Tuesday to Sunday and is closed on Mondays. We close at midnight Tuesday to Thursday and Sunday, and at 2am on Friday and Saturday. Aitch is open Thursday to Sunday from 9pm." },
-  { q: "Do I need a reservation?", a: "Reservations are recommended, especially Thursday to Saturday, and can be booked at silenthnyc.com. Walk-ins are welcome. Parties over 15 should contact us directly and a deposit may apply." },
-  { q: "What food does Silent H serve?", a: "Modern Mexican by Chef Gerardo Álvarez Saucedo: charred guacamole, crispy chicharrón tacos, mesquite rib-eye espadas, a 44oz tomahawk and house desserts." },
-  { q: "Is Silent H good for date night?", a: "Yes. Silent H is one of NYC's favourite date-night spots, with an intimate room, shareable plates and the Aitch agave lounge for a nightcap." },
-  { q: "What is Aitch?", a: "Aitch is Silent H's late-night agave cocktail lounge in NYC, pouring artisanal tequila and mezcal with elevated bites and guest DJs, Thursday to Sunday from 9pm. Aitch is 21 and over." },
-  { q: "When is happy hour?", a: "Every day from 5 to 7pm: $10 house margaritas and $4 Mexican bites. Tuesdays also feature a $20 rib-eye cachetada all day." },
-  { q: "Are there vegetarian or vegan options?", a: "Yes, several dishes are vegetarian or can be made vegan. Let your server know and the kitchen will guide you." },
-  { q: "Can I host a private event?", a: "Yes. Silent H offers private dining, corporate dinners and full buyouts across two Mexican-inspired spaces with chef-curated menus. Call 416 900 3535 or use Plan an Event to enquire." },
-  { q: "How do I get there and where do I park?", a: "Silent H is on West 13th Street in the Meatpacking District, near the 14th Street subway stations (A, C, E and L lines), with paid parking garages nearby." }
-,
-  { q: "What's the difference between Silent H and Aitch?", a: "Silent H is our modern Mexican restaurant on the main floor at 416 West 13th Street, serving shareable regional dishes and cocktails. Aitch is our intimate agave lounge downstairs, focused on tequila, mezcal and a deeper cocktail list, the same address with two distinct experiences." },
-  { q: "Does Silent H have a tequila and mezcal selection?", a: "Yes. Downstairs at Aitch, our agave lounge, we pour an extensive tequila and mezcal selection alongside agave-forward cocktails. Upstairs, the restaurant runs a regional Mexican cocktail program." },
-  { q: "Who is the chef at Silent H?", a: "Our kitchen is led by Monterrey-born chef Gerardo Álvarez Saucedo, whose menu reimagines regional Mexican cooking for NYC, from ceviches and tacos to a 44 oz tomahawk." },
-  { q: "What are Silent H's signature dishes?", a: "Standout plates include the charred guacamole (guacamole quemado), crispy chicharrón tacos, rib-eye dishes and the 44 oz tomahawk, all built for sharing." },
-  { q: "Can I come to Aitch just for drinks?", a: "Absolutely. Aitch, our downstairs agave lounge, is a great spot for tequila, mezcal and cocktails whether or not you're dining upstairs at the restaurant." },
-  { q: "Is Silent H a good spot for a birthday or celebration?", a: "Yes. The shareable Mexican menu, cocktail program and agave lounge make Silent H a popular choice for birthdays and celebrations in NYC. For larger or private gatherings, ask about our private event options." },
-  { q: "How much does dinner cost at Silent H?", a: "Silent H is a mid-to-upper range ($$) modern Mexican restaurant, with most plates designed to share. Happy hour runs every day from 5 to 7pm with $10 house margaritas and $4 Mexican bites for a lighter spend." },
-  { q: "Does Silent H have a patio?", a: "Yes. Along with the main dining room, Silent H has patio seating at 416 West 13th Street, plus the downstairs Aitch agave lounge." },
-  { q: "Are there gluten-free options at Silent H?", a: "Yes. Many of our Mexican dishes are corn-based and naturally gluten-free, and several plates can be adapted. Let your server know about any allergies and the kitchen will guide you." },
-  { q: "What is the atmosphere like at Silent H?", a: "Silent H pairs a warm, design-forward dining room with the spirit of modern Mexico. Downstairs, Aitch brings agave cocktails and guest DJs Thursday to Sunday, suited to both a relaxed dinner and a lively night out." },
-  { q: "Is Silent H family-friendly, and is there an age policy?", a: "The main restaurant welcomes guests of all ages for dinner. Aitch, our downstairs agave lounge, is 21 and over in the evenings." },
+  {
+    "q": "Where is Silent H located?",
+    "a": "Silent H is at 420 West 13th Street in NYC's Meatpacking District. Aitch, our tequila bar, is next door at 418 West 13th Street."
+  },
+  {
+    "q": "Is Silent H open?",
+    "a": "Silent H and Aitch are opening soon. We will announce the opening date here and on our NYC Instagram accounts."
+  },
+  {
+    "q": "What are Silent H's planned hours?",
+    "a": "After opening, dinner is planned from 5pm Tuesday to Sunday, with Mondays closed. Planned closing times are midnight Tuesday to Thursday and Sunday, and 2am Friday and Saturday. Aitch is planned Thursday to Sunday from 9pm. Final hours will be confirmed before opening."
+  },
+  {
+    "q": "Can I make a reservation?",
+    "a": "Reservations are coming soon. Online booking is not available yet. Contact info@silenthnyc.com for opening enquiries."
+  },
+  {
+    "q": "What food will Silent H serve?",
+    "a": "Modern Mexican by Chef Gerardo Álvarez Saucedo, including charred guacamole, tacos, rib-eye dishes and the 44 oz tomahawk. Explore the shared food and cocktail menu on our Menu page."
+  },
+  {
+    "q": "Is Silent H designed for date night?",
+    "a": "Our upcoming NYC dining room is designed for shared plates and cocktails, with Aitch next door for tequila and mezcal."
+  },
+  {
+    "q": "What is Aitch?",
+    "a": "Aitch is our tequila bar opening next door at 418 West 13th Street. Evening entry will be 21 and over."
+  },
+  {
+    "q": "When will happy hour run?",
+    "a": "After opening, happy hour is planned Tuesday to Sunday from 5 to 7pm, with $10 margaritas and $4 Mexican bites. We will be closed Mondays."
+  },
+  {
+    "q": "Are there vegetarian or vegan options?",
+    "a": "Our menu includes vegetable dishes and selected vegetarian or vegan options. Please ask the team about ingredients and preparation before ordering."
+  },
+  {
+    "q": "Can I host a private event?",
+    "a": "Contact the NYC team at info@silenthnyc.com or 406 282 8155 with your date and guest count. We will confirm availability, layouts and capacity."
+  },
+  {
+    "q": "How do I get there and where do I park?",
+    "a": "Silent H is on West 13th Street in the Meatpacking District, near the 14th Street stations for the A, C, E and L trains, with paid parking garages nearby."
+  },
+  {
+    "q": "What's the difference between Silent H and Aitch?",
+    "a": "Silent H is our Mexican restaurant at 420 West 13th Street. Aitch is our tequila bar next door at 418 West 13th Street: two addresses and two distinct experiences."
+  },
+  {
+    "q": "Does Silent H have tequila and mezcal?",
+    "a": "The restaurant menu features regional Mexican cocktails. Aitch next door will focus on tequila, mezcal and its own cocktail menu."
+  },
+  {
+    "q": "Who is the chef?",
+    "a": "Monterrey-born chef Gerardo Álvarez Saucedo leads the kitchen and brings his regional Mexican recipes to NYC."
+  },
+  {
+    "q": "What are the signature dishes?",
+    "a": "The menu includes guacamole quemado, tacos, rib-eye dishes and a 44 oz tomahawk built for sharing."
+  },
+  {
+    "q": "Can I visit Aitch just for drinks?",
+    "a": "When Aitch opens, you can visit the tequila bar at 418 West 13th Street separately from the restaurant."
+  },
+  {
+    "q": "Can I plan a birthday or celebration?",
+    "a": "Yes. Contact our NYC team to discuss your group, date and preferred space. Availability and arrangements will be confirmed directly."
+  },
+  {
+    "q": "What currency are menu prices in?",
+    "a": "Prices shown on the NYC menu are in US dollars (USD). The restaurant is opening soon."
+  },
+  {
+    "q": "Is there patio seating?",
+    "a": "Please contact the NYC team for current seating options. Outdoor seating has not been confirmed on this website."
+  },
+  {
+    "q": "Are there gluten-free options?",
+    "a": "Some dishes use corn-based ingredients. Please discuss allergies and cross-contact requirements with the team before ordering; ingredients alone do not guarantee an allergen-free dish."
+  },
+  {
+    "q": "What will the atmosphere be like?",
+    "a": "Silent H will pair a warm dining room with modern Mexican food and cocktails. Next door, Aitch will offer a more intimate tequila-bar experience."
+  },
+  {
+    "q": "Is the restaurant family-friendly?",
+    "a": "The restaurant plans to welcome guests of all ages for dinner. Aitch will be 21 and over in the evenings."
+  }
 ];

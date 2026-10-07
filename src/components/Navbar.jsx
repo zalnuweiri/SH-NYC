@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Menu as MenuIcon, X } from "lucide-react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { LuFacebook } from "react-icons/lu";
-import { useOTWidget } from "./OTwidget";
+import { useOTWidget } from "../lib/reservationsContext.js";
 
 // Desktop nav matches the .main-nav (globals.css): a fixed 620×74 centered
 // pill, radius 999, bg rgba(0,0,0,.4) + backdrop-blur 10, top 42px, laid out as a 5-col
@@ -36,7 +36,7 @@ export default function Navbar() {
     const MOBILE_LINKS = [
         { to: "/menu", label: "Menu" },
         { to: "/happy-hour", label: "Happy Hour" },
-        { label: "Reserve" },
+        { label: "Coming soon" },
         { to: "/events", label: "Plan an Event" },
     ];
 
@@ -83,7 +83,7 @@ export default function Navbar() {
                     onClick={openReservationWidget}
                     className={`${linkBase} text-sh-cream hover:text-sh-pink cursor-pointer`}
                 >
-                    Reserve
+                    Coming soon
                 </button>
                 <NavItem to="/events">Plan an Event</NavItem>
             </nav>
@@ -164,7 +164,7 @@ export default function Navbar() {
                             <a href="https://www.facebook.com/silenth.to/" aria-label="Facebook" className="hover:text-sh-pink transition-colors"><LuFacebook /></a>
                             <a href="https://www.tiktok.com/@silenth.to?lang=en" aria-label="TikTok" className="hover:text-sh-pink transition-colors"><FaTiktok /></a>
                         </div>
-                        <a href="mailto:info@silenth.ca" className="font-body uppercase text-sh-cream text-[16px] tracking-[0.2em] hover:text-sh-pink transition-colors">contact us</a>
+                        <a href="mailto:info@silenthnyc.com" className="font-body uppercase text-sh-cream text-[16px] tracking-[0.2em] hover:text-sh-pink transition-colors">contact us</a>
                     </div>
                 </div>
             )}

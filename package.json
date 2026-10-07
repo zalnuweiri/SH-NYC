@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node generate-sitemap.js && vite build",
+    "dev": "node scripts/build-aitch-nyc.mjs && vite",
+    "build": "node scripts/build-aitch-nyc.mjs && node generate-sitemap.js && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "images:build": "node scripts/build-page-images.mjs",
     "images:build:home": "node scripts/build-responsive-images.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
-    "analyze": "ANALYZE=1 vite build"
+    "analyze": "ANALYZE=1 vite build",
+    "verify:nyc": "node scripts/build-aitch-nyc.mjs && node scripts/verify-nyc.mjs"
   },
   "dependencies": {
     "@cloudinary/react": "^1.14.3",

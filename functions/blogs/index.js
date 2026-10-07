@@ -2,19 +2,7 @@
 // clients that do not run JavaScript receive its H1, introduction and post
 // links in the raw HTML. Individual posts remain handled by [slug].js.
 
-const FALLBACK_URL = "https://ggmrhgiclbuvluyanvhd.supabase.co";
-const FALLBACK_ANON_KEY =
-  "sb_publishable_73fG-32amp7Nwzj_cJ9mhw_ePBn0Mfi";
-
-function creds(env) {
-  return {
-    url: env.SUPABASE_URL || env.VITE_SUPABASE_URL || FALLBACK_URL,
-    key:
-      env.SUPABASE_ANON_KEY ||
-      env.VITE_SUPABASE_ANON_KEY ||
-      FALLBACK_ANON_KEY,
-  };
-}
+import { nycBlogPosts } from "../../src/data/nycBlogPosts.js";
 
 const esc = (value) =>
   String(value ?? "")
@@ -29,25 +17,7 @@ function postHref(post) {
   return post.slug ? `/blogs/${encodeURIComponent(post.slug)}` : "/blogs";
 }
 
-async function fetchPosts(env) {
-  const { url, key } = creds(env);
-  const endpoint =
-    `${url}/rest/v1/blog_posts` +
-    `?select=id,title,href,slug,published_at,created_at,sort_order` +
-    `&status=eq.published&order=sort_order.asc,published_at.desc`;
-
-  const response = await fetch(endpoint, {
-    headers: { apikey: key, Authorization: `Bearer ${key}` },
-    cf: { cacheTtl: 60, cacheEverything: true },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Supabase HTTP ${response.status}`);
-  }
-
-  const rows = await response.json();
-  return Array.isArray(rows) ? rows : [];
-}
+async function fetchPosts() { return nycBlogPosts; }
 
 function blogIndexHtml(posts) {
   const articles = posts

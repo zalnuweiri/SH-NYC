@@ -34,7 +34,11 @@ export const ROUTE_SEO = {
   "/": {
     title: "Silent H NYC | Modern Mexican Cuisine",
     description:
-      "Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Chef-driven plates, $10 happy-hour margaritas, and late nights at Aitch.",
+      "Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Opening soon, with a regional Mexican menu and Aitch next door.",
+  },
+  "/reservations": {
+    title: "Reservations Coming Soon | Silent H NYC",
+    description: "Silent H is opening soon at 420 West 13th Street in NYC. Online reservations are coming soon.",
   },
   "/menu": {
     title: "Silent H NYC Menu | Modern Mexican Cuisine (Menu)",
@@ -52,9 +56,9 @@ export const ROUTE_SEO = {
       "The story behind Silent H, a modern Mexican restaurant and agave lounge in NYC, led by Monterrey-born chef Gerardo Álvarez Saucedo.",
   },
   "/happy-hour": {
-    title: "Happy Hour in NYC | $10 Margaritas Daily | Silent H",
+    title: "Happy Hour in NYC | $10 Margaritas | Silent H",
     description:
-      "Best happy hour in NYC: every day 5-7pm at Silent H. $10 house margaritas and $4 Mexican bites, plus Tuesdays all day $20 rib-eye cachetada.",
+      "Happy hour planned in NYC: after opening, Tuesday to Sunday 5-7pm at Silent H. $10 house margaritas and $4 Mexican bites.",
   },
   "/faq": {
     title: "Silent H FAQ | Mexican Restaurant & Bar, NYC",
@@ -69,12 +73,12 @@ export const ROUTE_SEO = {
   "/nye26": {
     title: "New Year's Eve 2026 NYC | Silent H Masquerade Dinner",
     description:
-      "Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Reserve your table.",
+      "Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Event details and reservations are coming soon.",
   },
   "/aitch": {
     title: "Aitch | Agave Cocktail Lounge in NYC",
     description:
-      "Aitch is Silent H's late-night agave lounge in NYC - 50+ tequilas and mezcals, craft cocktails and elevated Mexican bites, Thursday to Sunday.",
+      "Aitch is Silent H's late-night agave lounge in NYC - opening soon at 418 West 13th Street, next door to Silent H.",
   },
 };
 
@@ -97,7 +101,7 @@ export function seoFor(pathname) {
 // double as this allowlist.)
 const KNOWN_EXACT_ROUTES = new Set([
   "/", "/menu", "/faq", "/events", "/story", "/happy-hour",
-  "/reservations", "/form", "/blogs", "/nye26", "/fifa26", "/aitch",
+  "/reservations", "/blogs", "/nye26", "/aitch",
 ]);
 
 /** True if `pathname` is a route the app really serves, so the middleware can
