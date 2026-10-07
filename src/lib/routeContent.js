@@ -226,32 +226,15 @@ function nye26() {
 
 // pathname → builder. Only these routes get body injection; everything else
 // returns null and is left untouched by the middleware.
-// /aitch - Aitch agave lounge. Keep in sync with src/pages/Aitch.jsx (SEO + hero).
+// Aitch's NYC landing page: keep crawler copy aligned with its new React entry.
 function aitch() {
   return shell(
-    h1("Aitch - Agave Cocktail Lounge in NYC") +
-    p(
-      "Aitch is Silent H's late-night agave lounge in NYC's Meatpacking District. Next door at 418 West 13th Street, the intimate room will pour a world-class program of 50+ artisanal tequilas and mezcals alongside craft cocktails and elevated Mexican bites, Thursday to Sunday."
-    ) +
-    h2("The agave program") +
-    p(
-      "Aitch is built for agave lovers: more than 50 tequilas and mezcals, from sipping spirits to mezcal-forward signature cocktails, guided by our bartenders in a warm, low-lit setting."
-    ) +
-    h2("Music and late nights") +
-    p(
-      "Settle in for a late-night date or a night out with friends. Guest DJs play Thursday through Sunday, capturing the spirit of modern Mexico after dark."
-    ) +
-    h2("Visit Aitch") +
-    p(
-      "Find Aitch next door at 418 West 13th Street, New York. Opening soon. Reservations are coming soon; enquiries: 406 284 0019 or info@aitchnyc.com."
-    ) +
-    navHtml([
-      ["/menu", "Menu"],
-      ["/happy-hour", "Happy Hour"],
-      ["/events", "Private Events"],
-      ["/story", "Our Story"],
-      ["/faq", "FAQ"],
-    ])
+    h1("Aitch NYC") +
+    p("Aitch NYC is opening soon at 418 West 13th Street, New York, NY 10014.") +
+    h2("Memberships coming soon") +
+    p("Membership details will be announced here soon.") +
+    h2("Contact us") +
+    p("For opening enquiries, contact info@aitchnyc.com or 406 284 0019.")
   );
 }
 
