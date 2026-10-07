@@ -30,7 +30,7 @@ export const faqs = [
   },
   {
     "q": "When will happy hour run?",
-    "a": "After opening, happy hour is planned Tuesday to Sunday from 5 to 7pm, with $10 margaritas and $4 Mexican bites. We will be closed Mondays."
+    "a": "Happy hour is coming soon. Details will be announced on our Happy Hour page."
   },
   {
     "q": "Are there vegetarian or vegan options?",

@@ -1,19 +1,6 @@
 // Current shared happy-hour menu, presented for service after opening.
-export const happyHourIntro = {
-  "title": "Happy Hour in NYC",
-  "schedule": "After opening · Tuesday–Sunday · 5pm–7pm",
-  "prices": [
-    {
-      "label": "Margaritas",
-      "price": "$10"
-    },
-    {
-      "label": "Individual Bites",
-      "price": "$4"
-    }
-  ],
-  "heroImage": "/HH1-1.png"
-};
+export const happyHourIntro = { title: "Happy Hour Coming Soon", heroImage: "/HH1-1.png" };
+
 export const happyHourItems = [
   {
     "id": "hh-margarita",

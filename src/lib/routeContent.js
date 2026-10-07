@@ -30,7 +30,7 @@ import { homeIntro, eventsFaq } from "../data/nycContent.js";
 //   that copy on the page, mirror it here (marked "keep in sync").
 
 import { menuData } from "../data/MenuData.js";
-import { happyHourIntro, happyHourItems } from "../data/happyHourData.js";
+import { happyHourIntro } from "../data/happyHourData.js";
 import { faqs } from "../data/faqData.js";
 
 const esc = (s) =>
@@ -115,18 +115,7 @@ function menu() {
 /* ───────────────────────── /happy-hour ─────────────────────────
    generated from src/data/happyHourData.js — cannot drift. */
 function happyHour() {
-  const prices = (happyHourIntro.prices || [])
-    .map((x) => `${x.label} ${x.price}`)
-    .join(" · ");
-
-  return shell(
-    h1(happyHourIntro.title) +
-      p(happyHourIntro.schedule) +
-      (prices ? p(prices) : "") +
-      happyHourItems.map(dish).join("") +
-    "<p>More reading: " + a("/blogs/meatpacking-district-restaurants", "dining in the Meatpacking District") + ".</p>" +
-      navHtml()
-  );
+  return shell(h1(happyHourIntro.title) + navHtml());
 }
 
 /* ───────────────────────── /faq ─────────────────────────

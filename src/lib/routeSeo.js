@@ -56,9 +56,9 @@ export const ROUTE_SEO = {
       "The story behind Silent H, a modern Mexican restaurant and agave lounge in NYC, led by Monterrey-born chef Gerardo Álvarez Saucedo.",
   },
   "/happy-hour": {
-    title: "Happy Hour in NYC | $10 Margaritas | Silent H",
+    title: "Happy Hour Coming Soon | Silent H NYC",
     description:
-      "Happy hour planned in NYC: after opening, Tuesday to Sunday 5-7pm at Silent H. $10 house margaritas and $4 Mexican bites.",
+      "Happy hour is coming soon to Silent H NYC. Details will be announced here.",
   },
   "/faq": {
     title: "Silent H FAQ | Mexican Restaurant & Bar, NYC",

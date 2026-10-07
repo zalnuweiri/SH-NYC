@@ -20,7 +20,8 @@ assert.equal(menuData.food.flatMap(s => s.items).length, 18);
 assert.equal(menuData.drinks.flatMap(s => s.items).length, 45);
 assert.equal(menuData.food.flatMap(s => s.items).find(i => i.name === '44 oz tomahawk').price, 340);
 assert.equal(happyHourItems.length, 6);
-assert.ok(happyHourIntro.schedule.includes('Tuesday–Sunday'));
+assert.equal(happyHourIntro.title, 'Happy Hour Coming Soon');
+assert.equal(/\$10|\$4|5.to.7|Tuesday|Margarita|Infladita|Happy Hour FAQ/i.test(bodyHtmlFor('/happy-hour')), false);
 assert.equal(bodyHtmlFor('/happy-hour').includes('$20'), false);
 assert.equal(forbidden.test(JSON.stringify(faqs)), false);
 for (const post of nycBlogPosts) {
