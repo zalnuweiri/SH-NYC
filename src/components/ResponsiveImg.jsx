@@ -17,12 +17,6 @@
 // values, each derived from that component's own CSS).
 import manifest from "../data/imageManifest.json";
 
-// Only used for images NOT in the manifest (i.e. never run through
-// scripts/build-page-images.mjs). Every menu/drink photo IS in the manifest —
-// see the comment below on why the manifest, not this constant, is what
-// actually governs which widths get requested for those.
-const DEFAULT_WIDTHS = [240, 480, 768, 1080, 1600];
-
 function toBase(src) {
   return src.replace(/\.(webp|jpg|jpeg|png)$/i, "");
 }
@@ -51,7 +45,12 @@ export default function ResponsiveImg({
   // rendered as a broken-image icon). `widths` is only a fallback for images
   // that were never run through that pipeline at all.
   const realWidths = manifest[base];
-  const effectiveWidths = realWidths ?? widths ?? DEFAULT_WIDTHS;
+  // A new image may not have generated responsive files yet. Use its actual
+  // source rather than inventing names for variants that do not exist.
+  if (!realWidths && !widths) {
+    return <img src={path} alt={alt} sizes={sizes} loading={loading} decoding={decoding} className={className} onClick={onClick} style={style} />;
+  }
+  const effectiveWidths = realWidths ?? widths;
 
   const avifSrcSet = effectiveWidths.map((w) => `${base}-${w}.avif ${w}w`).join(", ");
   const webpSrcSet = effectiveWidths.map((w) => `${base}-${w}.webp ${w}w`).join(", ");

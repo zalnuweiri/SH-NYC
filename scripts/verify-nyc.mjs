@@ -50,4 +50,20 @@ for (const route of ['faq', 'booking']) {
   assert.ok(readFileSync(`public/aitch/${route}/index.html`, 'utf8').includes(entry));
 }
 assert.ok(existsSync('public/cenotes.webp'));
+
+// Catch omitted originals or responsive menu files before deployment.
+const manifest = JSON.parse(readFileSync('src/data/imageManifest.json', 'utf8'));
+const menuImages = new Set(menuData.food.concat(menuData.drinks).flatMap(s => s.items).map(item => item.image).filter(Boolean));
+menuImages.add('/redesign/menu-electricdaisy.webp');
+menuImages.add('/redesign/menu-margaritatree.webp');
+for (const image of menuImages) {
+  assert.ok(existsSync('public' + image), `Missing menu photo: ${image}`);
+  const base = image.replace(/\.(webp|jpg|jpeg|png)$/i, '');
+  for (const width of manifest[base] || []) {
+    for (const extension of ['avif', 'webp']) {
+      assert.ok(existsSync(`public${base}-${width}.${extension}`), `Missing responsive photo: ${base}-${width}.${extension}`);
+    }
+  }
+}
+
 console.log('NYC regression checks passed: routes, shared menus, USD schema, coming-soon bookings, location-safe articles, retired article 404 and Aitch dependency cycle.');
