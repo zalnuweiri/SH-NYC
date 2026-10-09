@@ -258,19 +258,22 @@ export const menuData = {
           "id": 17,
           "name": "Humo Mudo",
           "description": "notomo tobala, NOA sweet vermouth, novara aperitivo, ancho, orange",
-          "price": 22
+          "price": 22,
+          "image": "/dmenu/mocktail-humo-mudo.webp"
         },
         {
           "id": 18,
           "name": "Jardín Morado",
           "description": "sobrii gin, lavender, lemon, butterfly pea, soda, thyme",
-          "price": 18
+          "price": 18,
+          "image": "/dmenu/mocktail-jardin-morado.webp"
         },
         {
           "id": 19,
           "name": "Ginger & Guayaba",
           "description": "sobrii tequila, guava, ginger, lime, tajín",
-          "price": 18
+          "price": 18,
+          "image": "/dmenu/mocktail-ginger-guayaba.webp"
         }
       ]
     },

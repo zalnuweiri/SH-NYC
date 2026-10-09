@@ -1,7 +1,7 @@
 import { SitemapStream, streamToPromise } from "sitemap";
 import { writeFileSync } from "node:fs";
 import { nycBlogPosts } from "./src/data/nycBlogPosts.js";
-const routes = ["/", "/menu", "/events", "/story", "/happy-hour", "/aitch/", "/faq", "/blogs", "/reservations", "/nye26"];
+const routes = ["/", "/menu", "/events", "/story", "/aitch/", "/faq", "/blogs", "/reservations", "/nye26"];
 const sitemap = new SitemapStream({ hostname: "https://www.silenthnyc.com" });
 for (const url of routes) sitemap.write({ url, changefreq: "weekly", priority: url === "/" ? 1 : 0.8 });
 for (const post of nycBlogPosts) sitemap.write({ url: `/blogs/${post.slug}`, lastmod: post.updated_at, priority: 0.8 });

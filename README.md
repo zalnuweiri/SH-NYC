@@ -16,7 +16,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 Silent H is presented as opening soon at 420 West 13th Street, New York, NY 10014. Aitch is next door at 418 West 13th Street. Online reservations are a coming-soon notice; no Toronto OpenTable or table-service provider is loaded.
 
-The current shared food, bar and happy-hour menu is stored in `src/data/MenuData.js` and `src/data/happyHourData.js`. NYC pricing metadata uses USD. Opening hours are presented as planned; unconfirmed event capacity, patio availability and the holiday gift-card promotion are not advertised as settled facts. The New Year's Eve page is a menu preview, without a scheduled-event rich result.
+The current shared food and bar menu is stored in `src/data/MenuData.js`. NYC pricing metadata uses USD. Opening hours are presented as planned; unconfirmed event capacity, patio availability and the holiday gift-card promotion are not advertised as settled facts. The New Year's Eve page is a menu preview, without a scheduled-event rich result.
 
 NYC articles live in `src/data/nycBlogPosts.js`, shared by React, Cloudflare Pages Functions and the sitemap. The shared Toronto Supabase feed is no longer used by NYC blog pages. Add or edit NYC articles here, or connect a separately scoped NYC CMS in all three consumers together.
 

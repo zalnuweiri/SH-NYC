@@ -9,7 +9,7 @@ import { homeIntro } from "../data/nycContent.js";
 //   The site is a client-rendered SPA: every route is served the same index.html,
 //   whose <body> is just <div id="root"></div>. A client that does not run
 //   JavaScript (crawlers, AI assistants, link unfurlers) therefore sees an empty
-//   page — no <h1>, no copy, no links — on /, /menu, /faq, /happy-hour, /events
+//   page — no <h1>, no copy, no links — on /, /menu, /faq, /events
 //   and /story. functions/blogs/[slug].js already fixes this for blog posts by
 //   injecting the article into #root; this module is the same fix for the static
 //   routes.
@@ -24,13 +24,12 @@ import { homeIntro } from "../data/nycContent.js";
 //   No cloaking: every client gets byte-identical HTML. No user-agent sniffing.
 //
 // DRIFT
-//   /menu, /happy-hour and /faq are GENERATED from the same data modules the
-//   pages render (MenuData.js, happyHourData.js, faqData.js), so they cannot fall
+//   /menu and /faq are GENERATED from the same data modules the
+//   pages render (MenuData.js, faqData.js), so they cannot fall
 //   out of sync. /, /story and /events are curated prose below — if you change
 //   that copy on the page, mirror it here (marked "keep in sync").
 
 import { menuData } from "../data/MenuData.js";
-import { happyHourIntro } from "../data/happyHourData.js";
 import { faqs } from "../data/faqData.js";
 
 const esc = (s) =>
@@ -46,7 +45,7 @@ const h3 = (t) => `<h3>${esc(t)}</h3>`;
 const p = (t) => `<p>${esc(t)}</p>`;
 const a = (href, t) => `<a href="${esc(href)}">${esc(t)}</a>`;
 
-// name + optional description, the shape every menu / happy-hour item shares.
+// name + optional description, the shape every menu item shares.
 const dish = (item) => h3(item.name) + (item.description ? p(item.description) : "");
 
 // Wrap a route's inner HTML in a plain, semantic shell. The wrapper is purely so
@@ -61,7 +60,6 @@ const shell = (inner) =>
 // others (mirrors the site's own nav destinations).
 const NAV_LINKS = [
   ["/menu", "Menu"],
-  ["/happy-hour", "Happy Hour"],
   ["/events", "Plan an Event"],
   ["/story", "Our Story"],
   ["/faq", "FAQ"],
@@ -112,11 +110,6 @@ function menu() {
   );
 }
 
-/* ───────────────────────── /happy-hour ─────────────────────────
-   generated from src/data/happyHourData.js — cannot drift. */
-function happyHour() {
-  return shell(h1(happyHourIntro.title) + navHtml());
-}
 
 /* ───────────────────────── /faq ─────────────────────────
    generated from src/data/faqData.js — cannot drift. */
@@ -126,7 +119,6 @@ function faq() {
       faqs.map((f) => h2(f.q) + p(f.a)).join("") +
       navHtml([
         ["/menu", "Menu"],
-        ["/happy-hour", "Happy Hour"],
         ["/aitch/", "Aitch Cocktail Bar"],
         ["/events", "Private Events"],
         ["/story", "Our Story"],
@@ -242,7 +234,6 @@ const BUILDERS = {
   "/": home,
   "/reservations": () => shell(h1("Reservations coming soon") + p("We’re getting ready to welcome you at 420 West 13th Street. Online reservations will open here soon.") + p("Opening and private-event enquiries: info@silenthnyc.com.") + navHtml()),
   "/menu": menu,
-  "/happy-hour": happyHour,
   "/faq": faq,
   "/story": story,
   "/events": events,

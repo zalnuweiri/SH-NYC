@@ -8,7 +8,7 @@ import { useOTWidget } from "../lib/reservationsContext.js";
 // Desktop nav matches the .main-nav (globals.css): a fixed 620×74 centered
 // pill, radius 999, bg rgba(0,0,0,.4) + backdrop-blur 10, top 42px, laid out as a 5-col
 // grid 0.9fr / 1.25fr / 74px(brand) / 0.9fr / 1.3fr:
-//   MENU · HAPPY HOUR · [Silent-H logo 38×56 in a 68px box] · RESERVE · PLAN AN EVENT
+//   MENU · [Silent-H logo 38×56 in a 68px box] · RESERVE · PLAN AN EVENT
 // Links: NeueBit(body) bold uppercase 15px, ls 0.13em, place-items-center, pad 0 7px,
 // hover → pink. Dynamic controls kept (differ from the 's static Next site):
 // router NavLinks for the real routes, "Reserve" opens the OT widget, logo → scroll-top,
@@ -35,7 +35,6 @@ export default function Navbar() {
     // Mobile menu-overlay links (Reserve has no `to` — it opens the OT widget).
     const MOBILE_LINKS = [
         { to: "/menu", label: "Menu" },
-        { to: "/happy-hour", label: "Happy Hour" },
         { label: "Coming soon" },
         { to: "/events", label: "Plan an Event" },
     ];
@@ -61,14 +60,13 @@ export default function Navbar() {
     return (
         <header className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none">
             {/* Desktop centered pill — 's .main-nav: fixed 620×74 (shrinks to
-                100vw-24 below ~644px), top 42px, 5-col grid, radius 999, bg black/40 +
+                100vw-24 below ~644px), top 42px, 4-col grid, radius 999, bg black/40 +
                 blur 10, two-layer shadow. */}
             <nav
                 aria-label="Primary navigation"
-                className="pointer-events-auto hidden md:grid items-center mt-[42px] h-[74px] w-[min(620px,calc(100vw-24px))] rounded-[999px] bg-black/40 backdrop-blur-[10px] [grid-template-columns:0.9fr_1.25fr_74px_0.9fr_1.3fr] [box-shadow:0_20px_25px_-5px_rgba(0,0,0,0.3),0_8px_10px_-6px_rgba(0,0,0,0.3)]"
+                className="pointer-events-auto hidden md:grid items-center mt-[42px] h-[74px] w-[min(540px,calc(100vw-24px))] rounded-[999px] bg-black/40 backdrop-blur-[10px] [grid-template-columns:1fr_74px_1fr_1.3fr] [box-shadow:0_20px_25px_-5px_rgba(0,0,0,0.3),0_8px_10px_-6px_rgba(0,0,0,0.3)]"
             >
                 <NavItem to="/menu">Menu</NavItem>
-                <NavItem to="/happy-hour">Happy Hour</NavItem>
                 {/* brand-mark — 68px grid cell, logo 38×56 object-contain ( .brand-mark) */}
                 <NavLink
                     to="/"

@@ -432,5 +432,26 @@
     640,
     768,
     1080
+  ],
+  "/dmenu/mocktail-humo-mudo": [
+    240,
+    480,
+    768,
+    1080,
+    1600
+  ],
+  "/dmenu/mocktail-jardin-morado": [
+    240,
+    480,
+    768,
+    1080,
+    1600
+  ],
+  "/dmenu/mocktail-ginger-guayaba": [
+    240,
+    480,
+    768,
+    1080,
+    1600
   ]
 }

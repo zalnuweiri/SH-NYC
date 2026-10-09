@@ -35,7 +35,7 @@ export function blogIndexHtml(posts) {
     `<p>Explore Mexican food, agave cocktails and plans for dining out in NYC.</p></header>` +
     `<main><section aria-label="Published articles">${articles}</section></main>` +
     `<nav><a href="/">Home</a> <a href="/menu">Menu</a> ` +
-    `<a href="/happy-hour">Happy Hour</a> <a href="/events">Plan an Event</a> ` +
+    `<a href="/events">Plan an Event</a> ` +
     `<a href="/story">Our Story</a> <a href="/faq">FAQ</a></nav></div>`
   );
 }

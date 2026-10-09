@@ -65,6 +65,7 @@ const slider = sliderBase.split("index-D8gvWyIt.js").join(filename);
 writeFileSync(`public/aitch/assets/${filename}`, code);
 writeFileSync(`public/aitch/assets/${sliderFilename}`, slider);
 let html = readFileSync("public/aitch/index.html", "utf8");
+html = html.replace(/<a[^>]+href="[^"]*happy-hour[^"]*"[^>]*>[^<]*<\/a>\s*/gi, "");
 html = html.replace(/(<script type="module"[^>]*src=")[^"]+/, `$1/aitch/assets/${filename}`);
 writeFileSync("public/aitch/index.html", html);
 for (const route of ["faq", "booking"]) {

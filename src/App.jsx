@@ -6,7 +6,6 @@ import Menu from "./pages/Menu";
 import FAQ from "./pages/FAQ";
 import Events from "./pages/Events";
 import Story from "./pages/Story";
-import HappyHour from "./pages/HappyHour";
 import Reservations from "./pages/Reservations";
 import ExternalRedirect from "./pages/ExternalRedirect";
 import NotFound from "./pages/NotFound";
@@ -37,7 +36,6 @@ export default function App() {
         <Route path="faq" element={<FAQ />} />
         <Route path="events" element={<Events />} />
         <Route path="story" element={<Story />} />
-        <Route path="happy-hour" element={<HappyHour />} /> {/* NEW */}
         <Route
           path="reservations"
           element={<Reservations />}

@@ -29,10 +29,6 @@ export const faqs = [
     "a": "Aitch is our tequila bar opening next door at 418 West 13th Street. Evening entry will be 21 and over."
   },
   {
-    "q": "When will happy hour run?",
-    "a": "Happy hour is coming soon. Details will be announced on our Happy Hour page."
-  },
-  {
     "q": "Are there vegetarian or vegan options?",
     "a": "Our menu includes vegetable dishes and selected vegetarian or vegan options. Please ask the team about ingredients and preparation before ordering."
   },

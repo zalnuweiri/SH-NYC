@@ -20,7 +20,7 @@ import { useOTWidget } from "../lib/reservationsContext.js";
  * and the menu.
  *
  * ONE DOM TREE, not the desktop/mobile twin blocks used elsewhere in this repo
- * (Home, Footer, HappyHour). Those pages need it because their two layouts differ
+ * (Home, Footer, Menu). Those pages need it because their two layouts differ
  * structurally; here the structure is identical and only the type scale and gaps
  * change, so twin blocks would buy nothing and cost a second <h1> and a second
  * copy of every dish in the DOM — exactly the wrong trade on a page whose only
@@ -33,7 +33,7 @@ import { useOTWidget } from "../lib/reservationsContext.js";
  *   name  Mondwest    Bold 20 UPPER  Mondwest    Bold 28 UPPER ls.07
  *   desc  NeueBit     Bold 18        NeueBit     Bold 22       ls.10
  * All text #ece1d4 (sh-cream). 1px @1280 = var(--dw)*0.078125/100.
- * The Figma has no mobile frame; the mobile scale follows the menu/happy-hour pages.
+ * The Figma has no mobile frame; the mobile scale follows the menu/menu pages.
  */
 
 const SITE = "https://www.silenthnyc.com";

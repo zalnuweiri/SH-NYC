@@ -58,7 +58,7 @@ export default function BlogsPage() {
         <>
         <SEO
             title="Silent H Blog | Mexican Food & Cocktails in NYC"
-            description="The Silent H blog: guides to Mexican food, tacos, tequila and mezcal, cocktails, happy hour and dining out in NYC."
+            description="The Silent H blog: guides to Mexican food, tacos, tequila and mezcal, cocktails and dining out in NYC."
             url="https://www.silenthnyc.com/blogs"
             jsonLd={breadcrumb("Blog", "https://www.silenthnyc.com/blogs")}
         />

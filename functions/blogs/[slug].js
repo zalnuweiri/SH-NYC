@@ -99,7 +99,7 @@ function articleHtml(post, paragraphs, heroUrl) {
       : "") +
     `<article style="font-family:'NeueBit',sans-serif;font-weight:400" class="w-full text-[22px] tracking-[2.2px] leading-[1.2] flex flex-col gap-[1em]">${blocks}</article>` +
     relatedHtml(post.slug) +
-      `<nav style="margin-top:48px" class="flex flex-wrap gap-x-6 gap-y-2 text-[18px] uppercase"><a href="/">Silent H</a><a href="/menu">Menu</a><a href="/happy-hour">Happy Hour Coming Soon</a><a href="/events">Event Planning Coming Soon</a><a href="/story">Our Story</a><a href="/faq">FAQ</a><a href="/aitch/">Aitch Lounge</a><a href="/blogs">Blog</a></nav>` +
+      `<nav style="margin-top:48px" class="flex flex-wrap gap-x-6 gap-y-2 text-[18px] uppercase"><a href="/">Silent H</a><a href="/menu">Menu</a><a href="/events">Event Planning Coming Soon</a><a href="/story">Our Story</a><a href="/faq">FAQ</a><a href="/aitch/">Aitch Lounge</a><a href="/blogs">Blog</a></nav>` +
       `</div></main></div>`
   );
 }

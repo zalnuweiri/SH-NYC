@@ -41,7 +41,7 @@ const SITE = "https://www.silenthnyc.com";
 const SHELL_TITLE = "Silent H | Modern Mexican Restaurant & Agave Bar, King West Toronto";
 
 const STATIC_ROUTES = [
-  "/", "/menu", "/events", "/story", "/happy-hour", "/faq", "/blogs", "/nye26",
+  "/", "/menu", "/events", "/story", "/faq", "/blogs", "/nye26",
 ];
 
 // Routes whose <body> is prerendered into #root at the edge. Static routes use
@@ -49,7 +49,7 @@ const STATIC_ROUTES = [
 // functions/blogs/index.js handler because it owns the published article list.
 // All must show real content — one <h1> and a non-empty #root — without JavaScript.
 const PRERENDER_ROUTES = new Set([
-  "/", "/menu", "/events", "/story", "/happy-hour", "/faq", "/blogs", "/nye26", "/aitch",
+  "/", "/menu", "/events", "/story", "/faq", "/blogs", "/nye26", "/aitch",
 ]);
 
 const grab = (html, re) => (html.match(re) || [])[1] || null;

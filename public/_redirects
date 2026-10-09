@@ -1,3 +1,10 @@
+# Retired pages return a real 404 instead of the SPA fallback.
+/happy-hour /404.html 404!
+/happy-hour/* /404.html 404!
+/happyhour /404.html 404!
+/thursdayspecial /404.html 404!
+/blogs/happy-hour* /404.html 404!
+
 # The /menu route shares a name with the menu photo directory. Serve the app
 # for this exact route while leaving /menu/* photo requests as static assets.
 /menu /index.html 200!
@@ -10,8 +17,6 @@
 # both no-slash and trailing-slash variants
 /our-story /story 301
 /our-story/ /story 301
-/happyhour /happy-hour 301
-/happyhour/ /happy-hour 301
 /home / 301
 /home/ / 301
 /brunch /menu 301
@@ -24,8 +29,6 @@
 /drinks/ /menu 301
 /patio / 301
 /patio/ / 301
-/thursdayspecial /happy-hour 301
-/thursdayspecial/ /happy-hour 301
 /nye2026 / 301
 /nye2026/ / 301
 /donhalloween / 301

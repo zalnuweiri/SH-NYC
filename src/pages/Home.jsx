@@ -65,7 +65,7 @@ export default function Home() {
       <>
         <SEO
             title="Silent H NYC | Modern Mexican Cuisine"
-            description="Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Chef-driven plates, $10 happy-hour margaritas, and late nights at Aitch."
+            description="Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Chef-driven plates, regional cocktails, and Aitch next door."
             url="https://www.silenthnyc.com/"
             preloads={[
               {

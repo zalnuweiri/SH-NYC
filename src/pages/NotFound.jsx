@@ -11,7 +11,6 @@ import SEO from "../components/SEO.jsx";
 const LINKS = [
   { to: "/", label: "Home" },
   { to: "/menu", label: "Menu" },
-  { to: "/happy-hour", label: "Happy Hour" },
   { to: "/events", label: "Private Events" },
   { to: "/story", label: "Our Story" },
   { to: "/blogs", label: "Blog" },
@@ -23,7 +22,7 @@ export default function NotFound() {
     <>
       <SEO
         title="Page not found | Silent H"
-        description="The page you're looking for doesn't exist. Explore the Silent H menu, happy hour, events and more in NYC."
+        description="The page you're looking for doesn't exist. Explore the Silent H menu, events and more in NYC."
         index={false}
       />
       <main className="relative z-10 min-h-[80vh] flex flex-col items-center justify-center gap-8 px-6 py-32 text-center font-body text-sh-cream">

@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { nycBlogPosts, nycPost } from '../src/data/nycBlogPosts.js';
 import { menuData } from '../src/data/MenuData.js';
-import { happyHourItems, happyHourIntro } from '../src/data/happyHourData.js';
 import { faqs } from '../src/data/faqData.js';
 import { bodyHtmlFor } from '../src/lib/routeContent.js';
 import { isKnownRoute, canonicalFor } from '../src/lib/routeSeo.js';
@@ -10,7 +9,7 @@ import { blogIndexHtml } from '../functions/blogs/index.js';
 import { relatedFor } from '../src/lib/relatedPosts.js';
 import { onRequestGet } from '../functions/blogs/[slug].js';
 const forbidden = /Toronto|King West|461 King|silenth\.ca|opentable\.ca|\bCAD\b/i;
-for (const route of ['/', '/menu', '/happy-hour', '/events', '/story', '/faq', '/reservations', '/nye26', '/aitch']) {
+for (const route of ['/', '/menu', '/events', '/story', '/faq', '/reservations', '/nye26', '/aitch']) {
   const html = bodyHtmlFor(route);
   assert.ok(html, route);
   assert.equal(forbidden.test(html), false, route);
@@ -18,18 +17,19 @@ for (const route of ['/', '/menu', '/happy-hour', '/events', '/story', '/faq', '
   assert.ok(canonicalFor(route).startsWith('https://www.silenthnyc.com/'));
 }
 assert.equal(isKnownRoute('/fifa26'), false);
+assert.equal(isKnownRoute('/happy-hour'), false);
+assert.equal(bodyHtmlFor('/happy-hour'), null);
+assert.equal(nycPost('happy-hour-nyc'), null);
+assert.equal(/happy[\s-]*hour/i.test(JSON.stringify(faqs) + JSON.stringify(nycBlogPosts) + blogIndexHtml(nycBlogPosts)), false);
 assert.equal(menuData.food.flatMap(s => s.items).length, 18);
 assert.equal(menuData.drinks.flatMap(s => s.items).length, 45);
+assert.ok(menuData.drinks.find(section => section.category === 'Mocktails').items.every(item => item.image), 'Every mocktail has its own photo');
 assert.equal(menuData.food.flatMap(s => s.items).find(i => i.name === '44 oz tomahawk').price, 340);
-assert.equal(happyHourItems.length, 6);
-assert.equal(happyHourIntro.title, 'Happy Hour Coming Soon');
-assert.equal(/\$10|\$4|5.to.7|Tuesday|Margarita|Infladita|Happy Hour FAQ/i.test(bodyHtmlFor('/happy-hour')), false);
-assert.equal(bodyHtmlFor('/happy-hour').includes('$20'), false);
 assert.equal(forbidden.test(JSON.stringify(faqs)), false);
 const blogMigration = JSON.parse(readFileSync('src/data/blogMigration.json', 'utf8'));
-assert.equal(nycBlogPosts.length, 35, 'Restore all 35 published source articles');
-assert.equal(new Set(nycBlogPosts.map(post => post.slug)).size, 35);
-assert.equal(new Set(blogMigration.map(row => row.source_slug)).size, 35);
+assert.equal(nycBlogPosts.length, 34, 'Keep all articles except the retired promotion guide');
+assert.equal(new Set(nycBlogPosts.map(post => post.slug)).size, 34);
+assert.equal(new Set(blogMigration.map(row => row.source_slug)).size, 34);
 assert.deepEqual(blogMigration.map(row => row.nyc_slug).sort(), nycBlogPosts.map(post => post.slug).sort());
 const foreignBlogReferences = /Toronto|King West|Scotiabank|Rogers Centre|Princess of Wales|Royal Alex|The Well|461 King|silenth\.ca|\bCAD\b/i;
 for (const post of nycBlogPosts) {
@@ -42,7 +42,6 @@ for (const post of nycBlogPosts) {
   for (const related of relatedFor(post.slug)) assert.ok(nycPost(related.slug), post.slug);
 }
 for (const slug of ['best-tacos-nyc', 'meatpacking-district-restaurants', 'private-dining-nyc', 'date-night-nyc']) assert.ok(nycPost(slug), 'Keep existing NYC article links');
-assert.ok(nycPost('happy-hour-nyc').body_text.includes('Times, offers, prices and the start date have not been announced.'));
 assert.ok(nycPost('private-dining-nyc').body_text.includes('have not announced NYC event spaces'));
 const missing = await onRequestGet({
   request: new Request('https://www.silenthnyc.com/blogs/private-dining-toronto'),
@@ -62,6 +61,7 @@ assert.equal(forbidden.test(code), false);
 assert.equal(/themrblack|dj_events/.test(code), false);
 assert.ok(slider.includes(entry.split('/').at(-1)));
 assert.ok(html.includes('418 West 13th Street'));
+assert.equal(/happy[\s-]*hour/i.test(html), false);
 assert.equal(html.includes('openingHoursSpecification'), false);
 for (const route of ['faq', 'booking']) {
   assert.ok(readFileSync(`public/aitch/${route}/index.html`, 'utf8').includes(entry));

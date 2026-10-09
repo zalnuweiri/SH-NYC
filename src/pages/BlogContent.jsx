@@ -22,7 +22,6 @@ import { relatedFor } from "../lib/relatedPosts.js";
 // Curated links shown at the foot of every article for internal linking.
 const RELATED_LINKS = [
   { to: "/menu", label: "The menu" },
-  { to: "/happy-hour", label: "Happy hour coming soon" },
   { to: "/aitch", label: "Aitch, our agave lounge" },
   { to: "/events", label: "Event planning coming soon" },
   { to: "/story", label: "Our story" },

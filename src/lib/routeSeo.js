@@ -55,20 +55,15 @@ export const ROUTE_SEO = {
     description:
       "The story behind Silent H, a modern Mexican restaurant and agave lounge in NYC, led by Monterrey-born chef Gerardo Álvarez Saucedo.",
   },
-  "/happy-hour": {
-    title: "Happy Hour Coming Soon | Silent H NYC",
-    description:
-      "Happy hour is coming soon to Silent H NYC. Details will be announced here.",
-  },
   "/faq": {
     title: "Silent H FAQ | Mexican Restaurant & Bar, NYC",
     description:
-      "Common questions about Silent H, modern Mexican restaurant and Aitch agave lounge in NYC: hours, reservations, happy hour, menu and parking.",
+      "Common questions about Silent H, modern Mexican restaurant and Aitch agave lounge in NYC: hours, reservations, menu and parking.",
   },
   "/blogs": {
     title: "Silent H Blog | Mexican Food & Cocktails in NYC",
     description:
-      "The Silent H blog: guides to Mexican food, tacos, tequila and mezcal, cocktails, happy hour and dining out in NYC.",
+      "The Silent H blog: guides to Mexican food, tacos, tequila and mezcal, cocktails and dining out in NYC.",
   },
   "/nye26": {
     title: "New Year's Eve 2026 NYC | Silent H Masquerade Dinner",
@@ -100,7 +95,7 @@ export function seoFor(pathname) {
 // pages will 404. (ROUTE_SEO above is only the head-rewrite subset, so it can't
 // double as this allowlist.)
 const KNOWN_EXACT_ROUTES = new Set([
-  "/", "/menu", "/faq", "/events", "/story", "/happy-hour",
+  "/", "/menu", "/faq", "/events", "/story",
   "/reservations", "/blogs", "/nye26", "/aitch",
 ]);
 

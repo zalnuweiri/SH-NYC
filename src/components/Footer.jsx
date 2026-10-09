@@ -71,7 +71,6 @@ export default function Footer() {
         { to: "/events", label: "events" },
         { to: "/story", label: "our story" },
         { to: "/faq", label: "FAQ" },
-        { to: "/happy-hour", label: "happy hour" },
         { to: "/aitch/", label: "aitch" },
         { to: "/blogs", label: "blog" },
     ];
