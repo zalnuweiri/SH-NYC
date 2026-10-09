@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 
 import Reveal from "../lib/motion/Reveal";
 import { T } from "../styles/figmaTokens";
-import { supabase } from "../lib/supabaseClient";
+import { nycBlogPosts } from "../data/nycBlogPosts.js";
 
-const BLOG_IMAGE_BUCKET = "blog-images";
 
 const BLOG_CAROUSEL_THRESHOLD = 5;
 const DESKTOP_VISIBLE_POSTS = 4;
@@ -28,115 +27,11 @@ const MOBILE_TITLE_CLAMP_STYLE = {
     textOverflow: "ellipsis",
 };
 
-const FALLBACK_POSTS = [
-    {
-        id: "fallback-1",
-        img: "/redesign/fig-blog-1.png",
-        title: "The best for you to try at home",
-        category: "Ingredients",
-        href: "https://www.instagram.com/silenth.to/",
-        author: "Silent H team",
-        dateLabel: "5 days ago",
-    },
-    {
-        id: "fallback-2",
-        img: "/redesign/fig-blog-2.png",
-        title: "It’s drinks o’clock in Mexico",
-        category: "Drinks",
-        href: "https://www.instagram.com/silenth.to/",
-        author: "Silent H team",
-        dateLabel: "5 days ago",
-    },
-    {
-        id: "fallback-3",
-        img: "/redesign/fig-blog-3.png",
-        title: "Culture and food in one dish",
-        category: "Culture",
-        href: "https://www.instagram.com/silenth.to/",
-        author: "Silent H team",
-        dateLabel: "5 days ago",
-    },
-    {
-        id: "fallback-4",
-        img: "/redesign/fig-blog-4.png",
-        title: "The best for you to try at home",
-        category: "Ingredients",
-        href: "https://www.instagram.com/silenth.to/",
-        author: "Silent H team",
-        dateLabel: "5 days ago",
-    },
-];
-
-function isExternalHref(href) {
-    return /^https?:\/\//i.test(href);
-}
-
-function isFullImageUrl(value) {
-    return /^https?:\/\//i.test(value);
-}
-
-function resolveImageUrl(value) {
-    if (!value) return "/placeholder.jpg";
-
-    const cleanValue = String(value).trim();
-
-    if (isFullImageUrl(cleanValue)) {
-        return cleanValue;
-    }
-
-    const cleanPath = cleanValue.replace(/^\/+/, "");
-
-    const { data } = supabase.storage
-        .from(BLOG_IMAGE_BUCKET)
-        .getPublicUrl(cleanPath);
-
-    return data?.publicUrl || "/placeholder.jpg";
-}
-
-function formatRelativeDate(value) {
-    if (!value) return "";
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) return "";
-
-    const now = new Date();
-    const diffMs = date.getTime() - now.getTime();
-    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
-
-    const formatter = new Intl.RelativeTimeFormat("en", {
-        numeric: "auto",
-    });
-
-    if (Math.abs(diffDays) < 1) return "today";
-    if (Math.abs(diffDays) < 30) return formatter.format(diffDays, "day");
-
-    const diffMonths = Math.round(diffDays / 30);
-    if (Math.abs(diffMonths) < 12) return formatter.format(diffMonths, "month");
-
-    const diffYears = Math.round(diffMonths / 12);
-    return formatter.format(diffYears, "year");
-}
-
-function getPostHref(post) {
-    if (post.slug) return `/blogs/${post.slug}`;
-
-    return "/blogs";
-}
-
-function normalizePost(post) {
-    return {
-        id: post.id,
-        img: resolveImageUrl(post.image_url),
-        title: post.title || "Untitled story",
-        category: post.category || "Story",
-        href: getPostHref(post),
-        author: post.author_name || "Silent H team",
-        dateLabel:
-            post.date_label ||
-            formatRelativeDate(post.published_at || post.created_at),
-    };
-}
+const FALLBACK_POSTS = nycBlogPosts.map((post) => ({
+    id: post.id, img: post.image_url, title: post.title, category: post.category,
+    href: post.href, author: post.author_name, dateLabel: "",
+}));
+function isExternalHref(href) { return /^https?:\/\//i.test(href); }
 
 function SmartLink({ href, className, children }) {
     if (isExternalHref(href)) {
@@ -222,8 +117,8 @@ function MobileBlogCard({ card }) {
 }
 
 export default function BlogSection() {
-    const [posts, setPosts] = useState(FALLBACK_POSTS);
-    const [isLoading, setIsLoading] = useState(true);
+    const posts = FALLBACK_POSTS;
+    const isLoading = false;
     const [desktopStartIndex, setDesktopStartIndex] = useState(0);
     const [mobilePage, setMobilePage] = useState(0);
 
@@ -245,64 +140,6 @@ export default function BlogSection() {
     const desktopDotCount = maxDesktopStartIndex + 1;
 
     const mobileTotalPages = Math.ceil(posts.length / MOBILE_VISIBLE_POSTS);
-
-    useEffect(() => {
-        let ignore = false;
-
-        async function loadBlogPosts() {
-            // No client (missing env / offline) → static fallback, never crash the page.
-            if (!supabase) {
-                setPosts(FALLBACK_POSTS);
-                setIsLoading(false);
-                return;
-            }
-
-            let data, error;
-            try {
-                ({ data, error } = await supabase
-                    .from("blog_posts")
-                    .select(
-                        "id,title,category,image_url,href,slug,author_name,date_label,published_at,created_at,sort_order,status"
-                    )
-                    .eq("status", "published")
-                    .order("sort_order", { ascending: true })
-                    .order("published_at", { ascending: false }));
-            } catch (err) {
-                error = err;
-            }
-
-            if (ignore) return;
-
-            if (error) {
-                console.error("[BlogSection] Failed to load blog posts:", error);
-                setPosts(FALLBACK_POSTS);
-                setIsLoading(false);
-                return;
-            }
-
-            const nextPosts = (data ?? []).map(normalizePost);
-
-            if (!nextPosts.length) {
-                console.warn(
-                    "[BlogSection] Supabase returned 0 published posts. Rendering FALLBACK_POSTS."
-                );
-                setPosts(FALLBACK_POSTS);
-            } else {
-                console.info(
-                    `[BlogSection] Loaded ${nextPosts.length} published posts from Supabase.`
-                );
-                setPosts(nextPosts);
-            }
-
-            setIsLoading(false);
-        }
-
-        loadBlogPosts();
-
-        return () => {
-            ignore = true;
-        };
-    }, []);
 
     useEffect(() => {
         setDesktopStartIndex((prev) =>

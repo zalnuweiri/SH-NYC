@@ -1,0 +1,113 @@
+@font-face {
+  font-family: 'RetroByte';
+  src: url('/aitch/nyc-design/RetroByte.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NeueBit';
+  src: url('/fonts/NeueBit-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root { color-scheme: dark; background: #000; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #000; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.aitch-landing {
+  --aitch-gold: #e6d1a2;
+  --aitch-teal: #3db4a9;
+  --scene-scale: 1;
+  --hero-scale: 1;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 320px;
+  height: 100svh;
+  overflow: hidden;
+  background: #000;
+}
+.aitch-scene {
+  position: absolute;
+  width: 1280px;
+  height: 824px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) scale(var(--scene-scale));
+  pointer-events: none;
+}
+.scene-wall { position: absolute; left: -4px; top: -2px; width: 1287px; height: 826px; object-fit: cover; }
+.butterfly, .butterfly-shadow { position: absolute; display: flex; align-items: center; justify-content: center; }
+.butterfly-left { left: 217px; top: 535px; width: 116.315px; height: 110.886px; }
+.butterfly-left img { width: 107.26px; height: 101.237px; transform: rotate(5.4deg); }
+.butterfly-right { left: 968px; top: 422px; width: 88.078px; height: 83.967px; }
+.butterfly-right img { width: 81.222px; height: 76.661px; transform: rotate(174.6deg) scaleY(-1); }
+.butterfly-shadow { mix-blend-mode: multiply; }
+.butterfly-shadow div { position: relative; }
+.butterfly-shadow img { position: absolute; left: -36.7px; top: -36.7px; }
+.shadow-left { left: 252px; top: 553px; width: 107.282px; height: 94.638px; }
+.shadow-left div { width: 99px; height: 45.842px; transform: rotate(-144.68deg); }
+.shadow-right { left: 986px; top: 470px; width: 76.898px; height: 71.966px; }
+.shadow-right div { width: 72.24px; height: 33.451px; transform: rotate(140.16deg); }
+.scene-video {
+  position: absolute; inset: 0; width: 1280px; height: 824px;
+  object-fit: contain; pointer-events: none;
+  opacity: 0; mix-blend-mode: multiply;
+}
+.video-ready .scene-video { opacity: .7; }
+.video-ready .butterfly, .video-ready .butterfly-shadow { display: none; }
+.scene-vignette {
+  position: absolute; left: -4px; top: 0; width: 1287px; height: 824px;
+  mix-blend-mode: multiply;
+  background: radial-gradient(ellipse closest-side at 50% 50%, #fff 17.786%, #dfdfdf 28.063%, #bfbfbf 38.34%, #9f9f9f 48.616%, #808080 58.893%, #606060 69.17%, #404040 79.447%, #303030 84.585%, #202020 89.723%, #101010 94.862%, #080808 97.431%, #000 100%);
+}
+.corner-mark { position: absolute; width: 16px; height: 18px; overflow: hidden; pointer-events: none; }
+.corner-mark img { position: absolute; top: 0; left: 0; max-width: none; }
+.top-left { left: 20px; top: 20px; }
+.top-right { right: 20px; top: 20px; }
+.bottom-left { left: 20px; bottom: 20.17px; }
+.bottom-right { right: 20px; bottom: 20.17px; }
+.top-right img, .bottom-right img { left: -1225px; }
+.aitch-identity {
+  position: absolute; top: calc(50% - .37px); left: calc(50% + .5px);
+  width: 611px; display: flex; flex-direction: column; align-items: center; gap: 80px;
+  transform: translate(-50%, -50%) scale(var(--hero-scale));
+}
+.aitch-title { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; font-weight: 500; }
+.aitch-wordmark { position: relative; display: block; width: 366px; height: 85.2687px; }
+.aitch-wordmark img { position: absolute; max-width: none; }
+.wordmark-shadow { top: .9032px; left: -5px; mix-blend-mode: multiply; }
+.wordmark-face { top: 0; left: 0; }
+.aitch-city { font: 500 40px/30px 'RetroByte', monospace; letter-spacing: 16px; padding-left: 16px; color: var(--aitch-gold); text-align: center; }
+.aitch-nav {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  width: 291px; height: 48px; padding: 8px 4px; border-radius: 50px;
+  background: rgb(0 0 0 / .6); backdrop-filter: blur(5px);
+}
+.aitch-nav button {
+  appearance: none; border: 0; padding: 8px; background: transparent; color: var(--aitch-teal);
+  font: 500 14px/1 'RetroByte', monospace; letter-spacing: 2.8px; text-transform: uppercase;
+  white-space: nowrap; cursor: pointer; transition: color .2s;
+}
+.aitch-nav button:hover { color: var(--aitch-gold); }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--aitch-gold); outline-offset: 4px; }
+.aitch-dialog {
+  width: min(520px, calc(100vw - 40px)); max-height: calc(100svh - 40px); overflow: auto;
+  margin: auto; padding: 48px 32px 36px; border: 1px solid #31546a; border-radius: 12px;
+  background: #061620; color: var(--aitch-gold); text-align: center;
+  box-shadow: 0 24px 100px #000;
+}
+.aitch-dialog::backdrop { background: rgb(0 0 0 / .8); backdrop-filter: blur(6px); }
+.dialog-close { position: absolute; top: 8px; right: 12px; border: 0; background: none; color: var(--aitch-gold); cursor: pointer; font-size: 28px; padding: 8px; }
+.dialog-eyebrow { margin: 0 0 20px !important; color: var(--aitch-teal); font: 500 12px/1.4 'RetroByte', monospace !important; letter-spacing: 3px; text-transform: uppercase; }
+.aitch-dialog h2 { margin: 0 0 28px; font: 500 28px/1.35 'RetroByte', monospace; letter-spacing: 3px; text-transform: uppercase; }
+.aitch-dialog p, .aitch-dialog a { font: 400 24px/1.45 'NeueBit', monospace; letter-spacing: .6px; }
+.aitch-dialog p { margin: 20px 0; }
+.aitch-dialog a { display: block; width: fit-content; margin: 12px auto 0; color: var(--aitch-teal); text-underline-offset: 4px; }
+@media (max-aspect-ratio: 1/1) {
+  .butterfly-left { left: 450px; top: 575px; }
+  .shadow-left { left: 485px; top: 593px; }
+  .butterfly-right { left: 735px; top: 235px; }
+  .shadow-right { left: 753px; top: 283px; }
+}

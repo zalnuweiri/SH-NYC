@@ -1,6 +1,6 @@
 // layout/ScrollManager.jsx — resets scroll to top on route change.
-// Merges the old ScrollToTop.jsx; the old location.state.scrollTo happy-hour
-// deep-link branch is dropped (Happy Hour is now its own page).
+// Merges the old ScrollToTop.jsx; the old location.state.scrollTo menu
+// deep-link branch is dropped (Menu is now its own page).
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useLenisRef } from "../lib/smoothScroll/lenisContext";

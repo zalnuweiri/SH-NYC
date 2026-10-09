@@ -1,0 +1,2 @@
+export const openingNotice = "Opening soon in NYC. Reservations are coming soon.";
+export const homeIntro = "Silent H is a modern Mexican restaurant opening soon at 420 West 13th Street in NYC’s Meatpacking District. Led by Chef Gerardo Álvarez Saucedo, our kitchen brings regional Mexican recipes to a menu built for sharing. Next door at 418 West 13th Street, Aitch will offer tequila, mezcal and cocktails. Explore our menu and contact the NYC team for opening and private-event enquiries.";

@@ -1,6 +1,6 @@
 import SEO from "../components/SEO.jsx";
-import { breadcrumb, event } from "../lib/seoSchema.js";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { breadcrumb } from "../lib/seoSchema.js";
+import { useOTWidget } from "../lib/reservationsContext.js";
 
 /**
  * NYE Masquerade Dinner landing page — /nye26
@@ -20,7 +20,7 @@ import { useOTWidget } from "../components/OTwidget.jsx";
  * and the menu.
  *
  * ONE DOM TREE, not the desktop/mobile twin blocks used elsewhere in this repo
- * (Home, Footer, HappyHour). Those pages need it because their two layouts differ
+ * (Home, Footer, Menu). Those pages need it because their two layouts differ
  * structurally; here the structure is identical and only the type scale and gaps
  * change, so twin blocks would buy nothing and cost a second <h1> and a second
  * copy of every dish in the DOM — exactly the wrong trade on a page whose only
@@ -33,7 +33,7 @@ import { useOTWidget } from "../components/OTwidget.jsx";
  *   name  Mondwest    Bold 20 UPPER  Mondwest    Bold 28 UPPER ls.07
  *   desc  NeueBit     Bold 18        NeueBit     Bold 22       ls.10
  * All text #ece1d4 (sh-cream). 1px @1280 = var(--dw)*0.078125/100.
- * The Figma has no mobile frame; the mobile scale follows the menu/happy-hour pages.
+ * The Figma has no mobile frame; the mobile scale follows the menu/menu pages.
  */
 
 const SITE = "https://www.silenthnyc.com";
@@ -174,7 +174,7 @@ export default function NYE26() {
     <>
       <SEO
         title="New Year's Eve 2026 NYC | Silent H Masquerade Dinner"
-        description="Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Reserve your table."
+        description="Ring in 2027 at Silent H, NYC: a New Year's Eve masquerade dinner on 12.31.26 with a modern Mexican prix-fixe. Event details and reservations are coming soon."
         url={URL}
         preloads={[
           {
@@ -194,15 +194,6 @@ export default function NYE26() {
         ]}
         jsonLd={[
           breadcrumb("New Year's Eve", URL),
-          event({
-            name: "New Year's Eve Masquerade Dinner at Silent H",
-            description:
-              "A New Year's Eve masquerade dinner at Silent H in NYC — a modern Mexican prix-fixe menu served through midnight into 2027.",
-            url: URL,
-            image: HERO_IMG,
-            startDate: EVENT.start,
-            endDate: EVENT.end,
-          }),
         ]}
       />
 
@@ -243,6 +234,7 @@ export default function NYE26() {
             <h1 className={`${T.hero} text-sh-cream`}>New Years Eve</h1>
             <p className={`${T.sub} text-sh-cream`}>Masquerade Dinner</p>
             <p className={`${T.date} text-sh-cream`}>{EVENT.display}</p>
+            <p className="font-body text-sh-cream text-lg text-center">Menu preview · event details coming soon</p>
 
             {/* Figma "SecondaryButton - Desktop" 192×50. Same hover semantics as
                 BTN_OUTLINE / <Button variant="ghost">: label + outline fade
@@ -259,7 +251,7 @@ export default function NYE26() {
                 "md:py-[calc(var(--dw)*1.5625/100)] md:text-[round(calc(var(--dw)*1.5625/100),1px)]"
               }
             >
-              Reserve now
+              Reservations coming soon
             </button>
           </div>
         </section>

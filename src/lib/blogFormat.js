@@ -76,7 +76,6 @@ export function buildDescription(paragraphs) {
 /** Inline auto-links: first occurrence of each phrase becomes a link. */
 export const INTERNAL_LINKS = [
   { re: /Aitch/, to: "/aitch" },
-  { re: /happy hour/i, to: "/happy-hour" },
   { re: /events team|events calendar|events/i, to: "/events" },
   { re: /book a table|reservations?|reserve a table/i, to: "/reservations" },
   { re: /dinner menu|food menu|full menu|our menu|the menu/i, to: "/menu" },

@@ -6,7 +6,7 @@ import Reveal from "../lib/motion/Reveal";
 import Parallax from "../lib/motion/Parallax";
 import RelatedGuides from "../components/RelatedGuides";
 import ResponsiveImg from "../components/ResponsiveImg";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { useOTWidget } from "../lib/reservationsContext.js";
 import { T, M } from "../styles/figmaTokens";
 
 /* Silent H — Our Story. Pixel-rebuilt from the Figma frames:
@@ -33,7 +33,7 @@ const BODY = "text-sh-cream/75"; // warm-grey body (cream dimmed ~75%, matches t
 
 const HERO_SUB = "Cuisine that is rooted in tradition, elevated by innovation, and undeniably memorable.";
 const PHILOSOPHY =
-  "It blends bold creativity with deep respect for Mexico’s rich gastronomic heritage. Guided by Chef Gerardo Álvarez Saucedo, our kitchen reimagines long standing family recipe's bringing familiar flavours with refined technique, creating dishes that honour their origins while inviting new discovery. Every plate is inspired by the streets of Mexico, shaped by obsession for quality, and driven by an uncompromising pursuit of flavour.";
+  "It blends bold creativity with deep respect for Mexico’s rich gastronomic heritage. Guided by Chef Gerardo Álvarez Saucedo, our kitchen reimagines longstanding family recipes, bringing familiar flavours with refined technique, creating dishes that honour their origins while inviting new discovery. Every plate is inspired by the streets of Mexico, shaped by obsession for quality, and driven by an uncompromising pursuit of flavour.";
 
 // Alternating image/text rows (Figma Frame 1646/1645/1647). side = image side (desktop).
 const ROWS = [
@@ -240,7 +240,7 @@ export default function Story() {
                 onClick={openReservationWidget}
                 className="w-full sm:w-auto min-w-[250px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-[#050505] bg-[#050505] text-sh-cream font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:bg-sh-cream hover:text-[#050505] transition-colors"
               >
-                Book Your Reservation
+                Reservations Coming Soon
               </button>
               <Link
                 to="/menu"
@@ -255,7 +255,7 @@ export default function Story() {
         <RelatedGuides
           className="py-20 md:py-[calc(var(--dw)*10/100)]"
           links={[
-            { to: "/blogs/date-night-restaurants-toronto", label: "Date-night restaurants in Toronto" },
+            { to: "/blogs/meatpacking-district-restaurants", label: "An evening in the Meatpacking District" },
           ]}
         />
       </main>

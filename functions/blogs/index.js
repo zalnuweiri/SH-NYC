@@ -2,19 +2,7 @@
 // clients that do not run JavaScript receive its H1, introduction and post
 // links in the raw HTML. Individual posts remain handled by [slug].js.
 
-const FALLBACK_URL = "https://ggmrhgiclbuvluyanvhd.supabase.co";
-const FALLBACK_ANON_KEY =
-  "sb_publishable_73fG-32amp7Nwzj_cJ9mhw_ePBn0Mfi";
-
-function creds(env) {
-  return {
-    url: env.SUPABASE_URL || env.VITE_SUPABASE_URL || FALLBACK_URL,
-    key:
-      env.SUPABASE_ANON_KEY ||
-      env.VITE_SUPABASE_ANON_KEY ||
-      FALLBACK_ANON_KEY,
-  };
-}
+import { nycBlogPosts } from "../../src/data/nycBlogPosts.js";
 
 const esc = (value) =>
   String(value ?? "")
@@ -29,27 +17,9 @@ function postHref(post) {
   return post.slug ? `/blogs/${encodeURIComponent(post.slug)}` : "/blogs";
 }
 
-async function fetchPosts(env) {
-  const { url, key } = creds(env);
-  const endpoint =
-    `${url}/rest/v1/blog_posts` +
-    `?select=id,title,href,slug,published_at,created_at,sort_order` +
-    `&status=eq.published&order=sort_order.asc,published_at.desc`;
+async function fetchPosts() { return nycBlogPosts; }
 
-  const response = await fetch(endpoint, {
-    headers: { apikey: key, Authorization: `Bearer ${key}` },
-    cf: { cacheTtl: 60, cacheEverything: true },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Supabase HTTP ${response.status}`);
-  }
-
-  const rows = await response.json();
-  return Array.isArray(rows) ? rows : [];
-}
-
-function blogIndexHtml(posts) {
+export function blogIndexHtml(posts) {
   const articles = posts
     .map(
       (post) =>
@@ -62,10 +32,10 @@ function blogIndexHtml(posts) {
   return (
     `<div style="max-width:1140px;margin:0 auto;padding:100px 24px">` +
     `<header><h1>A blog full of experiences</h1>` +
-    `<p>A closer look at the flavours, culture, and experiences behind Silent H.</p></header>` +
+    `<p>Explore Mexican food, agave cocktails and plans for dining out in NYC.</p></header>` +
     `<main><section aria-label="Published articles">${articles}</section></main>` +
     `<nav><a href="/">Home</a> <a href="/menu">Menu</a> ` +
-    `<a href="/happy-hour">Happy Hour</a> <a href="/events">Plan an Event</a> ` +
+    `<a href="/events">Plan an Event</a> ` +
     `<a href="/story">Our Story</a> <a href="/faq">FAQ</a></nav></div>`
   );
 }

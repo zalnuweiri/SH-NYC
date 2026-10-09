@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ErrorBoundary from "../components/ErrorBoundary";
@@ -16,28 +15,13 @@ import SmoothScroll from "../lib/smoothScroll/SmoothScroll";
 // route. functions/_middleware.js does that at the edge, reading the same
 // src/lib/routeSeo.js table imported here — so the pre-JS HTML and the hydrated
 // DOM cannot disagree.
-import { canonicalFor, seoFor } from "../lib/routeSeo.js";
 
-
-function setCanonical(href) {
-  let link = document.querySelector('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement("link");
-    link.setAttribute("rel", "canonical");
-    document.head.appendChild(link);
-  }
-  link.setAttribute("href", href);
-}
 
 
 export default function Layout() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    setCanonical(canonicalFor(pathname));
-    const seo = seoFor(pathname);
-    if (seo?.title) document.title = seo.title;
-  }, [pathname]);
+
 
   return (
       <SmoothScroll>

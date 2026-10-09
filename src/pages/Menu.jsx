@@ -8,7 +8,7 @@ import {
   D, M, PhotoToggle,
   RowDesktop, WineCellDesktop, RowMobile, WineRowMobile,
 } from "../components/menu/MenuParts.jsx";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { useOTWidget } from "../lib/reservationsContext.js";
 import ResponsiveImg from "../components/ResponsiveImg.jsx";
 import RelatedGuides from "../components/RelatedGuides.jsx";
 
@@ -24,7 +24,7 @@ const MARG_SUB = "four margaritas served in a cocktail tree";
 
 /* Electric Daisy editorial copy (matches Figma; not in MenuData). */
 const ED_PARA =
-  "Electric Daisies, known for their tingling, flavour-enhancing effect, star in Canada’s first cocktail of its kind—only at Silent H. Crafted with Patrón El Alto, passionfruit, smoked vanilla, and saffron, it’s bold, luxurious, and served in a hand-painted glass from Guadalajara.";
+  "Electric Daisies, known for their tingling, flavour-enhancing effect, feature in Silent H’s signature cocktail. Crafted with Patrón El Alto, passionfruit, smoked vanilla, and saffron, it’s bold, luxurious, and served in a hand-painted glass from Guadalajara.";
 const ED_SPEC =
   "Saffron-Infused Patrón El Alto | Mezcal | Galliano | Santomé | Maracuyá | Orange Bitters | Acids | Mango Boba | Electric Daisy | Gold";
 
@@ -46,10 +46,10 @@ function MenuIntro() {
 }
 
 const MENU_FAQ = [
-  { q: "What kind of food does Silent H serve?", a: "Modern, regional Mexican built for sharing: ceviches, aguachiles, tacos, flautas, queso flameado and a 44 oz tomahawk, from Monterrey-born chef Gerardo Álvarez Saucedo." },
+  { q: "What kind of food does Silent H serve?", a: "Modern, regional Mexican built for sharing: ceviches, tacos, guacamole and a 44 oz tomahawk, from Monterrey-born chef Gerardo Álvarez Saucedo." },
   { q: "Does Silent H have vegetarian and vegan options?", a: "Yes. Several plates are vegetable-forward and a number of tacos and dishes offer a vegan option; ask your server for the full list." },
-  { q: "Does the menu have tacos?", a: "Yes, including the Taco de chicharrón and the Flauta carnita, alongside a full shareable Mexican menu." },
-  { q: "Does Silent H have a cocktail menu?", a: "Yes, a regional cocktail program upstairs, plus a deeper tequila and mezcal list downstairs at Aitch, our agave lounge." },
+  { q: "Does the menu have tacos?", a: "Yes, including Tacos de pastor and Tacos olvidados, alongside a full shareable Mexican menu." },
+  { q: "Does Silent H have a cocktail menu?", a: "Yes, a regional cocktail program at Silent H, plus a deeper tequila and mezcal list next door at Aitch, our tequila bar." },
 ];
 
 const MENU_SCHEMA = {
@@ -68,7 +68,7 @@ const MENU_SCHEMA = {
         "@type": "MenuItem",
         "name": it.name,
         ...(it.description ? { description: it.description } : {}),
-        ...(isFinite(n) && n > 0 ? { offers: { "@type": "Offer", price: String(n), priceCurrency: "CAD" } } : {}),
+        ...(isFinite(n) && n > 0 ? { offers: { "@type": "Offer", price: String(n), priceCurrency: "USD" } } : {}),
       };
     }),
   })),
@@ -451,13 +451,13 @@ export default function Menu() {
             onClick={openReservationWidget}
             className="fixed bottom-6 right-6 z-[9999] bg-[#EB4660] hover:bg-black font-display text-white px-6 py-3 rounded-full shadow-xl tracking-[0.2em] uppercase text-sm transition-all"
         >
-          Reserve
+          Coming soon
         </button>
       
         <RelatedGuides
           className="mb-16 md:mb-[calc(var(--dw)*4/100)]"
           links={[
-            { to: "/blogs/best-mexican-restaurant-toronto", label: "The best Mexican restaurants in Toronto" },
+            { to: "/blogs/best-tacos-nyc", label: "Mexican food and tacos in NYC" },
           ]}
         />
 

@@ -58,7 +58,9 @@
   font-weight: 700; font-style: normal; font-display: swap;
 }
 
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "./";
+@source "../index.html";
 
 /* ── 2. Design tokens (Tailwind v4 @theme; sets a CSS var AND generates the utility) ── */
 @theme {

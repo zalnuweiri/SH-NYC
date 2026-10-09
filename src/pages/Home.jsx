@@ -1,9 +1,10 @@
+import { homeIntro } from "../data/nycContent.js";
 import { Link } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import SEO from "../components/SEO.jsx";
 import Reveal from "../lib/motion/Reveal";
 import Parallax from "../lib/motion/Parallax";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { useOTWidget } from "../lib/reservationsContext.js";
 import { T, M, BTN_OUTLINE } from "../styles/figmaTokens";
 import MenuCarousel from "../components/MenuCarousel";
 import LazyVideo from "../components/LazyVideo";
@@ -64,7 +65,7 @@ export default function Home() {
       <>
         <SEO
             title="Silent H NYC | Modern Mexican Cuisine"
-            description="Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Chef-driven plates, $10 happy-hour margaritas, and late nights at Aitch."
+            description="Silent H is a modern Mexican restaurant and agave lounge in NYC's Meatpacking District. Chef-driven plates, regional cocktails, and Aitch next door."
             url="https://www.silenthnyc.com/"
             preloads={[
               {
@@ -173,7 +174,7 @@ export default function Home() {
                         onClick={openReservationWidget}
                         className="min-w-[220px] min-h-[56px] inline-flex items-center justify-center rounded-[4px] border border-sh-pink bg-sh-pink text-sh-ink font-body font-bold uppercase text-[14px] tracking-[0.13em] px-[24px] py-[14px] hover:bg-[#f05f76] hover:border-[#f05f76] transition-colors"
                     >
-                      Book Your Reservation
+                      Reservations Coming Soon
                     </button>
                     <Link
                         to="/menu"
@@ -273,7 +274,7 @@ export default function Home() {
                           onClick={openReservationWidget}
                           className="inline-flex items-center justify-center rounded-[4px] bg-sh-pink text-sh-ink font-body font-bold uppercase text-[16px] tracking-[0.1em] h-[48px] hover:opacity-90 transition-opacity"
                       >
-                        Book Your Reservation
+                        Reservations Coming Soon
                       </button>
                       <Link
                           to="/menu"
@@ -289,14 +290,7 @@ export default function Home() {
             <div className="mx-auto max-w-[920px] text-center">
               <h2 className="font-display font-bold uppercase text-[clamp(38px,4.2vw,56px)] leading-none tracking-[0.045em] text-sh-cream mb-7">A Modern Mexican Restaurant in
                 NYC</h2>
-              <p className="font-body text-sh-cream text-[clamp(20px,1.85vw,24px)] font-[500] leading-[1.45] tracking-[0.025em]">Silent H is a modern Mexican
-                restaurant and agave cocktail lounge in NYC's Meatpacking District. Led by Chef Gerardo Álvarez
-                Saucedo, the kitchen reimagines traditional Mexican family recipes with refined technique, from charred
-                guacamole and crispy chicharrón tacos to mesquite-grilled rib-eye espadas and a 44oz tomahawk. Next
-                door, our late-night lounge Aitch pours a world-class program of artisanal tequila and mezcal alongside
-                elevated bites, with guest DJs Thursday through Sunday. Join us for happy hour every day from 5 to 7pm,
-                settle in for a downtown NYC date night, or plan a private event across two Mexican-inspired spaces. Silent
-                H is open for dinner Tuesday to Sunday from 5pm at 416 West 13th Street.</p>
+              <p className="font-body text-sh-cream text-[clamp(20px,1.85vw,24px)] font-[500] leading-[1.45] tracking-[0.025em]">{homeIntro}</p>
             </div>
           </section>
 
@@ -330,10 +324,10 @@ export default function Home() {
                   Plan your celebración auténtica in our vibrant NYC space.
                 </p>
                 <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em] mb-[5px]">
-                  Book your holiday event before October 31st and receive a $100 gift card.
+                  Contact our NYC team to discuss your private event.
                 </p>
                 <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] leading-[1.45] tracking-[0.025em]">
-                  Terms apply
+                  Opening details coming soon
                 </p>
               </Reveal>
               {/* "Plan Your Event" — centered, overlapping the image top slightly ( .events-button) */}
@@ -396,8 +390,7 @@ export default function Home() {
                   Private dining &amp; events
                 </h2>
                 <p className="font-body text-sh-muted text-[clamp(20px,1.85vw,24px)] tracking-[0.025em] leading-[1.45] max-w-[321px]">
-                  Plan your celebración auténtica in our vibrant NYC space. Book your holiday event before
-                  October 31st and receive a $100 gift card. Terms apply.
+                  Plan your celebración auténtica in our upcoming NYC space. Contact our team to discuss your event.
                 </p>
                 <Link to="/events" className="inline-flex items-center justify-center rounded-[4px] border border-sh-cream font-body uppercase text-sh-cream text-[16px] tracking-[0.1em] w-[164px] h-[48px] hover:bg-sh-cream hover:text-sh-black transition-colors">
                   Start Planning

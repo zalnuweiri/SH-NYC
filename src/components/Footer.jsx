@@ -1,9 +1,8 @@
-import { FaTiktok, FaInstagram, FaYoutube} from "react-icons/fa";
-import { LuFacebook, LuYoutube} from "react-icons/lu";
+import { FaInstagram} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import MailingForm from "./MailingForm.jsx";
-import { useOTWidget } from "../components/OTwidget.jsx";
+import { useOTWidget } from "../lib/reservationsContext.js";
 import { T } from "../styles/figmaTokens";
 
 // Pink "Join our mailing" button with the Figma SecondaryButton press animation:
@@ -62,7 +61,7 @@ function RecommendedBadge({ imgClassName, fallbackClassName }) {
 //     address NeueBit Bold 16px | google-maps logo + "find us on google maps"
 //     NeueBit Bold 18px.
 //   • Frame 1654 (gap40): pink SecondaryButton 270×48 + Frame 1592 219×57 black r4
-//     ("RECOMENDED ON" green #00eb5b NeueBit Bold 18px + Tripadvisor logo 150×23).
+//     ("RECOMMENDED ON" green #00eb5b NeueBit Bold 18px + Tripadvisor logo 150×23).
 export default function Footer() {
     const [showForm, setShowForm] = useState(false);
     const { openReservationWidget } = useOTWidget();
@@ -72,7 +71,6 @@ export default function Footer() {
         { to: "/events", label: "events" },
         { to: "/story", label: "our story" },
         { to: "/faq", label: "FAQ" },
-        { to: "/happy-hour", label: "happy hour" },
         { to: "/aitch/", label: "aitch" },
         { to: "/blogs", label: "blog" },
     ];
@@ -91,14 +89,8 @@ export default function Footer() {
                         Let&apos;s get social
                     </p>
                     <div className="mt-[22px] flex flex-row items-center gap-[30px] text-[28px]">
-                        <a href="https://www.tiktok.com/@silenth.to?lang=en" aria-label="TikTok"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaTiktok/></a>
-                        <a href="https://www.instagram.com/silenth.to/?hl=en" aria-label="Instagram"
+                        <a href="https://www.instagram.com/silenth.nyc/" aria-label="Instagram"
                            className="text-sh-cream hover:text-sh-pink transition-colors"><FaInstagram/></a>
-                        <a href="https://www.facebook.com/silenth.to/" aria-label="Facebook"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><LuFacebook/></a>
-                        <a href="https://www.youtube.com/@silenth.toronto" aria-label="Youtube"
-                           className="text-sh-cream hover:text-sh-pink transition-colors"><FaYoutube/></a>
                     </div>
                     <picture>
                         <source
@@ -143,24 +135,24 @@ export default function Footer() {
                                 </Link>
                             ))}
                             <button onClick={openReservationWidget} className="font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em] leading-[1.5] hover:text-sh-pink transition-colors text-left">
-                                reserve a table
+                                reservations coming soon
                             </button>
                         </div>
                     </div>
 
                     {/* Address */}
                     <p className="max-w-[220px] font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em] leading-[1.5] pt-[50px]">
-                        <a href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer" className="hover:text-sh-pink transition-colors">416 West 13th St</a>
+                        <a href="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer" className="hover:text-sh-pink transition-colors">420 West 13th St</a>
                         {" | "}
-                        <a href="tel:+14169003535" className="hover:text-sh-pink transition-colors">416 900 3535</a>
+                        <a href="tel:+14062828155" className="hover:text-sh-pink transition-colors">406 282 8155</a>
                         {" | "}
-                        <a href="mailto:info@silenth.ca" className="hover:text-sh-pink transition-colors">info@silenth.ca</a>
+                        <a href="mailto:info@silenthnyc.com" className="hover:text-sh-pink transition-colors">info@silenthnyc.com</a>
                     </p>
 
                     {/* Maps link + embed */}
                     <div className="flex flex-col items-start gap-[16px] pt-[50px]">
                         <a
-                            href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014"
+                            href="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex flex-row items-center gap-[10px] hover:opacity-80 transition-opacity"
@@ -169,7 +161,7 @@ export default function Footer() {
                             <span className="font-body font-bold uppercase text-sh-cream text-[12px] tracking-[0.18em]">find us on google maps</span>
                         </a>
                         <a
-                            href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014"
+                            href="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Open Silent H on Google Maps"
@@ -177,7 +169,7 @@ export default function Footer() {
                         >
                             <iframe
                                 title="Silent H location"
-                                src="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014&output=embed"
+                                src="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014&output=embed"
                                 loading="lazy"
                                 className="pointer-events-none h-full w-full border-0"
                             />
@@ -220,14 +212,8 @@ export default function Footer() {
                     (explicit break); icons ordered TikTok / Instagram / Facebook per the .fig. */}
                 <p className="mt-5 font-display font-bold uppercase text-sh-cream text-[28px] leading-[1.2] tracking-[0.05em]">Let&apos;s get<br />social</p>
                 <div className="mt-5 flex justify-center gap-8 text-[24px] text-sh-cream">
-                    <a href="https://www.tiktok.com/@silenth.to?lang=en" aria-label="TikTok"
-                       className="hover:text-sh-pink transition-colors"><FaTiktok/></a>
-                    <a href="https://www.instagram.com/silenth.to/?hl=en" aria-label="Instagram"
+                    <a href="https://www.instagram.com/silenth.nyc/" aria-label="Instagram"
                        className="hover:text-sh-pink transition-colors"><FaInstagram/></a>
-                    <a href="https://www.facebook.com/silenth.to/" aria-label="Facebook"
-                       className="hover:text-sh-pink transition-colors"><LuFacebook/></a>
-                    <a href=" https://www.youtube.com/@silenth.toronto" aria-label="Youtube"
-                       className="hover:text-sh-pink transition-colors"><LuYoutube/></a>
                 </div>
 
                 {/* Frame 1653 — pink mailing button (60 below social) */}
@@ -241,35 +227,35 @@ export default function Footer() {
                     {QUICK_LINKS.map((l) => (
                         <Link key={l.to} to={l.to} className="font-body uppercase text-sh-cream text-[16px] leading-[0.5] tracking-[0.2em] hover:text-sh-pink transition-colors">{l.label}</Link>
                     ))}
-                    <button onClick={openReservationWidget} className="font-body uppercase text-sh-cream text-[16px] leading-[0.5] tracking-[0.2em] hover:text-sh-pink transition-colors">reserve a table</button>
+                    <button onClick={openReservationWidget} className="font-body uppercase text-sh-cream text-[16px] leading-[0.5] tracking-[0.2em] hover:text-sh-pink transition-colors">reservations coming soon</button>
                 </div>
 
                 {/* Address (40 below) */}
                 <p className="mt-10 font-body uppercase text-sh-cream text-[16px] tracking-[0.2em] leading-[1.2]">
-                    416 West 13th St | 416 900 3535 | info@silenth.ca
+                    420 West 13th St | 406 282 8155 | info@silenthnyc.com
                 </p>
 
                 {/* Find us on google maps (40 below) */}
-                <a href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer" className="mt-10 flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <a href="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer" className="mt-10 flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <img src="/redesign/fig-google-maps-logo-1-1.png" alt="" className="w-6 h-8 object-cover" />
                     <span className="font-body uppercase text-sh-cream text-[16px] tracking-[0.1em]">find us on google maps</span>
                 </a>
 
                 {/* Embedded map directly under the link. pointer-events-none so touch-scroll passes
                     straight through; the wrapping link opens Google Maps. */}
-                <a href="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014" target="_blank" rel="noopener noreferrer"
                    aria-label="Open Silent H on Google Maps" className="mt-6 block w-[260px] h-[150px] overflow-hidden rounded-[4px]">
                     <iframe
                         title="Silent H location"
-                        src="https://www.google.com/maps?q=416+W+13th+St,+New+York,+NY+10014&output=embed"
+                        src="https://www.google.com/maps?q=420+W+13th+St,+New+York,+NY+10014&output=embed"
                         loading="lazy"
                         className="pointer-events-none h-full w-full border-0"
                     />
                 </a>
 
-                {/* RECOMENDED ON box (40 below) */}
+                {/* RECOMMENDED ON box (40 below) */}
                 <div className="mt-10 w-[219px] rounded-[4px] bg-sh-ink flex flex-col items-center justify-center gap-2 py-4">
-                    <span className="font-body text-[#00eb5b] text-[22px] leading-[1] tracking-[0.2em]">RECOMENDED ON</span>
+                    <span className="font-body text-[#00eb5b] text-[22px] leading-[1] tracking-[0.2em]">RECOMMENDED ON</span>
                     <RecommendedBadge
                         imgClassName="w-[150px] h-[23px] object-contain"
                         fallbackClassName="inline-flex items-center h-[23px] font-body font-bold text-[#00eb5b] text-[20px] leading-none tracking-[0.08em]"

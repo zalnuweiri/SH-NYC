@@ -26,7 +26,7 @@
  *   • blog posts additionally: article text present in the HTML, plus
  *     BlogPosting + BreadcrumbList JSON-LD
  */
-import { loadEnv } from "vite";
+import { nycBlogPosts } from "../src/data/nycBlogPosts.js";
 
 // Where we FETCH from (can be localhost / a preview deployment)…
 const BASE = (process.argv[2] || "https://www.silenthnyc.com").replace(/\/+$/, "");
@@ -35,39 +35,27 @@ const BASE = (process.argv[2] || "https://www.silenthnyc.com").replace(/\/+$/, "
 // comparing it to BASE would wrongly fail every local run.
 const SITE = "https://www.silenthnyc.com";
 
-const env = { ...loadEnv("production", process.cwd(), ""), ...process.env };
 
 // index.html's hardcoded default — seeing this on any route means the page was
 // served raw and nothing corrected it.
 const SHELL_TITLE = "Silent H | Modern Mexican Restaurant & Agave Bar, King West Toronto";
 
 const STATIC_ROUTES = [
-  "/", "/menu", "/events", "/story", "/happy-hour", "/faq", "/blogs", "/nye26",
+  "/", "/menu", "/events", "/story", "/faq", "/blogs", "/nye26",
 ];
 
 // Routes whose <body> is prerendered into #root at the edge. Static routes use
 // src/lib/routeContent.js via functions/_middleware.js; /blogs uses its dedicated
-// functions/blogs/index.js handler because its published links come from Supabase.
+// functions/blogs/index.js handler because it owns the published article list.
 // All must show real content — one <h1> and a non-empty #root — without JavaScript.
 const PRERENDER_ROUTES = new Set([
-  "/", "/menu", "/events", "/story", "/happy-hour", "/faq", "/blogs", "/nye26", "/aitch",
+  "/", "/menu", "/events", "/story", "/faq", "/blogs", "/nye26", "/aitch",
 ]);
 
 const grab = (html, re) => (html.match(re) || [])[1] || null;
 
 async function publishedSlugs() {
-  const url = env.VITE_SUPABASE_URL;
-  const key = env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !key) {
-    console.warn("! No Supabase creds — checking static routes only.\n");
-    return [];
-  }
-  const res = await fetch(
-    `${url}/rest/v1/blog_posts?select=slug&status=eq.published&order=sort_order.asc`,
-    { headers: { apikey: key, Authorization: `Bearer ${key}` } }
-  );
-  if (!res.ok) return [];
-  return (await res.json()).map((r) => r.slug);
+  return nycBlogPosts.map((post) => post.slug);
 }
 
 async function check(path, { isBlog, prerendered, expectedBlogSlugs = [] }) {

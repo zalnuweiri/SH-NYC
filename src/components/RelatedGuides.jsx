@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 /**
  * "Related guides" — a small internal-linking block for the dark money pages
- * (Menu, Happy Hour, Events, Story). It renders the SAME blog targets that the
+ * (Menu, Events, Story). It renders the SAME blog targets that the
  * edge prerender already injects via src/lib/routeContent.js, but as real
  * <Link>s inside the React tree so they PERSIST in the rendered DOM (Google
  * weights rendered-DOM links most, and they double as real navigation for

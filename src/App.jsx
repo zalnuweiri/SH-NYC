@@ -6,8 +6,7 @@ import Menu from "./pages/Menu";
 import FAQ from "./pages/FAQ";
 import Events from "./pages/Events";
 import Story from "./pages/Story";
-import HappyHour from "./pages/HappyHour";
-import FormTest from "./pages/FormTest";
+import Reservations from "./pages/Reservations";
 import ExternalRedirect from "./pages/ExternalRedirect";
 import NotFound from "./pages/NotFound";
 
@@ -21,7 +20,7 @@ import NotFound from "./pages/NotFound";
 const BlogsPage = lazy(() => import("./pages/BlogsPage"));
 const BlogContent = lazy(() => import("./pages/BlogContent"));
 
-const Fifa26 = lazy(() => import("./pages/Fifa26")); // out-of-scope page, lazy
+
 
 // Seasonal NYE landing page. Unlinked from the site chrome (SEO/direct-URL only),
 // so it is lazy — no reason to ship it in the bundle every visitor downloads.
@@ -37,12 +36,11 @@ export default function App() {
         <Route path="faq" element={<FAQ />} />
         <Route path="events" element={<Events />} />
         <Route path="story" element={<Story />} />
-        <Route path="happy-hour" element={<HappyHour />} /> {/* NEW */}
         <Route
           path="reservations"
-          element={<ExternalRedirect to="https://www.opentable.ca/r/silent-h-toronto" />}
+          element={<Reservations />}
         />
-        <Route path="form" element={<FormTest />} />
+
           <Route
             path="blogs"
             element={
@@ -87,16 +85,7 @@ export default function App() {
           The splat also covers /aitch/faq, /aitch/booking, etc. */}
       <Route path="aitch/*" element={<ExternalRedirect to="/aitch/" />} />
 
-      {/* Out of scope: Fifa26 keeps its own standalone chrome (own Navbar/Footer),
-          so it is routed OUTSIDE the dark Layout shell to avoid double chrome. */}
-      <Route
-        path="fifa26"
-        element={
-          <Suspense fallback={null}>
-            <Fifa26 />
-          </Suspense>
-        }
-      />
+
     </Routes>
   );
 }
